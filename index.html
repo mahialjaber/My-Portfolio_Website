@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mahi Al Jaber — SOC Analyst · Detection &amp; Response</title>
+<meta name="description" content="Mahi Al Jaber — entry-level SOC / Blue Team analyst. Alert triage, Sigma detection engineering, Splunk SPL, AWS CloudTrail threat detection, MITRE ATT&amp;CK-mapped adversary emulation. Evidence-backed lab projects.">
+<meta name="author" content="Mahi Al Jaber">
+<meta name="theme-color" content="#f2f2f3">
+<link rel="canonical" href="https://mahialjaber.me/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mahialjaber.me/">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Mahi Al Jaber — SOC Analyst · Detection &amp; Response">
+<meta property="og:description" content="I investigate alerts and write the detections that generate them. Splunk · Sigma · AWS · MITRE ATT&amp;CK.">
+<link rel="stylesheet" href="industry.css">
+<style>
+  /* Industry's steel accent retuned to purple — same OKLCH lightness steps,
+     hue shifted, so every component that reads the ramp stays in balance. */
+  :root {
+    --color-accent: #7f62a6;
+    --color-accent-2: #8f74b3;
+    --color-accent-100: #f4effc;
+    --color-accent-200: #e6dbf7;
+    --color-accent-300: #d2c1ee;
+    --color-accent-400: #b9a1de;
+    --color-accent-500: #9d81c6;
+    --color-accent-600: #7f62a6;
+    --color-accent-700: #614883;
+    --color-accent-800: #43325c;
+    --color-accent-900: #2c2140;
+    --color-accent-2-100: #f4effc;
+    --color-accent-2-200: #e6dbf7;
+    --color-accent-2-300: #d6c8ef;
+    --color-accent-2-400: #bfa9e0;
+    --color-accent-2-500: #a289c8;
+    --color-accent-2-600: #856aa8;
+    --color-accent-2-700: #664d85;
+    --color-accent-2-800: #45355e;
+    --color-accent-2-900: #2d2342;
+  }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; -webkit-font-smoothing: antialiased; }
+  a { color: var(--color-accent-700); text-decoration: none; }
+  a:hover { color: var(--color-accent); }
+  html[data-theme="dark"] {
+    --color-bg: #14171a;
+    --color-surface: #1c2024;
+    --color-text: #e7eaed;
+    --color-divider: color-mix(in srgb, #e7eaed 20%, transparent);
+    --color-accent-700: #c1a9e0;
+    --color-accent-800: #dbcdee;
+    --color-accent-100: #2b2340;
+    --color-accent-200: #382c52;
+    --color-neutral-100: #23282c;
+    --color-neutral-800: #d3d7db;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.5);
+    --shadow-md: 0 3px 10px rgba(0,0,0,.55);
+    --shadow-lg: 0 12px 32px rgba(0,0,0,.6);
+  }
+  html[data-theme="dark"] img { filter: brightness(.92); }
+  /* Primary fill lightens in dark mode so the dark label keeps AA contrast. */
+  html[data-theme="dark"] .btn-primary { background: var(--color-accent-400); border-color: var(--color-accent-400); color: #1a1420; }
+  html[data-theme="dark"] .btn-primary:hover { background: var(--color-accent-300); border-color: var(--color-accent-300); }
+  html[data-theme="dark"] .btn-primary:active { background: var(--color-accent-500); border-color: var(--color-accent-500); }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--color-text) 22%, transparent); }
+  @keyframes caretBlink { 0%, 48% { opacity: 1 } 50%, 100% { opacity: 0 } }
+  @keyframes softPulse { 0%, 100% { opacity: .35; transform: scale(1) } 50% { opacity: 1; transform: scale(1.35) } }
+  .lg-only { display: flex; }
+  .sm-only { display: none; }
+  @media (max-width: 900px) {
+    .lg-only { display: none !important; }
+    .sm-only { display: inline-flex !important; }
+    .split { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 1100px) { .phase-grid { grid-template-columns: 1fr 1fr !important; } }
+  @media (max-width: 640px) { .phase-grid { grid-template-columns: 1fr !important; } }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Mahi Al Jaber","jobTitle":"SOC Analyst — Detection & Response","email":"mailto:mahialjaber.dev@gmail.com","url":"https://github.com/mahialjaber","knowsAbout":["Security Operations","Splunk SPL","Sigma","MITRE ATT&CK","AWS CloudTrail","Threat Hunting","Incident Response"],"sameAs":["https://github.com/mahialjaber"]}
+</script>
+</helmet>
+
+<div id="top" style="background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); min-height: 100vh; overflow-x: hidden">
+
+  <div style="position: fixed; top: 0; left: 0; height: 2px; z-index: 90; background: var(--color-accent); width: {{ progress }}%"></div>
+
+  <header style="position: sticky; top: 0; z-index: 60; border-bottom: 1px solid var(--color-divider); background: color-mix(in srgb, var(--color-bg) 86%, transparent); backdrop-filter: blur(12px)">
+    <nav class="nav" style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; gap: 28px">
+      <a href="#top" class="nav-brand" style="display: flex; align-items: baseline; gap: 8px; letter-spacing: .04em; text-transform: uppercase; color: var(--color-text)">
+        Mahi Al Jaber
+        <span class="text-muted" style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .16em">/ BLUE TEAM</span>
+      </a>
+      <div class="lg-only" style="align-items: center; gap: 24px; font-family: var(--font-heading); font-size: 14px; letter-spacing: .06em; text-transform: uppercase">
+        <a href="#about">About</a>
+        <a href="#skills">Toolchain</a>
+        <a href="#projects">Projects</a>
+        <a href="#phase">Phases</a>
+        <a href="#journey">Journey</a>
+        <a href="#github">GitHub</a>
+      </div>
+      <button type="button" class="btn btn-secondary" onClick="{{ toggleTheme }}" aria-label="Switch colour theme" title="Switch colour theme" style="gap: 8px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-text)">
+        <span style="width: 9px; height: 9px; border: 1px solid currentColor; background: var(--color-text)"></span>{{ themeLabel }}
+      </button>
+      <a href="#contact" class="btn btn-primary lg-only" style="letter-spacing: .08em; text-transform: uppercase; color: var(--color-bg)">Get in touch</a>
+      <button type="button" class="btn btn-secondary sm-only" onClick="{{ toggleMenu }}" aria-label="Toggle navigation" style="letter-spacing: .1em; text-transform: uppercase">Menu</button>
+    </nav>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="display: grid; border-top: 1px solid var(--color-divider); font-family: var(--font-heading); font-size: 16px; letter-spacing: .08em; text-transform: uppercase">
+        <a href="#about" onClick="{{ closeMenu }}" style="padding: 14px 24px; border-bottom: 1px solid var(--color-divider)">About</a>
+        <a href="#skills" onClick="{{ closeMenu }}" style="padding: 14px 24px; border-bottom: 1px solid var(--color-divider)">Toolchain</a>
+        <a href="#projects" onClick="{{ closeMenu }}" style="padding: 14px 24px; border-bottom: 1px solid var(--color-divider)">Projects</a>
+        <a href="#phase" onClick="{{ closeMenu }}" style="padding: 14px 24px; border-bottom: 1px solid var(--color-divider)">Phases</a>
+        <a href="#journey" onClick="{{ closeMenu }}" style="padding: 14px 24px; border-bottom: 1px solid var(--color-divider)">Journey</a>
+        <a href="#github" onClick="{{ closeMenu }}" style="padding: 14px 24px; border-bottom: 1px solid var(--color-divider)">GitHub</a>
+        <a href="#contact" onClick="{{ closeMenu }}" style="padding: 14px 24px; color: var(--color-accent-700)">Contact</a>
+      </div>
+    </sc-if>
+  </header>
+
+  <!-- ── HERO ─────────────────────────────────────────────── -->
+  <section style="max-width: 1240px; margin: 0 auto; padding: clamp(48px, 8vw, 110px) 24px clamp(40px, 6vw, 88px)">
+    <div class="split" style="display: grid; grid-template-columns: 1.35fr .9fr; gap: clamp(32px, 5vw, 72px); align-items: start">
+      <div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 22px">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--color-accent); animation: softPulse 2.4s ease-in-out infinite"></span>
+          <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--color-accent-700)">Open to entry-level SOC roles &amp; internships</span>
+        </div>
+        <h1 style="font-size: clamp(46px, 9vw, 104px); line-height: .92; letter-spacing: -.03em; text-transform: uppercase; margin: 0 0 18px">
+          Detection.<br>Response.<br><span style="color: var(--color-accent-700)">Evidence.</span>
+        </h1>
+        <div style="display: flex; align-items: center; gap: 8px; min-height: 26px; margin-bottom: 26px">
+          <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: clamp(12px, 1.6vw, 14px); letter-spacing: .04em">{{ rotLine }}</span>
+          <span style="display: inline-block; width: 8px; height: 15px; background: var(--color-accent); animation: caretBlink 1.05s step-end infinite"></span>
+        </div>
+        <p style="font-size: clamp(16px, 1.9vw, 19px); max-width: 60ch; line-height: 1.6; text-wrap: pretty; margin: 0 0 14px">
+          I'm <strong>Mahi Al Jaber</strong> — I investigate alerts and write the detections that generate them. My work sits where SOC operations meet cloud telemetry: triage, enrichment, escalation and documentation on one side; CloudTrail, IAM and GuardDuty on the other.
+        </p>
+        <p class="text-muted" style="max-width: 58ch; line-height: 1.6; margin: 0 0 34px">
+          I emulate real attacker techniques in a lab I built myself, capture the telemetry they produce, write detections for them, and document the investigation the way a Tier 1 analyst documents a ticket. Everything here links to evidence — nothing is a course completion.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px">
+          <a href="#projects" class="btn btn-primary" style="padding: 12px 22px; font-size: 14px; letter-spacing: .1em; text-transform: uppercase">View the case files</a>
+          <a href="https://github.com/mahialjaber" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 12px 22px; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-text)">GitHub profile</a>
+          <a href="#contact" class="btn btn-secondary sm-only" style="padding: 12px 22px; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-text)">Contact</a>
+        </div>
+      </div>
+
+      <div style="display: grid; gap: 26px">
+        <sc-if value="{{ showPortrait }}" hint-placeholder-val="{{ true }}">
+          <figure class="blueprint duotone" style="margin: 0; aspect-ratio: 4/5; background: var(--color-surface)">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <img src="assets/portrait.jpg" alt="Mahi Al Jaber" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 16%; filter: grayscale(1) contrast(1.06)">
+          </figure>
+        </sc-if>
+        <div class="blueprint" style="padding: 20px 18px">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 14px">Spec sheet</div>
+          <dl style="margin: 0; display: grid; gap: 12px">
+            <sc-for list="{{ spec }}" as="row" hint-placeholder-count="4">
+              <div style="display: grid; grid-template-columns: 84px 1fr; gap: 12px; align-items: baseline; padding-bottom: 10px; border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent)">
+                <dt class="text-muted" style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase">{{ row.k }}</dt>
+                <dd style="margin: 0; font-size: 13.5px; line-height: 1.45">{{ row.v }}</dd>
+              </div>
+            </sc-for>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ────────────────────────────────────────────── -->
+  <section id="about" style="max-width: 1240px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) 24px; border-top: 1px solid var(--color-divider)">
+    <div data-reveal="" style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 40px">
+      <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .16em; color: var(--color-accent-700)">01</span>
+      <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase">What I do</h2>
+      <span style="flex: 1; height: 1px; background: var(--color-divider)"></span>
+    </div>
+    <div class="split" style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 64px)">
+      <div data-reveal="">
+        <p style="font-size: clamp(20px, 2.6vw, 30px); font-family: var(--font-heading); line-height: 1.22; letter-spacing: -.015em; margin: 0 0 22px">
+          I investigate alerts — and I write the detections that generate them.
+        </p>
+        <p style="line-height: 1.7; text-wrap: pretty">
+          Most junior analysts keep two things separate: <strong>SOC operations</strong> — triage, enrichment, escalation, documentation — and <strong>cloud telemetry</strong> — CloudTrail, IAM, GuardDuty. My work sits at the intersection.
+        </p>
+        <p class="text-muted" style="line-height: 1.7; text-wrap: pretty">
+          Each case file I publish follows the same structure: alert → what I checked and why → enrichment → verdict and confidence → escalation summary → recommended tuning. Including the ones I initially got wrong, because that's where the reasoning shows.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px">
+          <span class="tag tag-accent">Alert triage</span>
+          <span class="tag tag-accent">Detection engineering</span>
+          <span class="tag tag-accent">Threat hunting</span>
+          <span class="tag tag-outline">Adversary emulation</span>
+          <span class="tag tag-outline">Cloud security</span>
+        </div>
+      </div>
+      <div data-reveal="" style="display: grid; gap: 16px; align-content: start">
+        <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="3">
+          <div class="blueprint" style="padding: 20px; display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <span style="font-family: var(--font-heading); font-size: 30px; line-height: 1; color: color-mix(in srgb, var(--color-accent) 45%, transparent)">{{ p.n }}</span>
+            <div>
+              <h3 style="font-size: 19px; margin: 0 0 6px; text-transform: uppercase; letter-spacing: .01em">{{ p.t }}</h3>
+              <p class="text-muted" style="margin: 0; font-size: 14px; line-height: 1.6">{{ p.d }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SKILLS ───────────────────────────────────────────── -->
+  <section id="skills" style="max-width: 1240px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) 24px; border-top: 1px solid var(--color-divider)">
+    <div data-reveal="" style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 40px">
+      <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .16em; color: var(--color-accent-700)">02</span>
+      <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase">Toolchain</h2>
+      <span style="flex: 1; height: 1px; background: var(--color-divider)"></span>
+      <span class="text-muted lg-only" style="font-size: 11px; letter-spacing: .14em; text-transform: uppercase">Hands-on, in a lab I built</span>
+    </div>
+    <div data-reveal="" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px">
+      <sc-for list="{{ toolchain }}" as="g" hint-placeholder-count="6">
+        <div class="blueprint" style="padding: 22px 20px; display: flex; flex-direction: column; gap: 14px">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+            <h3 style="font-size: 17px; margin: 0; text-transform: uppercase; letter-spacing: .04em">{{ g.group }}</h3>
+            <span class="text-muted" style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px">{{ g.idx }}</span>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px">
+            <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="4">
+              <span class="tag tag-neutral">{{ it }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ── PROJECTS ─────────────────────────────────────────── -->
+  <section id="projects" style="max-width: 1240px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) 24px; border-top: 1px solid var(--color-divider)">
+    <div data-reveal="" style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 18px">
+      <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .16em; color: var(--color-accent-700)">03</span>
+      <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase">Case files</h2>
+      <span style="flex: 1; height: 1px; background: var(--color-divider)"></span>
+    </div>
+    <p class="text-muted" data-reveal="" style="max-width: 62ch; margin: 0 0 38px; line-height: 1.65">Four projects, each with its own architecture, telemetry and detections. Open one for the full write-up — overview, architecture, technologies, features, screenshots and the repository.</p>
+    <div data-reveal="" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 22px">
+      <sc-for list="{{ projects }}" as="p" hint-placeholder-count="4">
+        <article class="blueprint" style="padding: 24px 22px; display: flex; flex-direction: column; gap: 14px; cursor: pointer; transition: background .25s ease, transform .25s ease" style-hover="background: color-mix(in srgb, var(--color-accent) 6%, transparent); transform: translateY(-3px)" onClick="{{ p.open }}" tabIndex="0" onKeyDown="{{ p.onKey }}" role="button">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+            <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent-700)">{{ p.kicker }}</span>
+            <span class="tag tag-outline">{{ p.status }}</span>
+          </div>
+          <h3 style="font-size: clamp(22px, 2.4vw, 27px); margin: 0; letter-spacing: -.01em; line-height: 1.1; text-transform: uppercase">{{ p.name }}</h3>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.62; opacity: .82; flex: 1">{{ p.summary }}</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px">
+            <sc-for list="{{ p.tech4 }}" as="t" hint-placeholder-count="4">
+              <span class="tag tag-accent">{{ t }}</span>
+            </sc-for>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; border-top: 1px solid var(--color-divider); font-family: var(--font-heading); font-size: 13px; letter-spacing: .1em; text-transform: uppercase">
+            <span style="color: var(--color-accent-700)">Open case file →</span>
+            <span class="text-muted" style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .06em">{{ p.repoLabel }}</span>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ── PROJECT PHASE ────────────────────────────────────── -->
+  <section id="phase" style="border-top: 1px solid var(--color-divider); background: var(--color-accent-900); color: #f2f2f3">
+    <div style="max-width: 1240px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) 24px">
+      <div data-reveal="" style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 18px">
+        <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .16em; color: var(--color-accent-300)">04</span>
+        <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase; color: #f2f2f3">Project phase</h2>
+        <span style="flex: 1; height: 1px; background: color-mix(in srgb, #f2f2f3 22%, transparent)"></span>
+      </div>
+      <p data-reveal="" style="max-width: 64ch; margin: 0 0 44px; line-height: 1.65; color: color-mix(in srgb, #f2f2f3 78%, transparent)">How every project on this page gets built — the same loop a mature SOC runs to make sure a detection fires before an attacker finds the gap first.</p>
+      <div data-reveal="" class="phase-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: color-mix(in srgb, #f2f2f3 20%, transparent)">
+        <sc-for list="{{ phases }}" as="ph" hint-placeholder-count="4">
+          <div style="background: var(--color-accent-900); padding: 28px 22px; display: flex; flex-direction: column; gap: 14px">
+            <div style="display: flex; align-items: baseline; gap: 10px">
+              <span style="font-family: var(--font-heading); font-size: 46px; line-height: .9; color: var(--color-accent-400)">{{ ph.n }}</span>
+              <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent-300)">{{ ph.tag }}</span>
+            </div>
+            <h3 style="font-size: 21px; margin: 0; text-transform: uppercase; letter-spacing: .02em; color: #f2f2f3">{{ ph.t }}</h3>
+            <p style="margin: 0; font-size: 14px; line-height: 1.62; color: color-mix(in srgb, #f2f2f3 72%, transparent)">{{ ph.d }}</p>
+            <ul style="margin: 4px 0 0; padding-left: 16px; display: grid; gap: 6px; font-size: 13px; line-height: 1.5; color: color-mix(in srgb, #f2f2f3 66%, transparent)">
+              <sc-for list="{{ ph.items }}" as="i" hint-placeholder-count="3">
+                <li>{{ i }}</li>
+              </sc-for>
+            </ul>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── JOURNEY ──────────────────────────────────────────── -->
+  <section id="journey" style="max-width: 1240px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) 24px">
+    <div data-reveal="" style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 44px">
+      <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .16em; color: var(--color-accent-700)">05</span>
+      <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase">Learning journey</h2>
+      <span style="flex: 1; height: 1px; background: var(--color-divider)"></span>
+    </div>
+    <div data-reveal="" style="display: grid; gap: 0">
+      <sc-for list="{{ journey }}" as="j" hint-placeholder-count="5">
+        <div class="split" style="display: grid; grid-template-columns: 160px 1fr; gap: 24px; padding: 26px 0; border-top: 1px solid var(--color-divider)">
+          <div>
+            <div style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 6px">{{ j.stage }}</div>
+            <div class="tag tag-neutral">{{ j.state }}</div>
+          </div>
+          <div>
+            <h3 style="font-size: clamp(20px, 2.2vw, 25px); margin: 0 0 8px; text-transform: uppercase; letter-spacing: -.005em">{{ j.t }}</h3>
+            <p class="text-muted" style="margin: 0; max-width: 72ch; line-height: 1.65; text-wrap: pretty">{{ j.d }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ── GITHUB ───────────────────────────────────────────── -->
+  <section id="github" style="max-width: 1240px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) 24px; border-top: 1px solid var(--color-divider)">
+    <div data-reveal="" style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 40px">
+      <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .16em; color: var(--color-accent-700)">06</span>
+      <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase">GitHub</h2>
+      <span style="flex: 1; height: 1px; background: var(--color-divider)"></span>
+      <a href="https://github.com/mahialjaber?tab=repositories" target="_blank" rel="noopener" class="text-muted lg-only" style="font-size: 11px; letter-spacing: .14em; text-transform: uppercase">@mahialjaber →</a>
+    </div>
+    <div class="split" data-reveal="" style="display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(24px, 3.5vw, 52px); align-items: start">
+      <div>
+        <p style="font-family: var(--font-heading); font-size: clamp(20px, 2.4vw, 28px); line-height: 1.24; letter-spacing: -.01em; margin: 0 0 16px">A repository is a claim. The commit history is whether it holds.</p>
+        <p class="text-muted" style="line-height: 1.7; margin: 0 0 12px; text-wrap: pretty">Anyone can list a tool on a CV. What a technical reviewer actually wants is the trail underneath it — the environment, the telemetry it produced, the query that caught it, and an honest note about what the query missed. That's what my GitHub is for.</p>
+        <p class="text-muted" style="line-height: 1.7; margin: 0; text-wrap: pretty">So read it as working notes rather than a shop window: the labs are reproducible, the detections are written out in full, and the limitations are documented in the same README as the results.</p>
+        <a href="https://github.com/mahialjaber" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 24px; padding: 12px 22px; font-size: 14px; letter-spacing: .1em; text-transform: uppercase">Browse the profile →</a>
+      </div>
+      <div style="display: grid; gap: 14px">
+        <sc-for list="{{ ghNotes }}" as="n" hint-placeholder-count="4">
+          <div class="blueprint" style="padding: 18px 20px; display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .12em; color: var(--color-accent-700); padding-top: 3px">{{ n.n }}</span>
+            <div>
+              <h3 style="font-size: 17px; margin: 0 0 5px; text-transform: uppercase; letter-spacing: .03em">{{ n.t }}</h3>
+              <p class="text-muted" style="margin: 0; font-size: 13.5px; line-height: 1.6">{{ n.d }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ──────────────────────────────────────────── -->
+  
+
+  <section id="contact" style="max-width: 1240px; margin: 0 auto; padding: clamp(56px, 7vw, 110px) 24px; border-top: 1px solid var(--color-divider)">
+    <div data-reveal="" style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 40px">
+      <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .16em; color: var(--color-accent-700)">07</span>
+      
+      <span style="flex: 1; height: 1px; background: var(--color-divider)"></span>
+    </div>
+    <div class="split" style="display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(28px, 4vw, 60px); align-items: start">
+      <div data-reveal="">
+        <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase">Get in touch</h2><p style="font-family: var(--font-heading); font-size: clamp(20px, 2.4vw, 27px); line-height: 1.25; margin: 0 0 20px; letter-spacing: -.01em">Hiring for a Tier 1 SOC seat, or an internship? I'd like to hear about it.</p>
+        <p class="text-muted" style="line-height: 1.65; margin: 0 0 26px">Remote worldwide, or relocation. I usually reply within a day.</p>
+        <div style="display: grid; gap: 12px">
+          <sc-for list="{{ channels }}" as="c" hint-placeholder-count="3">
+            <a href="{{ c.href }}" target="_blank" rel="noopener" class="blueprint" style="padding: 16px 18px; display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; color: var(--color-text); transition: background .2s ease" style-hover="background: color-mix(in srgb, var(--color-accent) 8%, transparent)">
+              <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+              <span>
+                <span class="text-muted" style="display: block; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 4px">{{ c.k }}</span>
+                <span style="font-size: 15px">{{ c.v }}</span>
+              </span>
+              <span style="color: var(--color-accent-700); font-family: var(--font-heading); font-size: 13px; letter-spacing: .1em">→</span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+
+      <form class="blueprint" data-reveal="" onSubmit="{{ onSubmit }}" novalidate="" style="padding: clamp(22px, 3vw, 34px); display: grid; gap: 18px">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+          <h3 style="font-size: 20px; margin: 0; text-transform: uppercase; letter-spacing: .04em">Send a message</h3>
+          <span class="text-muted" style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .12em">POST /API/CONTACT</span>
+        </div>
+        <div class="split" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px">
+          <div class="field">
+            <label for="cf-name">Name</label>
+            <input id="cf-name" class="input" type="text" name="name" autoComplete="name" placeholder="Your name" value="{{ form.name }}" onInput="{{ onName }}" aria-invalid="{{ invalid.name }}">
+            <sc-if value="{{ errors.name }}" hint-placeholder-val="{{ false }}">
+              <span role="alert" style="display: block; margin-top: 6px; font-size: 12px; color: var(--color-accent-800)">{{ errors.name }}</span>
+            </sc-if>
+          </div>
+          <div class="field">
+            <label for="cf-email">Email</label>
+            <input id="cf-email" class="input" type="email" name="email" autoComplete="email" placeholder="you@company.com" value="{{ form.email }}" onInput="{{ onEmail }}" aria-invalid="{{ invalid.email }}">
+            <sc-if value="{{ errors.email }}" hint-placeholder-val="{{ false }}">
+              <span role="alert" style="display: block; margin-top: 6px; font-size: 12px; color: var(--color-accent-800)">{{ errors.email }}</span>
+            </sc-if>
+          </div>
+        </div>
+        <div class="field">
+          <label for="cf-subject">Subject</label>
+          <input id="cf-subject" class="input" type="text" name="subject" placeholder="SOC Analyst role — first conversation" value="{{ form.subject }}" onInput="{{ onSubject }}">
+        </div>
+        <div class="field">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" class="input" name="message" rows="6" placeholder="A little about the role, the team and the stack…" value="{{ form.message }}" onInput="{{ onMessage }}" aria-invalid="{{ invalid.message }}"></textarea>
+          <div style="display: flex; justify-content: space-between; gap: 12px; margin-top: 6px">
+            <sc-if value="{{ errors.message }}" hint-placeholder-val="{{ false }}">
+              <span role="alert" style="font-size: 12px; color: var(--color-accent-800)">{{ errors.message }}</span>
+            </sc-if>
+            <span class="text-muted" style="margin-left: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px">{{ charCount }}</span>
+          </div>
+        </div>
+        <input type="text" name="_hp" tabIndex="-1" autoComplete="off" onInput="{{ onHp }}" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px">
+          <button type="submit" class="btn btn-primary" disabled="{{ sending }}" style="padding: 12px 24px; font-size: 14px; letter-spacing: .1em; text-transform: uppercase">{{ submitLabel }}</button>
+          <span class="text-muted" style="font-size: 12px">Validated client-side, then again on the API.</span>
+        </div>
+        <sc-if value="{{ notice }}" hint-placeholder-val="{{ false }}">
+          <div role="status" style="padding: 14px 16px; border: 1px solid var(--color-accent); background: color-mix(in srgb, var(--color-accent) 10%, transparent)">
+            <div style="font-family: var(--font-heading); font-size: 15px; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 4px">{{ notice.title }}</div>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.55">{{ notice.body }}</p>
+            <sc-if value="{{ notice.mailto }}" hint-placeholder-val="{{ false }}">
+              <a href="{{ notice.mailto }}" style="display: inline-block; margin-top: 8px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase">Open in mail client →</a>
+            </sc-if>
+          </div>
+        </sc-if>
+      </form>
+    </div>
+  </section><footer style="border-top: 1px solid var(--color-divider)">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 30px 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between">
+      <span style="font-family: var(--font-heading); font-size: 15px; letter-spacing: .12em; text-transform: uppercase">Mahi Al Jaber — Blue Team</span>
+      <span class="text-muted" style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10.5px; letter-spacing: .1em">BUILT FROM THE REPOS · GITHUB.COM/MAHIALJABER</span>
+    </div>
+  </footer>
+
+  <!-- ── PROJECT DETAIL ───────────────────────────────────── -->
+  <sc-if value="{{ openProject }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ onBackdrop }}" style="position: fixed; inset: 0; z-index: 100; background: color-mix(in srgb, var(--color-neutral-900) 62%, transparent); backdrop-filter: blur(3px); overflow-y: auto; padding: clamp(12px, 3vw, 44px)">
+      <div role="dialog" aria-modal="true" aria-label="Project detail" data-stop="" style="max-width: 1020px; margin: 0 auto; background: var(--color-bg); border: 1px solid var(--color-accent-700); box-shadow: var(--shadow-lg)">
+        <div style="position: sticky; top: 0; z-index: 2; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 22px clamp(18px, 3vw, 34px); border-bottom: 1px solid var(--color-divider); background: color-mix(in srgb, var(--color-bg) 94%, transparent); backdrop-filter: blur(8px)">
+          <div>
+            <div style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 8px">{{ openProject.kicker }}</div>
+            <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 38px); letter-spacing: -.02em; line-height: 1.05; text-transform: uppercase">{{ openProject.name }}</h2>
+            <p class="text-muted" style="margin: 8px 0 0; font-size: 14px; max-width: 62ch">{{ openProject.title }}</p>
+          </div>
+          <button type="button" class="btn btn-secondary" onClick="{{ closeProject }}" aria-label="Close" style="flex: none; letter-spacing: .1em; text-transform: uppercase">Close ✕</button>
+        </div>
+
+        <div style="padding: clamp(20px, 3vw, 34px); display: grid; gap: 40px">
+          <div>
+            <h3 style="font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); margin: 0 0 14px">Overview</h3>
+            <sc-for list="{{ openProject.overview }}" as="par" hint-placeholder-count="2">
+              <p style="margin: 0 0 12px; line-height: 1.7; max-width: 78ch; text-wrap: pretty">{{ par }}</p>
+            </sc-for>
+          </div>
+
+          <div>
+            <h3 style="font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); margin: 0 0 14px">Architecture &amp; workflow</h3>
+            <div class="blueprint" style="padding: 20px; overflow-x: auto; background: var(--color-surface); margin-bottom: 18px">
+              <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+              <pre style="margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; line-height: 1.5; white-space: pre">{{ openProject.arch }}</pre>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px">
+              <sc-for list="{{ openProject.flow }}" as="f" hint-placeholder-count="3">
+                <div class="blueprint" style="padding: 16px">
+                  <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+                  <div style="font-family: var(--font-heading); font-size: 15px; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px">{{ f.t }}</div>
+                  <p class="text-muted" style="margin: 0; font-size: 13px; line-height: 1.55">{{ f.d }}</p>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div>
+            <h3 style="font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); margin: 0 0 14px">Technologies</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <sc-for list="{{ openProject.tech }}" as="t" hint-placeholder-count="6">
+                <span class="tag tag-accent">{{ t }}</span>
+              </sc-for>
+            </div>
+          </div>
+
+          <div>
+            <h3 style="font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); margin: 0 0 14px">Features</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px">
+              <sc-for list="{{ openProject.features }}" as="ft" hint-placeholder-count="4">
+                <div style="padding-left: 16px; border-left: 1px solid var(--color-accent)">
+                  <div style="font-family: var(--font-heading); font-size: 16px; text-transform: uppercase; letter-spacing: .03em; margin-bottom: 5px">{{ ft.t }}</div>
+                  <p class="text-muted" style="margin: 0; font-size: 13.5px; line-height: 1.58">{{ ft.d }}</p>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <sc-if value="{{ openProject.hasAttack }}" hint-placeholder-val="{{ false }}">
+            <div>
+              <h3 style="font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); margin: 0 0 14px">MITRE ATT&amp;CK mapping</h3>
+              <div style="overflow-x: auto">
+                <table class="table">
+                  <thead><tr><th>Technique</th><th>ID</th><th>Tactic</th><th>Tool</th><th>Log source</th></tr></thead>
+                  <tbody>
+                    <sc-for list="{{ openProject.attack }}" as="a" hint-placeholder-count="3">
+                      <tr>
+                        <td>{{ a.technique }}</td>
+                        <td><span class="tag tag-outline">{{ a.id }}</span></td>
+                        <td style="font-size: 13px; opacity: .8">{{ a.tactic }}</td>
+                        <td style="font-size: 13px; opacity: .8">{{ a.tool }}</td>
+                        <td style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; opacity: .8">{{ a.log }}</td>
+                      </tr>
+                    </sc-for>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ openProject.hasCode }}" hint-placeholder-val="{{ false }}">
+            <div>
+              <h3 style="font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); margin: 0 0 14px">{{ openProject.codeLabel }}</h3>
+              <div style="display: grid; gap: 16px">
+                <sc-for list="{{ openProject.code }}" as="q" hint-placeholder-count="2">
+                  <div>
+                    <div style="font-family: var(--font-heading); font-size: 15px; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 8px">{{ q.label }}</div>
+                    <p class="text-muted" style="margin: 0 0 10px; font-size: 13px; line-height: 1.55; max-width: 76ch">{{ q.note }}</p>
+                    <div class="blueprint" style="padding: 16px; background: var(--color-accent-900); overflow-x: auto">
+                      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+                      <pre style="margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; line-height: 1.6; white-space: pre; color: #dbe6f0">{{ q.body }}</pre>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <div>
+            <h3 style="font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); margin: 0 0 14px">Screenshots</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px">
+              <sc-for list="{{ openProject.shots }}" as="s" hint-placeholder-count="3">
+                <figure class="blueprint" style="margin: 0; aspect-ratio: 16/10; display: grid; place-items: center; background: repeating-linear-gradient(45deg, color-mix(in srgb, var(--color-text) 5%, transparent) 0 6px, transparent 6px 12px)">
+                  <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+                  <figcaption style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .06em; text-align: center; padding: 0 14px; margin: 0">{{ s }}</figcaption>
+                </figure>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding-top: 22px; border-top: 1px solid var(--color-divider)">
+            <a href="{{ openProject.repo }}" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 12px 22px; font-size: 14px; letter-spacing: .1em; text-transform: uppercase">Repository →</a>
+            <sc-if value="{{ openProject.demo }}" hint-placeholder-val="{{ false }}">
+              <a href="{{ openProject.demo }}" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 12px 22px; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-text)">Live demo →</a>
+            </sc-if>
+            <span class="text-muted" style="font-size: 12.5px; max-width: 46ch">{{ openProject.demoNote }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#7a6a8f&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#7f62a6&quot;,&quot;#6a4f96&quot;,&quot;#8f5f8f&quot;,&quot;#5980a6&quot;],&quot;section&quot;:&quot;Theme&quot;},&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;system&quot;,&quot;options&quot;:[&quot;system&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;portrait&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;outdoor&quot;,&quot;options&quot;:[&quot;outdoor&quot;,&quot;none&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;apiEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;/api/contact&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;}}">
+const ROT = [
+  "Alert Triage · Enrichment · Escalation",
+  "Sigma Detections · Splunk SPL · MITRE ATT&CK",
+  "AWS CloudTrail Threat Detection",
+  "Purple-Team Validation · Detection Tuning",
+];
+
+const PROJECTS = [
+  {
+    id: "soc-lab",
+    name: "Cloud SOC Lab",
+    title: "Threat Detection & SIEM Engineering on AWS — attack emulation, log pipeline engineering and ATT&CK-mapped hunting with Splunk Enterprise.",
+    kicker: "AWS · SPLUNK · MITRE ATT&CK",
+    status: "Public",
+    summary: "A miniature enterprise SOC on AWS: three isolated EC2 instances standing in for attacker, endpoint and SIEM, run end-to-end from provisioning through detection engineering.",
+    repo: "https://github.com/mahialjaber/enterprise-threat-detection-soc-lab",
+    repoLabel: "enterprise-threat-detection-soc-lab",
+    demo: null,
+    demoNote: "No hosted demo — the deliverables are the ingestion pipeline, the SPL detections and the analyst dashboard.",
+    overview: [
+      "I built this lab to prove something a resume bullet can't: that I can operate inside a real SOC on day one. Not \"I know what Splunk is\" — that I can stand up a log ingestion pipeline, write detections from scratch, chase an attacker through raw event data, and explain every decision along the way.",
+      "Three isolated AWS EC2 instances stand in for an attacker, a target endpoint and a centralized SIEM. Real MITRE ATT&CK-mapped techniques are executed against the target, the telemetry they generate is forwarded into Splunk over TCP 9997, and custom SPL correlation searches turn that raw text into a triage-ready view.",
+      "It also exposed its own limits: native Windows Security auditing has real gaps for process-level techniques like LSASS memory access. The next iteration adds Sysmon (Event ID 1, 10, 11) and converts the strongest ad-hoc searches into scheduled correlation content with real alerting thresholds.",
+    ],
+    arch: "┌──────────────┐       ┌──────────────┐       ┌──────────────┐\n│   ATTACKER   │       │    TARGET    │       │     SIEM     │\n│  Kali Linux  │──────▶│Windows Server│──────▶│    Splunk    │\n└──────────────┘       └──────────────┘       └──────────────┘\n   Hydra + ART            Universal            Indexer +\n   → RDP :3389            Forwarder            Search Head\n                          WinEventLog          TCP 9997",
+    flow: [
+      { t: "01 · Attacker", d: "Kali Linux EC2 — Hydra RDP brute force and Atomic Red Team execution, directed at port 3389." },
+      { t: "02 · Target", d: "Windows Server EC2 generating native WinEventLog:Security and :System telemetry; runs the Splunk Universal Forwarder." },
+      { t: "03 · SIEM", d: "Splunk Enterprise on Ubuntu / Amazon Linux — indexer and search head receiving forwarded logs over TCP 9997." },
+      { t: "04 · Analyst", d: "SPL correlation searches and a multi-panel dashboard for triage and threat hunting." },
+    ],
+    tech: ["AWS EC2", "Kali Linux", "Hydra", "Atomic Red Team", "Windows Server", "Splunk Universal Forwarder", "Splunk Enterprise", "SPL (rex, stats, timechart, eval)", "MITRE ATT&CK", "Ubuntu / Amazon Linux"],
+    features: [
+      { t: "SIEM engineering", d: "Splunk Enterprise deployed as centralized indexer/search head, with a Universal Forwarder on a live Windows endpoint feeding a working pipeline over TCP 9997." },
+      { t: "Log parsing", d: "rex-based field extraction turning unstructured raw Windows Event Log text (4624, 4625, 7036) into structured, query-ready fields." },
+      { t: "Detection engineering", d: "Custom SPL correlation searches for brute-force patterns, authentication anomalies and credential-access behaviour — not out-of-the-box content." },
+      { t: "Adversary emulation", d: "Real ATT&CK-mapped techniques executed to generate genuine telemetry instead of synthetic sample data — the purple-team approach used to validate detections in production." },
+      { t: "Analyst reporting", d: "A multi-panel SOC dashboard that turns raw log data into the kind of triage view a Tier 1/2 analyst hands off during a shift." },
+    ],
+    attack: [
+      { technique: "RDP Brute Force", id: "T1110.001", tactic: "Credential Access", tool: "Hydra", log: "WinEventLog:Security (4625 / 4624)" },
+      { technique: "Credential Dumping (LSASS)", id: "T1003.001", tactic: "Credential Access", tool: "Atomic Red Team", log: "WinEventLog:Security (process-level)" },
+      { technique: "UAC Bypass", id: "T1548.002", tactic: "Privilege Escalation / Defense Evasion", tool: "Atomic Red Team", log: "WinEventLog:Security / :System" },
+    ],
+    codeLabel: "Key SPL detections",
+    code: [
+      {
+        label: "Brute-force correlation — failed → successful logon by source IP",
+        note: "Flags any source IP with a high volume of failed logons and at least one success — the strongest signal of an actually-compromised account, not just noisy scanning.",
+        body: 'index=main sourcetype="WinEventLog:Security" (EventCode=4624 OR EventCode=4625)\n| rex field=_raw "Source Network Address:\\s+(?<src_ip>[\\d\\.]+)"\n| stats count(eval(EventCode=4625)) AS failed_logons,\n        count(eval(EventCode=4624)) AS successful_logons by src_ip\n| where failed_logons > 15 AND successful_logons > 0\n| sort -failed_logons',
+      },
+      {
+        label: "Authentication status timeline",
+        note: "Powers the timeline panel — plots successful vs failed logon volume in 15-minute buckets, so a brute-force window is visually obvious against baseline traffic.",
+        body: 'index=main sourcetype="WinEventLog:Security" (EventCode=4624 OR EventCode=4625)\n| eval auth_status=case(EventCode=4624, "Success", EventCode=4625, "Failure")\n| timechart span=15m count by auth_status',
+      },
+      {
+        label: "Top threat-actor IPs and targeted accounts",
+        note: "Extracts source IP and target account directly from raw event text with rex, then ranks by failure volume — no reliance on pre-built field extractions.",
+        body: 'index=main sourcetype="WinEventLog:Security" EventCode=4625\n| rex field=_raw "Source Network Address:\\s+(?<src_ip>[\\d\\.]+)"\n| rex field=_raw "Account Name:\\s+(?<target_account>[^\\r\\n]+)"\n| stats count AS failed_attempts, values(target_account) AS targeted_accounts by src_ip\n| sort -failed_attempts\n| head 10',
+      },
+    ],
+    shots: ["SPLUNK SOC DASHBOARD — MULTI-PANEL TRIAGE VIEW", "BRUTE-FORCE CORRELATION SEARCH RESULTS", "AUTHENTICATION TIMELINE PANEL (15m BUCKETS)", "AWS EC2 THREE-TIER LAB TOPOLOGY"],
+  },
+  {
+    id: "datasets",
+    name: "SOC Log Datasets",
+    title: "Realistic, simulated security logs with hidden attacks — built for SOC analysts, threat hunters and students. 5 domains · 12 log files · 2 formats · 100% synthetic.",
+    kicker: "DATASETS · THREAT HUNTING · MIT",
+    status: "Public · MIT",
+    summary: "Purpose-built log files across five environments, each hiding specific attack techniques inside realistic background traffic — plus a hunting playbook of SPL, KQL and CLI queries.",
+    repo: "https://github.com/mahialjaber/SOC-Log-Analysis-Datasets",
+    repoLabel: "SOC-Log-Analysis-Datasets",
+    demo: null,
+    demoNote: "Clone, unzip a domain and ingest it into Splunk, Elastic, Sentinel — or just grep, awk and jq.",
+    overview: [
+      "Finding realistic log data for threat hunting practice is surprisingly hard. Clean, normal-activity logs teach you nothing about detection; massive public dumps are unstructured and overwhelming; real incident data is — rightly — locked down.",
+      "This repository bridges that gap: structured log files across Applications, Cloud, Email & DLP, Endpoints and Network, each containing specific, identifiable attack techniques buried inside normal-looking traffic. Everything is fully synthetic — no real user data, credentials, PII or breach data.",
+      "It ships with a Threat Hunting Playbook: starter queries for SQLi and XSS, cloud IAM privilege escalation, phishing and exfiltration, Windows brute force, C2 beaconing and DNS tunnelling, in SPL, KQL and plain shell.",
+    ],
+    arch: "SOC-Log-Analysis-Datasets/\n├── Applications/   app_sec_audit · web_server_access      → SQLi · XSS · traversal\n├── Cloud/          cloud_activity_audit                  → IAM esc. · resource deletion\n├── Email_and_DLP/  dlp_events · email_gateway_events     → phishing · exfiltration\n├── Endpoints/      linux_syslog · windows_security_events→ brute force · priv-esc\n└── Network/        dns · firewall · ids_ips · proxy · vpn→ tunnelling · C2 · scanning",
+    flow: [
+      { t: "01 · Domains", d: "Five environments a real SOC actually monitors — applications, cloud, email/DLP, endpoints and network." },
+      { t: "02 · Formats", d: "Plain text and JSONL, zipped to keep the repo light; ingests cleanly into Splunk, Elastic, Sentinel or your own scripts." },
+      { t: "03 · Playbook", d: "Sample SPL, KQL and CLI queries per attack vector — starting points to tune, not answers to copy." },
+      { t: "04 · Audience", d: "Students on Security+ / CySA+ / GCIH, Tier 1–2 analysts, detection engineers, purple teams and instructors." },
+    ],
+    tech: ["Splunk SPL", "Microsoft Sentinel KQL", "Elastic Stack (Filebeat/Logstash)", "JSONL", "grep / awk / sed / jq", "Windows Event Logs", "AWS-style cloud audit logs", "MIT License"],
+    features: [
+      { t: "Targeted, not random", d: "Every file is built around specific, well-known techniques — SQLi, XSS, brute force, C2 beaconing, DNS tunnelling, IAM abuse — rather than random noise." },
+      { t: "Realistic background noise", d: "Attacks are buried inside normal-looking traffic, just like production, so you have to actually hunt for them." },
+      { t: "SIEM-agnostic", d: "Text and JSONL formats that load into Splunk, Elastic, Sentinel — or nothing more than a shell." },
+      { t: "Hunting playbook", d: "Six worked hunts with queries in two SIEM languages plus CLI equivalents, and guidance on tuning thresholds down from noise." },
+      { t: "Free and open", d: "MIT licensed for educational and commercial use — built so the next analyst who needs practice data can just clone it." },
+    ],
+    attack: null,
+    codeLabel: "From the hunting playbook",
+    code: [
+      {
+        label: "Cloud IAM privilege escalation",
+        note: "Target: Cloud/cloud_activity_audit.log — surfaces the IAM calls an attacker chains to keep and widen access.",
+        body: 'index=cloud sourcetype=cloud_audit\n| search eventName IN ("AttachUserPolicy", "PutUserPolicy", "CreateAccessKey", "DeleteTrail")\n| stats count by user, eventName, sourceIPAddress\n| where count > 3',
+      },
+      {
+        label: "DNS tunnelling",
+        note: "Target: Network/dns_query_logs.jsonl — long query names are the cheapest first signal of data smuggled over DNS.",
+        body: "index=dns sourcetype=dns_query\n| eval query_length=len(query)\n| where query_length > 50\n| stats count by src_ip, query\n| sort - count",
+      },
+    ],
+    shots: ["REPOSITORY STRUCTURE — FIVE DOMAIN FOLDERS", "SPLUNK INGESTION OF firewall_traffic.log", "DNS TUNNELLING HUNT — QUERY LENGTH OUTLIERS", "README PLAYBOOK SECTION"],
+  },
+  {
+    id: "cli",
+    name: "CLI Threat Analyzer",
+    title: "Log & security copilot — a Python command-line tool that brings Gemini into the terminal for log, report and file analysis.",
+    kicker: "PYTHON · AI · TERMINAL",
+    status: "Public",
+    summary: "Feed server logs, security reports, code or images to an AI model without leaving PowerShell or bash — built for rapid triage and troubleshooting.",
+    repo: "https://github.com/mahialjaber/CLI-Threat-Analyzer",
+    repoLabel: "CLI-Threat-Analyzer",
+    demo: null,
+    demoNote: "Runs locally: clone, pip install -r requirements.txt, add GEMINI_API_KEY to .env, python chat1.py.",
+    overview: [
+      "A command-line interface that puts Google's Gemini directly in the terminal — designed for developers, sysadmins and security professionals who want to analyse system logs, security reports, code files and images without switching context.",
+      "The workflow it targets is the boring, constant part of triage: paste or point at an Apache/Nginx access log or an SSH log, and get anomalous IPs, errors and likely threats back in the same shell you were already in.",
+    ],
+    arch: "  ┌─────────────┐   /file <path> <prompt>   ┌──────────────┐\n  │  Terminal   │ ─────────────────────────▶ │  chat1.py    │\n  │ PS / bash   │ ◀───────────────────────── │  session     │\n  └─────────────┘        verdict / IOCs       └──────┬───────┘\n                                                     │ Gemini API\n                                              ┌──────▼───────┐\n                                              │  analysis    │\n                                              └──────────────┘",
+    flow: [
+      { t: "01 · Input", d: "Interactive chat, or /file <path> <prompt> to attach a local log, report, code file or image." },
+      { t: "02 · Analysis", d: "Multi-modal request to the Gemini API with the operator's prompt as the analytical frame." },
+      { t: "03 · Output", d: "Threats, errors and anomalous IPs summarised back in the terminal, ready to paste into a ticket." },
+      { t: "04 · Config", d: "API key held in .env — never in source; runs the same on Windows PowerShell, Linux bash or macOS." },
+    ],
+    tech: ["Python 3.x", "Google Gemini API", "python-dotenv", "Windows PowerShell", "Linux Bash", "macOS Terminal"],
+    features: [
+      { t: "Log & report analysis", d: "Feed Apache/Nginx or SSH logs to the model to identify security threats, errors and anomalous IPs." },
+      { t: "Multi-modal", d: "Upload local files and images directly through the terminal for inspection." },
+      { t: "Seamless integration", d: "An interactive chat session built purely in Python, optimised for rapid troubleshooting where the operator already works." },
+      { t: "Secrets discipline", d: "Configuration through a .env file with a documented format — no keys committed, no Python syntax in the env file." },
+    ],
+    attack: null,
+    codeLabel: "Usage",
+    code: [
+      {
+        label: "File analysis",
+        note: "Point the analyzer at a log and give it the question you actually have.",
+        body: "$ python chat1.py\n> /file sample_access.log Analyze these server logs for security breaches.",
+      },
+    ],
+    shots: ["INTERACTIVE SESSION IN POWERSHELL", "/file COMMAND ANALYSING AN ACCESS LOG", "VERDICT OUTPUT WITH FLAGGED IPs"],
+  },
+  {
+    id: "soar",
+    name: "Purple Team SOAR",
+    title: "Hybrid Enterprise Purple Team — Automated Response (SOAR). In active development.",
+    kicker: "SOAR · AUTOMATION · PURPLE TEAM",
+    status: "Private · WIP",
+    summary: "The current build: closing the loop from detection to automated response across a hybrid enterprise, with purple-team validation driving every playbook.",
+    repo: "https://github.com/mahialjaber?tab=repositories",
+    repoLabel: "private repository",
+    demo: null,
+    demoNote: "Private while it's in development — happy to walk through the architecture and playbooks in a conversation.",
+    overview: [
+      "This is what I'm building now: an automated response layer over the detection work in the Cloud SOC Lab, aimed at a hybrid enterprise — on-premise Windows/AD alongside cloud identity and workloads.",
+      "The premise is the one the lab exposed: ad-hoc searches aren't content. Detections need thresholds, playbooks need to fire without a human in the loop for the mechanical steps, and every playbook needs a red-team action proving it triggers.",
+    ],
+    arch: "  detect ──▶ triage ──▶ enrich ──▶ decide ──▶ act ──▶ document\n     │          │           │          │        │         │\n   Sigma      severity     TI /      playbook  contain   case\n   / SPL      + dedupe     asset     gating    / notify   notes\n                            ctx\n     ▲                                                    │\n     └──────────── purple-team validation ◀───────────────┘",
+    flow: [
+      { t: "01 · Detect", d: "Sigma and SPL content over hybrid telemetry — endpoint, identity and cloud control plane." },
+      { t: "02 · Enrich", d: "Threat intel and asset context attached automatically before a human ever opens the alert." },
+      { t: "03 · Respond", d: "Gated playbooks for the mechanical containment steps, with an audit trail per action." },
+      { t: "04 · Validate", d: "Every playbook paired with an emulated technique that proves it fires — and gets re-run after tuning." },
+    ],
+    tech: ["Sigma", "Splunk SPL", "Python", "REST APIs", "Windows / Active Directory", "AWS", "MITRE ATT&CK", "NIST SP 800-61"],
+    features: [
+      { t: "Detection as content", d: "Scheduled correlation searches with real thresholds and documented false-positive behaviour, not ad-hoc queries." },
+      { t: "Automated enrichment", d: "Reputation, asset ownership and prior-alert context resolved before triage starts." },
+      { t: "Gated response", d: "Automation for the mechanical steps, an explicit human decision point for the destructive ones." },
+      { t: "Purple-team loop", d: "Emulated techniques re-run against every playbook so validation is continuous, not a one-off." },
+    ],
+    attack: null,
+    codeLabel: null,
+    code: null,
+    shots: ["PLAYBOOK FLOW — DETECT TO CONTAIN", "ENRICHMENT PIPELINE CONFIGURATION", "VALIDATION RUN AGAINST AN EMULATED TECHNIQUE"],
+  },
+];
+
+class Component extends DCLogic {
+  state = {
+    theme: null,
+    menuOpen: false,
+    openId: null,
+    rotIdx: 0,
+    progress: 0,
+    form: { name: "", email: "", subject: "", message: "", _hp: "" },
+    errors: {},
+    status: "idle",
+    notice: null,
+  };
+
+  componentDidMount() {
+    let saved = null;
+    try { saved = localStorage.getItem("mahi-portfolio-theme"); } catch (e) { saved = null; }
+    const pref = this.props.defaultTheme || "system";
+    const sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const theme = saved || (pref === "system" ? (sysDark ? "dark" : "light") : pref);
+    this.setState({ theme });
+    this.applyTheme(theme);
+
+    this._rot = setInterval(() => this.setState((s) => ({ rotIdx: (s.rotIdx + 1) % ROT.length })), 2600);
+
+    this._onScroll = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      this.setState({ progress: max > 0 ? Math.min(100, (h.scrollTop / max) * 100) : 0 });
+    };
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+
+    this._onKey = (e) => {
+      if (e.key === "Escape") this.setState({ openId: null, menuOpen: false });
+    };
+    window.addEventListener("keydown", this._onKey);
+
+    this.applyAccent();
+    this.wireReveal();
+  }
+
+  componentDidUpdate() {
+    this.applyAccent();
+    this.wireReveal();
+    document.body.style.overflow = this.state.openId ? "hidden" : "";
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._rot);
+    window.removeEventListener("scroll", this._onScroll);
+    window.removeEventListener("keydown", this._onKey);
+    if (this._io) this._io.disconnect();
+    document.body.style.overflow = "";
+  }
+
+  applyTheme(theme) {
+    const t = theme === "dark" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", t);
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", t === "dark" ? "#14171a" : "#f2f2f3");
+  }
+
+  toggleTheme() {
+    const next = this.state.theme === "dark" ? "light" : "dark";
+    this.setState({ theme: next });
+    this.applyTheme(next);
+    try { localStorage.setItem("mahi-portfolio-theme", next); } catch (e) { /* storage blocked */ }
+  }
+
+  applyAccent() {
+    const a = this.props.accentColor;
+    if (a) document.documentElement.style.setProperty("--color-accent", a);
+  }
+
+  // Reveal on scroll: JS sets the hidden state itself, so content stays
+  // visible if scripting or IntersectionObserver is unavailable.
+  wireReveal() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!("IntersectionObserver" in window)) return;
+    if (!this._io) {
+      this._io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((en) => {
+            if (!en.isIntersecting) return;
+            en.target.style.opacity = "1";
+            en.target.style.transform = "none";
+            this._io.unobserve(en.target);
+          });
+        },
+        { rootMargin: "0px 0px -8% 0px", threshold: 0.06 }
+      );
+    }
+    document.querySelectorAll("[data-reveal]").forEach((el) => {
+      if (el.dataset.revealed) return;
+      el.dataset.revealed = "1";
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.9) return; // already in view — leave it alone
+      el.style.opacity = "0";
+      el.style.transform = "translateY(20px)";
+      el.style.transition = "opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)";
+      this._io.observe(el);
+    });
+  }
+
+  setField(k, v) {
+    this.setState((s) => {
+      const errors = Object.assign({}, s.errors);
+      delete errors[k];
+      return { form: Object.assign({}, s.form, { [k]: v }), errors, notice: null };
+    });
+  }
+
+  validate(f) {
+    const e = {};
+    if (f.name.trim().length < 2) e.name = "Please enter your name (2+ characters).";
+    if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(f.email.trim())) e.email = "Enter a valid email address.";
+    if (f.message.trim().length < 20) e.message = "A little more detail, please — 20 characters minimum.";
+    return e;
+  }
+
+  async submit(ev) {
+    ev.preventDefault();
+    const f = this.state.form;
+    if (f._hp) return; // honeypot
+    const errors = this.validate(f);
+    if (Object.keys(errors).length) {
+      this.setState({ errors, status: "idle", notice: { title: "Check the highlighted fields", body: "Nothing was sent yet." } });
+      return;
+    }
+    this.setState({ errors: {}, status: "sending", notice: null });
+
+    const endpoint = this.props.apiEndpoint || "/api/contact";
+    const mailto =
+      "mailto:mahialjaber.dev@gmail.com?subject=" +
+      encodeURIComponent(f.subject || "Portfolio contact") +
+      "&body=" +
+      encodeURIComponent(f.message + "\n\n— " + f.name + " (" + f.email + ")");
+
+    try {
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 8000);
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(f),
+        signal: ctrl.signal,
+      });
+      clearTimeout(t);
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.ok !== false) {
+        this.setState({
+          status: "ok",
+          form: { name: "", email: "", subject: "", message: "", _hp: "" },
+          notice: { title: "Message sent", body: "Thanks — it's in my inbox. I usually reply within a day." },
+        });
+        return;
+      }
+      if (res.status === 422 && data.errors) {
+        this.setState({ status: "idle", errors: data.errors, notice: { title: "The API rejected the message", body: "Fix the highlighted fields and try again." } });
+        return;
+      }
+      if (res.status === 429) {
+        this.setState({ status: "error", notice: { title: "Rate limited", body: "Too many messages from this address. Try again in 15 minutes, or email directly.", mailto } });
+        return;
+      }
+      this.setState({ status: "error", notice: { title: "Delivery failed", body: data.error || "The contact API returned an error. Please email me directly.", mailto } });
+    } catch (err) {
+      this.setState({
+        status: "error",
+        notice: {
+          title: "Contact API unreachable",
+          body: "The Express + Nodemailer API in server/ isn't running behind this preview, so nothing was transmitted. Your message is preserved below — send it directly instead.",
+          mailto,
+        },
+      });
+    }
+  }
+
+  renderVals() {
+    const s = this.state;
+    const open = PROJECTS.find((p) => p.id === s.openId) || null;
+
+    const projects = PROJECTS.map((p) =>
+      Object.assign({}, p, {
+        tech4: p.tech.slice(0, 4),
+        open: () => this.setState({ openId: p.id }),
+        onKey: (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            this.setState({ openId: p.id });
+          }
+        },
+      })
+    );
+
+    const labels = { idle: "Send message", sending: "Sending…", ok: "Sent ✓", error: "Try again" };
+
+    return {
+      progress: s.progress,
+      rotLine: ROT[s.rotIdx],
+      menuOpen: s.menuOpen,
+      toggleMenu: () => this.setState((x) => ({ menuOpen: !x.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      showPortrait: (this.props.portrait ?? "outdoor") !== "none",
+      themeLabel: s.theme === "dark" ? "Light" : "Dark",
+      toggleTheme: () => this.toggleTheme(),
+
+      spec: [
+        { k: "Role", v: "SOC Analyst — Detection & Response" },
+        { k: "Focus", v: "Alert triage · Detection engineering · Cloud threat detection" },
+        { k: "Stack", v: "Splunk SPL · Sigma · AWS CloudTrail · Sysmon · Python" },
+        { k: "Frameworks", v: "MITRE ATT&CK · NIST SP 800-61 · Cyber Kill Chain" },
+        { k: "Studying", v: "Splunk Core Certified Power User" },
+        { k: "Status", v: "Open to entry-level SOC roles — remote worldwide or relocation" },
+      ],
+
+      pillars: [
+        { n: "01", t: "SOC operations", d: "Triage, enrichment, escalation and the write-up — each case file documented the way a Tier 1 analyst documents a ticket." },
+        { n: "02", t: "Detection engineering", d: "Vendor-neutral Sigma rules and custom Splunk SPL correlation searches, each with a threat model and tested false positives." },
+        { n: "03", t: "Cloud threat detection", d: "CloudTrail, IAM and GuardDuty telemetry from a self-built AWS lab where I emulate cloud attacker techniques first." },
+      ],
+
+      toolchain: [
+        { idx: "01", group: "SIEM & Detection", items: ["Splunk (SPL)", "Sigma", "MITRE ATT&CK", "Microsoft Sentinel (KQL)"] },
+        { idx: "02", group: "Endpoint & Identity", items: ["Sysmon", "Windows Event Logs", "Active Directory", "PowerShell logging"] },
+        { idx: "03", group: "Cloud", items: ["AWS CloudTrail", "IAM", "GuardDuty", "CloudWatch", "S3", "VPC", "Lambda"] },
+        { idx: "04", group: "Network", items: ["Wireshark", "TCP/IP", "DNS", "HTTP", "Packet analysis"] },
+        { idx: "05", group: "Automation", items: ["Python", "Bash", "Git", "REST APIs"] },
+        { idx: "06", group: "Frameworks", items: ["MITRE ATT&CK", "NIST SP 800-61", "Cyber Kill Chain"] },
+      ],
+
+      projects,
+
+      phases: [
+        {
+          n: "01",
+          tag: "Phase one",
+          t: "Planning",
+          d: "Pick the technique before the tool. Every project starts from an ATT&CK technique and the telemetry it should leave behind.",
+          items: ["Threat model and scope", "ATT&CK technique selection", "Log sources and visibility gaps", "Success criteria for the detection"],
+        },
+        {
+          n: "02",
+          tag: "Phase two",
+          t: "Development",
+          d: "Stand up the infrastructure and the pipeline, then write the detection against raw telemetry — not pre-normalised fields.",
+          items: ["Lab provisioning (AWS EC2, forwarders)", "Ingestion pipeline and parsing (rex)", "SPL / Sigma authoring", "Dashboards and analyst views"],
+        },
+        {
+          n: "03",
+          tag: "Phase three",
+          t: "Testing",
+          d: "Emulate the real technique and prove the detection fires. If it doesn't, the gap gets written down, not hidden.",
+          items: ["Adversary emulation (Hydra, Atomic Red Team)", "True/false-positive review", "Threshold and FP tuning", "Documented visibility limits"],
+        },
+        {
+          n: "04",
+          tag: "Phase four",
+          t: "Deployment",
+          d: "Ship it as content, not as a screenshot: scheduled searches, documented tuning, and a write-up anyone can follow.",
+          items: ["Scheduled correlation searches", "Runbook and escalation summary", "Repository documentation", "Next-iteration backlog"],
+        },
+      ],
+
+      journey: [
+        { stage: "Stage 01", state: "Shipped", t: "Foundations — logs, networks, frameworks", d: "Windows Event Logs, TCP/IP and packet analysis, and the frameworks that give triage a structure: MITRE ATT&CK, the Cyber Kill Chain and NIST SP 800-61." },
+        { stage: "Stage 02", state: "Shipped", t: "SOC Log Analysis Datasets", d: "Built the practice data I couldn't find: 12 synthetic log files across five domains with embedded attack vectors, plus a hunting playbook in SPL, KQL and CLI. MIT licensed so other analysts can use it." },
+        { stage: "Stage 03", state: "Shipped", t: "Cloud SOC Lab on AWS", d: "Three EC2 instances, a Splunk Universal Forwarder feeding an indexer over TCP 9997, Hydra and Atomic Red Team generating real ATT&CK-mapped telemetry, and custom SPL detections over the top." },
+        { stage: "Stage 04", state: "Shipped", t: "CLI Threat Analyzer", d: "Turned the repetitive part of triage into a tool — a Python CLI that pulls an AI model into the terminal for log, report and file analysis." },
+        { stage: "Stage 05", state: "In progress", t: "Hybrid Purple Team SOAR", d: "Automating the response side: gated playbooks over hybrid telemetry, with an emulated technique behind every playbook to prove it fires." },
+        { stage: "Stage 06", state: "Next", t: "Sysmon depth, scheduled content, certification", d: "Add Sysmon (Event ID 1, 10, 11) for process-level visibility, convert the strongest searches into scheduled correlation content, expand the lab to multi-host lateral movement — and finish Splunk Core Certified Power User." },
+      ],
+
+      ghNotes: [
+        { n: "01", t: "Reproducible, not screenshotted", d: "Every lab is written so someone else can stand it up: topology, versions, ports, forwarder config. If it can't be rebuilt from the README, it isn't finished." },
+        { n: "02", t: "Detections in full", d: "The SPL and Sigma live in the repo as text — not cropped into a dashboard image — so a reviewer can read the logic, argue with the thresholds and reuse the query." },
+        { n: "03", t: "Limits documented", d: "Each write-up ends with what the telemetry couldn't see and what the next iteration adds. Naming a visibility gap is part of the work, not an admission." },
+        { n: "04", t: "Written for the next analyst", d: "The datasets repo is MIT licensed and structured for someone else's practice. Building something usable by other people is the difference between studying and contributing." },
+      ],
+
+      channels: [
+        { k: "Email", v: "mahialjaber.dev@gmail.com", href: "mailto:mahialjaber.dev@gmail.com" },
+        { k: "WhatsApp", v: "linkedin.com/in/mahialjaber", href: "https://www.linkedin.com/in/mahialjaber" },
+        { k: "GitHub", v: "github.com/mahialjaber", href: "https://github.com/mahialjaber" },
+      ],
+
+      form: s.form,
+      errors: s.errors,
+      invalid: { name: s.errors.name ? "true" : "false", email: s.errors.email ? "true" : "false", message: s.errors.message ? "true" : "false" },
+      charCount: s.form.message.length + " / 4000",
+      sending: s.status === "sending",
+      submitLabel: labels[s.status] || "Send message",
+      notice: s.notice,
+      onName: (e) => this.setField("name", e.target.value),
+      onEmail: (e) => this.setField("email", e.target.value),
+      onSubject: (e) => this.setField("subject", e.target.value),
+      onMessage: (e) => this.setField("message", e.target.value),
+      onHp: (e) => this.setField("_hp", e.target.value),
+      onSubmit: (e) => this.submit(e),
+
+      openProject: open
+        ? Object.assign({}, open, {
+            hasAttack: !!open.attack,
+            hasCode: !!open.code,
+          })
+        : null,
+      closeProject: () => this.setState({ openId: null }),
+      onBackdrop: (e) => {
+        if (e.target === e.currentTarget) this.setState({ openId: null });
+      },
+    };
+  }
+}
+
+</script>
+</body>
+</html>
