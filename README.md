@@ -26,7 +26,7 @@ Hosted live on GitHub Pages: **[mahialjaber.github.io/My-Portfolio_Website/](htt
 | [**Wazuh Enterprise SOC Lab**](https://github.com/mahialjaber/wazuh-enterprise-soc-lab) | Wazuh SIEM · Sysmon · Linux auditd · VirusTotal | Multi-node endpoint telemetry pipeline, custom XML decoders, VirusTotal API enrichment, and automated active-response firewall containment. | Active Lab |
 | [**Enterprise Threat Detection SOC Lab**](https://github.com/mahialjaber/enterprise-threat-detection-soc-lab) | AWS EC2 · Kali Linux · Windows Server · Splunk | Three-tier architecture, Universal Forwarder over TCP 9997, Hydra RDP brute force, Atomic Red Team execution, and custom SPL correlation searches. | Public |
 | [**SOC Log Analysis Datasets**](https://github.com/mahialjaber/SOC-Log-Analysis-Datasets) | Plain text · JSONL · Splunk SPL · Sentinel KQL | **23+ ⭐ Stars** — Curated synthetic log files across 5 security domains (App, Cloud, Email, Endpoints, Network) with hidden attack vectors and a hunting playbook. | Public · MIT |
-| [**CLI Threat Analyzer**](https://github.com/mahialjaber/CLI-Threat-Analyzer) | Python · Google Gemini API · Terminal | Command-line security copilot for instant server log triage, IOC extraction, and security report summarization without leaving the terminal. | Public |
+| [**CLI Threat Analyzer**](https://github.com/mahialjaber/CLI-Threat-Analyzer) | Python · Threat Intelligence API · Terminal | Command-line security copilot for instant server log triage, IOC extraction, and security report summarization without leaving the terminal. | Public |
 
 ---
 
