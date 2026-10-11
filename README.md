@@ -24,10 +24,9 @@ Hosted live on GitHub Pages: **[mahialjaber.github.io/My-Portfolio_Website/](htt
 | Project | Environment / Stack | Focus & Highlights | Status |
 |:---|:---|:---|:---:|
 | [**Wazuh Enterprise SOC Lab**](https://github.com/mahialjaber/wazuh-enterprise-soc-lab) | Wazuh SIEM · Sysmon · Linux auditd · VirusTotal | Multi-node endpoint telemetry pipeline, custom XML decoders, VirusTotal API enrichment, and automated active-response firewall containment. | Active Lab |
-| [**Cloud SOC Lab on AWS**](https://github.com/mahialjaber/enterprise-threat-detection-soc-lab) | AWS EC2 · Kali Linux · Windows Server · Splunk | Three-tier architecture, Universal Forwarder over TCP 9997, Hydra RDP brute force, Atomic Red Team execution, and custom SPL correlation searches. | Public |
+| [**Enterprise Threat Detection SOC Lab**](https://github.com/mahialjaber/enterprise-threat-detection-soc-lab) | AWS EC2 · Kali Linux · Windows Server · Splunk | Three-tier architecture, Universal Forwarder over TCP 9997, Hydra RDP brute force, Atomic Red Team execution, and custom SPL correlation searches. | Public |
 | [**SOC Log Analysis Datasets**](https://github.com/mahialjaber/SOC-Log-Analysis-Datasets) | Plain text · JSONL · Splunk SPL · Sentinel KQL | **23+ ⭐ Stars** — Curated synthetic log files across 5 security domains (App, Cloud, Email, Endpoints, Network) with hidden attack vectors and a hunting playbook. | Public · MIT |
 | [**CLI Threat Analyzer**](https://github.com/mahialjaber/CLI-Threat-Analyzer) | Python · Google Gemini API · Terminal | Command-line security copilot for instant server log triage, IOC extraction, and security report summarization without leaving the terminal. | Public |
-| [**Hybrid Purple Team SOAR**](https://github.com/mahialjaber?tab=repositories) | Python · REST APIs · Sigma · MITRE ATT&CK | Automated response framework closing the loop from detection to containment across on-prem Active Directory and cloud workloads. | In Progress |
 
 ---
 
@@ -40,15 +39,16 @@ A handcrafted physics-based light cord widget inspired by classic lamps:
 - **Tactile Sound Feedback**: Synthesized realistic acoustic switch click using the browser's native **Web Audio API** (zero external audio files).
 - **Persistent Theme Sync**: Toggles between Dark Mode and Light Mode, updating the anchor fixture's status bulb and syncing with `localStorage`.
 
-### 2. ☕ Direct Creator Support / "Buy Me a Coffee"
-A clean, non-intrusive community backing module enabling supporters and researchers to fuel cloud lab compute costs:
-- **Tiers ($ USD)**: $3 (Coffee), $5 (Supporter), $10 (Dataset Hero), $25 (Sponsor).
-- **"Why are you buying me this coffee?"**: Supporter note input field.
-- **Multiple Payment Channels**:
-  - **bKash (Bangladesh)**: Personal Send Money to `01893142872` with one-click copy.
-  - **Binance Pay / Crypto**: USDT (BEP-20 / TRC-20) Pay ID `mahialjaber`.
-  - **Payoneer**: Global USD peer transfer to `mahialjaber.dev@gmail.com` / US Bank receiving details.
-  - **RedotPay**: Instant transfer via user ID `mahialjaber`.
+### 2. ☕ Two-Option Payment Gateway & Live Supporter Wall
+A clean, interactive payment checkout gateway enabling developers and learners to send support or buy a coffee:
+- **Quick Preset & Custom Tiers ($ USD)**: $3 (Coffee), $5 (Supporter), $10 (Dataset Hero), $25 (Lab Sponsor), plus custom amount.
+- **"Why are you buying me this coffee?"**: Supporter name and message field.
+- **Strictly Two Global Payment Options**:
+  - **Option 1: Credit / Debit Card & Payoneer USD**: Pay with any international card or direct USD ACH / Citibank transfer to `mahialjaber.dev@gmail.com`.
+  - **Option 2: Binance Pay & Crypto (USDT)**: Zero gas fee instant global transfers via Binance Pay ID `mahialjaber`.
+- **Interactive Checkout Invoice Modal**: Generates a real-time invoice receipt with one-click payment links and copy actions.
+- **Live Community Supporter Wall**: Real-time supporter feed displaying community notes from fellow developers.
+- **Standalone Payment Page**: Dedicated checkout page available at [`support.html`](support.html).
 
 ### 3. 📐 Blueprint / Industrial Design Language
 - Clean wireframe blueprint aesthetics with technical corner registration marks.

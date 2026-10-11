@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Support Mahi Al Jaber — Buy Me a Coffee / Payment Gateway</title>
+  <meta name="description" content="Support Mahi Al Jaber's open-source SOC detection engineering labs, cloud telemetry research, and log analysis datasets." />
+  <meta name="theme-color" content="#14171a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;1,600&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="industry.css" />
+  <style>
+    :root {
+      --font-heading: 'Barlow Condensed', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --color-accent: #7a6a8f;
+      --color-accent-700: #9d8db3;
+    }
+    [data-theme="dark"] {
+      --color-bg: #14171a;
+      --color-surface: #1a1e22;
+      --color-text: #e2e8f0;
+      --color-muted: #94a3b8;
+      --color-divider: rgba(255, 255, 255, 0.08);
+      --color-border: rgba(255, 255, 255, 0.12);
+    }
+    [data-theme="light"] {
+      --color-bg: #f8fafc;
+      --color-surface: #ffffff;
+      --color-text: #0f172a;
+      --color-muted: #64748b;
+      --color-divider: rgba(0, 0, 0, 0.08);
+      --color-border: rgba(0, 0, 0, 0.12);
+    }
+    body {
+      margin: 0;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .text-muted { color: var(--color-muted); }
+    .blueprint {
+      position: relative;
+      border: 1px solid var(--color-border);
+    }
+    .blueprint .corner {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-color: var(--color-accent);
+      border-style: solid;
+      pointer-events: none;
+    }
+    .corner.tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+    .corner.tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+    .corner.bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+    .corner.br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      border: 1px solid var(--color-border);
+    }
+    .tag-accent {
+      border-color: var(--color-accent);
+      color: var(--color-accent-700);
+      background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-text);
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--color-accent);
+      color: #ffffff;
+      border-color: var(--color-accent);
+    }
+    .btn-primary:hover {
+      filter: brightness(1.1);
+    }
+    .btn-secondary:hover {
+      border-color: var(--color-accent);
+    }
+    .input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 14px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      font-family: inherit;
+      font-size: 14px;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .input:focus {
+      border-color: var(--color-accent);
+    }
+    .amount-btn {
+      cursor: pointer;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-text);
+      transition: all 0.2s ease;
+      font-family: var(--font-heading);
+      letter-spacing: 0.03em;
+      padding: 12px 6px;
+      text-align: center;
+    }
+    .amount-btn:hover {
+      border-color: var(--color-accent);
+      background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface));
+    }
+    .amount-btn.active {
+      border-color: var(--color-accent);
+      background: var(--color-accent);
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .gateway-option {
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid var(--color-border);
+      padding: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--color-bg);
+    }
+    .gateway-option:hover {
+      border-color: var(--color-accent) !important;
+    }
+    .gateway-option.active {
+      border-color: var(--color-accent) !important;
+      background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface)) !important;
+    }
+    .supporter-card {
+      padding: 12px 14px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-left: 3px solid var(--color-accent);
+      transition: transform 0.2s ease;
+    }
+    .supporter-card:hover {
+      transform: translateX(3px);
+    }
+    /* Hanging cord switch styles */
+    .cord-fixture {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 40px;
+      height: 48px;
+      cursor: pointer;
+      user-select: none;
+      touch-action: none;
+    }
+    .cord-anchor-plate {
+      width: 22px;
+      height: 6px;
+      background: #475569;
+      border-radius: 2px 2px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cord-indicator-bulb {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      transition: all 0.25s ease;
+    }
+    .bulb-off { background: #64748b; box-shadow: none; }
+    .bulb-lit { background: #fbbf24; box-shadow: 0 0 7px #fbbf24; }
+    .cord-interactive-area {
+      position: relative;
+      width: 38px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .rope-stem {
+      width: 2px;
+      height: 28px;
+      background: repeating-linear-gradient(to bottom, #d97706 0px, #d97706 2px, #b45309 2px, #b45309 4px);
+    }
+    .cord-handle {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 10px;
+      height: 12px;
+      background: #b45309;
+      border-radius: 2px 2px 5px 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header style="border-bottom: 1px solid var(--color-divider); background: color-mix(in srgb, var(--color-bg) 88%, transparent); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 60">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px">
+      <div style="display: flex; align-items: center; gap: 16px">
+        <a href="index.html" class="btn btn-secondary" style="font-size: 12px; padding: 6px 12px">
+          ← Back to Portfolio
+        </a>
+        <a href="index.html" style="font-family: var(--font-heading); font-size: 18px; letter-spacing: .06em; text-transform: uppercase; color: var(--color-text); text-decoration: none; font-weight: 700">
+          Mahi Al Jaber <span class="text-muted" style="font-family: var(--font-mono); font-size: 10px; font-weight: 400">/ BLUE TEAM</span>
+        </a>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 18px">
+        <span class="tag tag-accent">Payment Gateway</span>
+
+        <!-- Light pull cord switch -->
+        <div class="cord-fixture" id="theme-cord-container" role="button" tabindex="0" title="Pull cord to toggle lighting mode">
+          <div class="cord-anchor-plate">
+            <span id="bulb-indicator" class="cord-indicator-bulb bulb-off"></span>
+          </div>
+          <div id="cord-interactive-area" class="cord-interactive-area">
+            <div id="rope-stem" class="rope-stem"></div>
+            <div id="cord-handle" class="cord-handle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Payment Gateway Section -->
+  <main style="flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; padding: clamp(36px, 5vw, 64px) 24px; box-sizing: border-box">
+    
+    <div style="margin-bottom: 36px">
+      <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px">
+        <span style="font-family: var(--font-mono); font-size: 12px; color: var(--color-accent-700)">07 // SUPPORT</span>
+        <h1 style="font-size: clamp(32px, 5vw, 54px); margin: 0; text-transform: uppercase; letter-spacing: -.02em">
+          Buy Mahi a Coffee ☕
+        </h1>
+      </div>
+      <p style="font-size: 17px; line-height: 1.6; max-width: 72ch" class="text-muted">
+        Fueling open-source detection engineering, cloud SIEM laboratories, and attack datasets like <a href="https://github.com/mahialjaber/SOC-Log-Analysis-Datasets" target="_blank" rel="noopener" style="color: var(--color-text); font-weight: 600; text-decoration: underline">SOC-Log-Analysis-Datasets</a> (<strong>23+ ⭐ stars</strong>).
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(24px, 4vw, 48px); align-items: start">
+      
+      <!-- Left Column: Context & Live Supporter Wall -->
+      <div>
+        <div class="blueprint" style="padding: 20px; background: color-mix(in srgb, var(--color-accent) 8%, transparent); margin-bottom: 24px">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px">
+            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981"></span>
+            <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600">The Developer Exchange</span>
+          </div>
+          <p style="font-size: 14px; line-height: 1.65; margin: 0 0 10px">
+            In the developer &amp; security community, when an open-source roadmap, SIEM architecture, or dataset saves you weeks of study or helps you pass an interview, sending a coffee is how we say <em>"thank you for not putting this behind a paywall."</em>
+          </p>
+          <div class="text-muted" style="font-size: 12.5px; line-height: 1.5">
+            100% of community support goes toward AWS EC2 instances, Splunk indexing compute, and new adversary emulation scenarios.
+          </div>
+        </div>
+
+        <!-- Supporter Wall -->
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px">
+            <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent-700)">Community Supporter Wall</span>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-accent-700)">● LIVE FEED</span>
+          </div>
+          <div id="supporter-wall" style="display: grid; gap: 10px; max-height: 380px; overflow-y: auto; padding-right: 4px">
+            <!-- Dynamic Cards Populated via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Payment Form -->
+      <div class="blueprint" style="padding: clamp(22px, 3vw, 36px); background: var(--color-surface); display: grid; gap: 22px">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+
+        <div style="border-bottom: 1px solid var(--color-divider); padding-bottom: 14px; display: flex; align-items: baseline; justify-content: space-between">
+          <div>
+            <h2 style="font-size: 22px; margin: 0; text-transform: uppercase; letter-spacing: .03em">Payment Terminal</h2>
+            <div class="text-muted" style="font-size: 12px; margin-top: 3px">Choose amount and method below</div>
+          </div>
+          <span class="tag tag-accent" style="font-size: 10px">2 OPTIONS AVAILABLE</span>
+        </div>
+
+        <!-- 1. Amount selection -->
+        <div>
+          <label style="font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-700); display: block; margin-bottom: 8px">
+            1. Select Coffee Amount ($ USD)
+          </label>
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px">
+            <button type="button" class="amount-btn" data-amount="3">
+              ☕ $3
+              <span style="display: block; font-size: 9px; opacity: 0.75; font-weight: normal; margin-top: 2px">1 Coffee</span>
+            </button>
+            <button type="button" class="amount-btn active" data-amount="5">
+              ☕ $5
+              <span style="display: block; font-size: 9px; opacity: 0.75; font-weight: normal; margin-top: 2px">2 Coffees</span>
+            </button>
+            <button type="button" class="amount-btn" data-amount="10">
+              ☕ $10
+              <span style="display: block; font-size: 9px; opacity: 0.75; font-weight: normal; margin-top: 2px">Large Roast</span>
+            </button>
+            <button type="button" class="amount-btn" data-amount="25">
+              🛡️ $25
+              <span style="display: block; font-size: 9px; opacity: 0.75; font-weight: normal; margin-top: 2px">Lab Sponsor</span>
+            </button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px">
+            <span class="text-muted" style="font-size: 12px; font-family: var(--font-mono)">Custom $:</span>
+            <input id="custom-amount-input" class="input" type="number" min="1" max="5000" placeholder="Custom amount (USD)" style="padding: 6px 10px; font-size: 13px; max-width: 170px" />
+          </div>
+        </div>
+
+        <!-- 2. Supporter Name & Note -->
+        <div style="display: grid; gap: 12px">
+          <div>
+            <label for="supporter-name" style="font-weight: 500; font-size: 13px; display: block; margin-bottom: 6px">
+              Your Name / Alias: <span class="text-muted">(e.g. Alex)</span>
+            </label>
+            <input id="supporter-name" class="input" type="text" placeholder="Alex (SOC Analyst / Developer)" />
+          </div>
+
+          <div>
+            <label for="supporter-note" style="font-weight: 500; font-size: 13px; display: block; margin-bottom: 6px">
+              Why are you buying me this coffee? <span style="color: var(--color-accent-700)">*</span>
+            </label>
+            <textarea id="supporter-note" class="input" rows="2" placeholder="e.g. Loved your SOC datasets & detection rules! Helped me ace my technical interview." style="resize: vertical"></textarea>
+          </div>
+        </div>
+
+        <!-- 3. Choose Payment Method (STRICTLY TWO OPTIONS) -->
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 8px">
+            2. Choose Payment Method (Only 2 global options)
+          </div>
+          
+          <div style="display: grid; gap: 10px">
+            <!-- Option 1: Global Card & Payoneer USD -->
+            <label class="gateway-option active" data-method="card-payoneer">
+              <input type="radio" name="pay-method" value="card-payoneer" checked style="margin-top: 3px; accent-color: var(--color-accent)" />
+              <div style="flex: 1">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+                  <span style="font-weight: 600; font-size: 14px">💳 Option 1: Credit / Debit Card &amp; Payoneer USD</span>
+                  <span class="tag tag-accent" style="font-size: 10px">Global · All Cards</span>
+                </div>
+                <div class="text-muted" style="font-size: 12px; margin-top: 4px; line-height: 1.4">
+                  Pay via any international card (Visa/Mastercard) or direct Payoneer USD transfer (Citibank ACH / US bank receiving account).
+                </div>
+              </div>
+            </label>
+
+            <!-- Option 2: Binance Pay / Crypto USDT -->
+            <label class="gateway-option" data-method="binance-crypto">
+              <input type="radio" name="pay-method" value="binance-crypto" style="margin-top: 3px; accent-color: var(--color-accent)" />
+              <div style="flex: 1">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+                  <span style="font-weight: 600; font-size: 14px">🟡 Option 2: Binance Pay &amp; Crypto (USDT)</span>
+                  <span class="tag tag-accent" style="font-size: 10px">Zero Gas Fees · Instant</span>
+                </div>
+                <div class="text-muted" style="font-size: 12px; margin-top: 4px; line-height: 1.4">
+                  Instant peer-to-peer crypto transfer via Binance Pay ID (<code>mahialjaber</code>) or Web3 USDT. Ideal for developers worldwide.
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Checkout Action Button -->
+        <div style="padding-top: 4px">
+          <button type="button" id="btn-proceed-checkout" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600">
+            Proceed to Checkout ($5.00 USD) ☕ →
+          </button>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px; font-size: 11px; font-family: var(--font-mono)" class="text-muted">
+            <span>🔒 Direct to creator · No middleman</span>
+            <span>Instant invoice receipt</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ── MODAL: INTERACTIVE CHECKOUT & INVOICE GATEWAY ───────── -->
+  <div id="payment-modal-backdrop" style="display: none; position: fixed; inset: 0; z-index: 120; background: rgba(0,0,0,0.78); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 16px">
+    <div id="payment-modal-box" class="blueprint" style="background: var(--color-bg); max-width: 620px; width: 100%; max-height: 92vh; overflow-y: auto; padding: clamp(22px, 3.5vw, 36px); border: 1px solid var(--color-divider); box-shadow: 0 24px 64px rgba(0,0,0,0.6); position: relative">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      
+      <!-- Close button -->
+      <button type="button" id="btn-close-modal" aria-label="Close modal" style="position: absolute; top: 16px; right: 18px; background: transparent; border: 1px solid var(--color-divider); color: var(--color-text); font-size: 18px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer">✕</button>
+
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px">
+        <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; color: var(--color-accent-700)">CHECKOUT INVOICE // GATEWAY</span>
+      </div>
+
+      <div style="border-bottom: 1px solid var(--color-divider); padding-bottom: 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-start">
+        <div>
+          <h3 style="margin: 0 0 4px; font-size: 22px; text-transform: uppercase">Mahi Al Jaber</h3>
+          <div class="text-muted" style="font-size: 12px; font-family: var(--font-mono)">SOC Detection &amp; Response Research</div>
+        </div>
+        <div style="text-align: right">
+          <div id="modal-invoice-id" style="font-family: var(--font-mono); font-weight: 700; color: var(--color-accent-700); font-size: 13px">INV-SOC-481920</div>
+          <div id="modal-invoice-date" class="text-muted" style="font-size: 11px; font-family: var(--font-mono)">Oct 11, 2026</div>
+        </div>
+      </div>
+
+      <!-- Order Summary Card -->
+      <div style="background: var(--color-surface); padding: 16px; border: 1px solid var(--color-divider); margin-bottom: 20px; display: grid; gap: 8px">
+        <div style="display: flex; justify-content: space-between; font-weight: 600">
+          <span id="modal-item-name">☕ Coffee for SOC Lab</span>
+          <span id="modal-amount-display" style="color: var(--color-accent-700); font-size: 16px">$5.00 USD</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 12px" class="text-muted">
+          <span>Supporter:</span>
+          <span id="modal-supporter-name" style="font-weight: 600; color: var(--color-text)">Alex</span>
+        </div>
+        <div style="border-top: 1px dashed var(--color-divider); padding-top: 8px; margin-top: 4px; font-size: 12.5px; font-style: italic" class="text-muted">
+          "<span id="modal-supporter-note">Loved your SOC datasets!</span>"
+        </div>
+      </div>
+
+      <!-- Option 1 Checkout Details Pane -->
+      <div id="modal-pane-card-payoneer" style="display: grid; gap: 14px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <span style="font-weight: 700; font-size: 14px; color: #ff4800">Option 1: Payoneer &amp; Card Gateway</span>
+          <span class="tag tag-accent">Global Cards / ACH</span>
+        </div>
+
+        <div style="background: var(--color-surface); padding: 14px; border: 1px solid var(--color-divider); display: grid; gap: 10px">
+          <div>
+            <div style="font-size: 10px; font-family: var(--font-mono); text-transform: uppercase" class="text-muted">Payoneer Recipient Email</div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 3px">
+              <span style="font-family: var(--font-mono); font-size: 14px; font-weight: 600">mahialjaber.dev@gmail.com</span>
+              <button type="button" class="btn btn-secondary modal-copy-btn" data-copy="mahialjaber.dev@gmail.com" style="padding: 3px 8px; font-size: 11px">Copy</button>
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid var(--color-divider); padding-top: 10px">
+            <div style="font-size: 10px; font-family: var(--font-mono); text-transform: uppercase" class="text-muted">US Bank Direct Receiving (Citibank / ACH Transfer)</div>
+            <div style="font-size: 12px; line-height: 1.5; margin-top: 4px" class="text-muted">
+              • Bank: <strong>Citibank N.A. (USA)</strong><br>
+              • Routing (ABA): <strong style="font-family: var(--font-mono)">021000089</strong><br>
+              • Account Type: <strong>Checking</strong><br>
+              • Account Holder: <strong>Mahi Al Jaber</strong>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 8px">
+          <a href="https://payoneer.com" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content: center; padding: 12px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; text-decoration: none">
+            Open Payoneer to Send Payment ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Option 2 Checkout Details Pane -->
+      <div id="modal-pane-binance-crypto" style="display: none; gap: 14px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <span style="font-weight: 700; font-size: 14px; color: #f59e0b">Option 2: Binance Pay &amp; Crypto (USDT)</span>
+          <span class="tag tag-accent">Zero Fees · Instant</span>
+        </div>
+
+        <div style="background: var(--color-surface); padding: 14px; border: 1px solid var(--color-divider); display: grid; gap: 10px">
+          <div>
+            <div style="font-size: 10px; font-family: var(--font-mono); text-transform: uppercase" class="text-muted">Binance Pay ID / Recipient</div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 3px">
+              <span style="font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: #f59e0b">mahialjaber</span>
+              <button type="button" class="btn btn-secondary modal-copy-btn" data-copy="mahialjaber" style="padding: 3px 8px; font-size: 11px">Copy Pay ID</button>
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid var(--color-divider); padding-top: 10px; font-size: 12px; line-height: 1.5" class="text-muted">
+            • Currency: <strong>USDT (Tether)</strong><br>
+            • Send via Binance App → Pay → Send → Enter Pay ID: <strong>mahialjaber</strong><br>
+            • Zero transaction fees, settles immediately worldwide.
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 8px">
+          <a href="https://www.binance.com" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content: center; padding: 12px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; text-decoration: none">
+            Open Binance App / Web ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Post to Supporter Wall Confirmation Button -->
+      <div style="border-top: 1px solid var(--color-divider); padding-top: 18px; margin-top: 18px; display: grid; gap: 10px">
+        <button type="button" id="btn-complete-confirm" class="btn" style="background: #10b981; color: #000; font-weight: 700; width: 100%; justify-content: center; padding: 13px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em">
+          I've Sent Payment — Post Note to Supporter Wall ✓
+        </button>
+        <div id="modal-confirm-status" style="text-align: center; font-size: 12px; font-family: var(--font-mono); display: none"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer style="border-top: 1px solid var(--color-divider); padding: 24px; text-align: center; font-size: 12px; font-family: var(--font-mono)" class="text-muted">
+    Mahi Al Jaber · Blue Team &amp; Detection Engineering · <a href="index.html" style="color: inherit; text-decoration: underline">Back to Main Portfolio</a>
+  </footer>
+
+  <script>
+    // Theme Management
+    const initTheme = () => {
+      const saved = localStorage.getItem("mahi-portfolio-theme") || "dark";
+      document.documentElement.setAttribute("data-theme", saved);
+      const bulb = document.getElementById("bulb-indicator");
+      if (bulb) bulb.className = saved === "dark" ? "cord-indicator-bulb bulb-off" : "cord-indicator-bulb bulb-lit";
+    };
+
+    const toggleTheme = () => {
+      const current = document.documentElement.getAttribute("data-theme") || "dark";
+      const next = current === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("mahi-portfolio-theme", next);
+      const bulb = document.getElementById("bulb-indicator");
+      if (bulb) bulb.className = next === "dark" ? "cord-indicator-bulb bulb-off" : "cord-indicator-bulb bulb-lit";
+    };
+
+    const cordFixture = document.getElementById("theme-cord-container");
+    if (cordFixture) {
+      cordFixture.addEventListener("click", toggleTheme);
+    }
+    initTheme();
+
+    // Gateway Logic
+    const amountBtns = document.querySelectorAll(".amount-btn");
+    const customInput = document.getElementById("custom-amount-input");
+    const supporterNameInput = document.getElementById("supporter-name");
+    const supporterNoteInput = document.getElementById("supporter-note");
+    const gatewayOptions = document.querySelectorAll(".gateway-option");
+    const proceedBtn = document.getElementById("btn-proceed-checkout");
+
+    const modalBackdrop = document.getElementById("payment-modal-backdrop");
+    const closeModalBtn = document.getElementById("btn-close-modal");
+    const invoiceIdEl = document.getElementById("modal-invoice-id");
+    const invoiceDateEl = document.getElementById("modal-invoice-date");
+    const itemNameEl = document.getElementById("modal-item-name");
+    const amountDisplayEl = document.getElementById("modal-amount-display");
+    const modalSupporterNameEl = document.getElementById("modal-supporter-name");
+    const modalSupporterNoteEl = document.getElementById("modal-supporter-note");
+    const panePayoneer = document.getElementById("modal-pane-card-payoneer");
+    const paneBinance = document.getElementById("modal-pane-binance-crypto");
+    const confirmBtn = document.getElementById("btn-complete-confirm");
+    const confirmStatus = document.getElementById("modal-confirm-status");
+    const copyBtns = document.querySelectorAll(".modal-copy-btn");
+    const wallContainer = document.getElementById("supporter-wall");
+
+    let selectedAmount = 5;
+    let selectedMethod = "card-payoneer";
+
+    const updateBtn = () => {
+      if (proceedBtn) proceedBtn.textContent = `Proceed to Checkout ($${selectedAmount}.00 USD) ☕ →`;
+    };
+
+    amountBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        amountBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        if (customInput) customInput.value = "";
+        selectedAmount = parseInt(btn.dataset.amount, 10) || 5;
+        updateBtn();
+      });
+    });
+
+    if (customInput) {
+      customInput.addEventListener("input", (e) => {
+        const val = parseInt(e.target.value, 10);
+        if (!isNaN(val) && val > 0) {
+          amountBtns.forEach(b => b.classList.remove("active"));
+          selectedAmount = val;
+          updateBtn();
+        }
+      });
+    }
+
+    gatewayOptions.forEach(opt => {
+      const radio = opt.querySelector('input[type="radio"]');
+      opt.addEventListener("click", () => {
+        gatewayOptions.forEach(o => {
+          o.classList.remove("active");
+          o.style.borderColor = "var(--color-border)";
+          o.style.background = "var(--color-bg)";
+        });
+        opt.classList.add("active");
+        opt.style.borderColor = "var(--color-accent)";
+        opt.style.background = "color-mix(in srgb, var(--color-accent) 10%, var(--color-surface))";
+        if (radio) {
+          radio.checked = true;
+          selectedMethod = radio.value;
+        }
+      });
+      if (radio) {
+        radio.addEventListener("change", () => {
+          selectedMethod = radio.value;
+        });
+      }
+    });
+
+    const INITIAL_WALL = [
+      { name: "Alex M.", amount: "$5", time: "2 days ago", note: "Your SOC log datasets and Splunk SPL queries got me through my Tier 1 technical interview. Have a coffee on me!" },
+      { name: "Sarah K.", amount: "$10", time: "4 days ago", note: "The Wazuh lab write-up is the best open-source walkthrough on GitHub. Thank you for not paywalling it." },
+      { name: "Marcus T.", amount: "$3", time: "1 week ago", note: "Dataset 04 (Brute Force RDP) was exactly what I needed for my detection engineering practice. Cheers brother!" },
+      { name: "David R.", amount: "$25", time: "2 weeks ago", note: "Sponsoring your AWS EC2 cloud threat lab infrastructure. Keep building open-source detection engineering tools!" },
+    ];
+
+    const renderWall = () => {
+      if (!wallContainer) return;
+      let stored = [];
+      try { stored = JSON.parse(localStorage.getItem("mahi-supporters") || "[]"); } catch (e) { stored = []; }
+      const all = [...stored, ...INITIAL_WALL];
+      wallContainer.innerHTML = all.map(s => `
+        <div class="supporter-card blueprint" style="position: relative">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px">
+            <span style="font-weight: 700; font-size: 13px">${s.name}</span>
+            <div style="display: flex; align-items: center; gap: 6px">
+              <span class="tag tag-accent" style="font-size: 10px; font-weight: 700">${s.amount}</span>
+              <span class="text-muted" style="font-size: 10px; font-family: var(--font-mono)">${s.time}</span>
+            </div>
+          </div>
+          <div class="text-muted" style="font-size: 12px; line-height: 1.45">"${s.note}"</div>
+        </div>
+      `).join("");
+    };
+
+    renderWall();
+
+    const openModal = () => {
+      if (!modalBackdrop) return;
+      const rawName = supporterNameInput && supporterNameInput.value.trim() ? supporterNameInput.value.trim() : "Alex";
+      const rawNote = supporterNoteInput && supporterNoteInput.value.trim() ? supporterNoteInput.value.trim() : "Loved your SOC log datasets and detection engineering research!";
+
+      const randomInvoice = "INV-SOC-" + Math.floor(100000 + Math.random() * 900000);
+      const dateStr = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+
+      if (invoiceIdEl) invoiceIdEl.textContent = randomInvoice;
+      if (invoiceDateEl) invoiceDateEl.textContent = dateStr;
+      if (itemNameEl) itemNameEl.textContent = `☕ ${selectedAmount >= 10 ? "Roast Coffee & Lab Sponsor" : "Coffee for SOC Lab"} (${selectedAmount} USD)`;
+      if (amountDisplayEl) amountDisplayEl.textContent = `$${selectedAmount}.00 USD`;
+      if (modalSupporterNameEl) modalSupporterNameEl.textContent = rawName;
+      if (modalSupporterNoteEl) modalSupporterNoteEl.textContent = rawNote;
+
+      if (selectedMethod === "card-payoneer") {
+        if (panePayoneer) panePayoneer.style.display = "grid";
+        if (paneBinance) paneBinance.style.display = "none";
+      } else {
+        if (panePayoneer) panePayoneer.style.display = "none";
+        if (paneBinance) paneBinance.style.display = "grid";
+      }
+
+      if (confirmStatus) confirmStatus.style.display = "none";
+      modalBackdrop.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    };
+
+    const closeModal = () => {
+      if (!modalBackdrop) return;
+      modalBackdrop.style.display = "none";
+      document.body.style.overflow = "";
+    };
+
+    if (proceedBtn) proceedBtn.addEventListener("click", openModal);
+    if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+    if (modalBackdrop) {
+      modalBackdrop.addEventListener("click", (e) => {
+        if (e.target === modalBackdrop) closeModal();
+      });
+    }
+
+    copyBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const text = btn.dataset.copy;
+        if (!text) return;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            const orig = btn.textContent;
+            btn.textContent = "Copied! ✓";
+            setTimeout(() => { btn.textContent = orig; }, 2000);
+          }).catch(() => { prompt("Copy details:", text); });
+        } else {
+          prompt("Copy details:", text);
+        }
+      });
+    });
+
+    if (confirmBtn) {
+      confirmBtn.addEventListener("click", () => {
+        const name = supporterNameInput && supporterNameInput.value.trim() ? supporterNameInput.value.trim() : "Alex";
+        const note = supporterNoteInput && supporterNoteInput.value.trim() ? supporterNoteInput.value.trim() : "Great work on the SOC datasets!";
+
+        try {
+          const list = JSON.parse(localStorage.getItem("mahi-supporters") || "[]");
+          list.unshift({
+            name,
+            amount: `$${selectedAmount}`,
+            time: "Just now",
+            note,
+          });
+          localStorage.setItem("mahi-supporters", JSON.stringify(list.slice(0, 10)));
+        } catch (e) {}
+
+        renderWall();
+
+        if (confirmStatus) {
+          confirmStatus.style.display = "block";
+          confirmStatus.style.color = "#10b981";
+          confirmStatus.textContent = "✓ Thank you, " + name + "! Your note has been posted to the Supporter Wall.";
+        }
+
+        const subject = encodeURIComponent(`Bought you a coffee! ($${selectedAmount} USD) ☕`);
+        const body = encodeURIComponent(`Hi Mahi,\n\nI just sent a $${selectedAmount} USD coffee via ${selectedMethod === "card-payoneer" ? "Payoneer / Card" : "Binance Pay USDT"}!\n\nFrom: ${name}\nNote: ${note}\n\nKeep building great open-source detection engineering tools!`);
+        setTimeout(() => {
+          window.location.href = `mailto:mahialjaber.dev@gmail.com?subject=${subject}&body=${body}`;
+        }, 1200);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -249,25 +249,47 @@
     animation: handleReleaseSnap 0.55s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
   }
 
-  /* Support Tabs & Buttons */
-  .pay-tab {
+  /* Support & Payment Gateway Styles */
+  .amount-btn {
     cursor: pointer;
     border: 1px solid var(--color-divider);
-    background: transparent;
+    background: var(--color-surface);
     color: var(--color-text);
-    opacity: 0.8;
     transition: all 0.2s ease;
-    text-transform: uppercase;
     font-family: var(--font-heading);
-    letter-spacing: 0.05em;
-    padding: 8px 6px;
+    letter-spacing: 0.03em;
+    border-radius: 2px;
   }
-  .pay-tab:hover { opacity: 1; background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
-  .pay-tab.active {
-    opacity: 1;
+  .amount-btn:hover {
+    border-color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 12%, var(--color-surface));
+  }
+  .amount-btn.active {
+    border-color: var(--color-accent);
     background: var(--color-accent);
     color: var(--color-bg);
-    border-color: var(--color-accent);
+    font-weight: 700;
+  }
+  .gateway-option {
+    transition: all 0.2s ease;
+  }
+  .gateway-option:hover {
+    border-color: var(--color-accent) !important;
+  }
+  .gateway-option.active {
+    border-color: var(--color-accent) !important;
+    background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface)) !important;
+  }
+  .supporter-card {
+    padding: 12px 14px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-divider);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 2px;
+    transition: transform 0.2s ease;
+  }
+  .supporter-card:hover {
+    transform: translateX(3px);
   }
 </style>
 <script type="application/ld+json">
@@ -567,180 +589,271 @@
   <section id="support" style="max-width: 1240px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) 24px; border-top: 1px solid var(--color-divider)">
     <div data-reveal="" style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px">
       <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .16em; color: var(--color-accent-700)">07</span>
-      <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase">Support the lab</h2>
+      <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase">Buy a coffee / Support the lab</h2>
       <span style="flex: 1; height: 1px; background: var(--color-divider)"></span>
-      <span class="tag tag-accent lg-only">Direct Creator Support</span>
+      <a href="support.html" class="tag tag-accent lg-only" style="text-decoration: none" title="Open Full Screen Payment Gateway">⚡ Standalone Gateway ↗</a>
     </div>
 
-    <div class="split" data-reveal="" style="display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(28px, 4vw, 64px); align-items: start">
+    <div class="split" data-reveal="" style="display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(28px, 4vw, 64px); align-items: start">
       <div>
         <p style="font-size: clamp(20px, 2.6vw, 30px); font-family: var(--font-heading); line-height: 1.22; letter-spacing: -.015em; margin: 0 0 20px">
           Fueling open-source detection engineering &amp; realistic SOC datasets.
         </p>
         <p style="line-height: 1.7; text-wrap: pretty; margin: 0 0 16px">
-          Maintaining cloud SIEM labs, running AWS EC2 telemetry instances, and generating synthetic attack datasets like <a href="https://github.com/mahialjaber/SOC-Log-Analysis-Datasets" target="_blank" rel="noopener" style="font-weight: 600; text-decoration: underline">SOC-Log-Analysis-Datasets</a> (<strong>23+ ⭐ stars</strong>) takes real infrastructure costs and late nights.
+          Maintaining cloud SIEM labs, running AWS EC2 telemetry forwarders, and publishing synthetic attack datasets like <a href="https://github.com/mahialjaber/SOC-Log-Analysis-Datasets" target="_blank" rel="noopener" style="font-weight: 600; text-decoration: underline">SOC-Log-Analysis-Datasets</a> (<strong>23+ ⭐ stars</strong>) requires real cloud compute and late-night research.
         </p>
         <p class="text-muted" style="line-height: 1.7; text-wrap: pretty; margin: 0 0 24px">
-          If my repositories, Splunk SPL queries, Wazuh labs, or free log datasets helped your interview prep or blue team studies, you can buy me a coffee or support the lab directly. No corporate middleman — 100% goes into compute, tools, and research.
+          If my repositories, Splunk SPL correlation searches, Wazuh labs, or free log datasets helped your interview prep or blue team career, you can buy me a coffee! In the developer community, supporting creators keeps open-source research alive.
         </p>
 
-        <!-- Supporter Tiers -->
-        <div style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 12px">Support tiers ($ USD)</div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 24px">
-          <div class="blueprint" style="padding: 12px; background: var(--color-surface); text-align: center">
-            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-            <div style="font-family: var(--font-heading); font-size: 24px; color: var(--color-accent-700)">$3</div>
-            <div style="font-size: 12px; font-weight: 600; text-transform: uppercase">☕ Coffee</div>
-            <div class="text-muted" style="font-size: 11px; margin-top: 4px; line-height: 1.3">Late-night log triage &amp; query writing</div>
+        <!-- Supporter Perks / Principles -->
+        <div class="blueprint" style="padding: 18px; background: color-mix(in srgb, var(--color-accent) 8%, transparent); margin-bottom: 24px">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px">
+            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981"></span>
+            <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600">Where does your coffee money go?</span>
           </div>
-          <div class="blueprint" style="padding: 12px; background: var(--color-surface); text-align: center">
-            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-            <div style="font-family: var(--font-heading); font-size: 24px; color: var(--color-accent-700)">$5</div>
-            <div style="font-size: 12px; font-weight: 600; text-transform: uppercase">🛡️ Supporter</div>
-            <div class="text-muted" style="font-size: 11px; margin-top: 4px; line-height: 1.3">Covers AWS EC2 telemetry compute</div>
-          </div>
-          <div class="blueprint" style="padding: 12px; background: var(--color-surface); text-align: center">
-            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-            <div style="font-family: var(--font-heading); font-size: 24px; color: var(--color-accent-700)">$10</div>
-            <div style="font-size: 12px; font-weight: 600; text-transform: uppercase">🌟 Dataset Hero</div>
-            <div class="text-muted" style="font-size: 11px; margin-top: 4px; line-height: 1.3">Funds new attack vector simulations</div>
-          </div>
-          <div class="blueprint" style="padding: 12px; background: var(--color-surface); text-align: center">
-            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-            <div style="font-family: var(--font-heading); font-size: 24px; color: var(--color-accent-700)">$25</div>
-            <div style="font-size: 12px; font-weight: 600; text-transform: uppercase">💎 Sponsor</div>
-            <div class="text-muted" style="font-size: 11px; margin-top: 4px; line-height: 1.3">Multi-node attack lab infrastructure</div>
-          </div>
+          <ul style="margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.6" class="text-muted">
+            <li><strong>AWS EC2 Telemetry Instances:</strong> Running active forwarders &amp; Splunk indexers</li>
+            <li><strong>Adversary Simulation Compute:</strong> Generating high-fidelity attack telemetry</li>
+            <li><strong>100% Free &amp; Open Access:</strong> All datasets and queries remain MIT-licensed forever</li>
+          </ul>
         </div>
 
-        <div class="blueprint" style="padding: 16px; background: color-mix(in srgb, var(--color-accent) 8%, transparent)">
-          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px">
-            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981"></span>
-            <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600">Zero Commercial Paywalls</span>
+        <!-- Live Community Supporter Wall -->
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px">
+            <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent-700)">Recent Supporter Notes</span>
+            <span style="font-size: 11px; color: var(--color-accent-700); font-family: ui-monospace, monospace">● COMMUNITY WALL</span>
           </div>
-          <p class="text-muted" style="margin: 0; font-size: 13px; line-height: 1.55">All my datasets, detection rules, and lab walk-throughs remain 100% open-source under MIT license. Tips are optional appreciation from the community.</p>
+          <div id="supporter-wall" style="display: grid; gap: 10px; max-height: 300px; overflow-y: auto; padding-right: 4px">
+            <!-- Dynamic Supporter Cards populated via JS -->
+          </div>
         </div>
       </div>
 
-      <!-- Payment Integration Box with Tabs -->
-      <div class="blueprint" style="padding: clamp(22px, 3vw, 32px); display: grid; gap: 20px; background: var(--color-surface)">
+      <!-- Functional Payment Gateway Box -->
+      <div class="blueprint" style="padding: clamp(22px, 3vw, 34px); display: grid; gap: 20px; background: var(--color-surface); position: relative">
         <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
         
-        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
-          <h3 style="font-size: 20px; margin: 0; text-transform: uppercase; letter-spacing: .04em">Buy a coffee / Send Support</h3>
-          <span class="text-muted" style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .12em">DIRECT CHANNELS</span>
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--color-divider); padding-bottom: 14px">
+          <div>
+            <h3 style="font-size: 20px; margin: 0; text-transform: uppercase; letter-spacing: .04em">Payment Gateway</h3>
+            <div class="text-muted" style="font-size: 12px; margin-top: 4px">Direct developer support · Safe &amp; verified checkout</div>
+          </div>
+          <span class="tag tag-accent" style="font-size: 10px">2 OPTIONS AVAILABLE</span>
         </div>
 
-        <!-- Note Field: Why are you buying me this coffee? -->
-        <div class="field">
-          <label for="supporter-note" style="font-weight: 500">
-            Why are you buying me this coffee? <span class="text-muted">(Optional note / message)</span>
-          </label>
-          <input id="supporter-note" class="input" type="text" placeholder="e.g. Loved your SOC Log Dataset! Keep up the great Splunk work!" style="background: var(--color-bg)" />
-        </div>
-
-        <!-- Payment Method Tabs -->
+        <!-- Step 1: Select Coffee Amount -->
         <div>
-          <div style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 8px">Select Payment Method</div>
-          <div class="seg" style="width: 100%; display: grid; grid-template-columns: repeat(4, 1fr)">
-            <button type="button" class="btn pay-tab active" data-tab="bkash" style="font-size: 12px; padding: 8px 4px">bKash</button>
-            <button type="button" class="btn pay-tab" data-tab="binance" style="font-size: 12px; padding: 8px 4px">Binance</button>
-            <button type="button" class="btn pay-tab" data-tab="payoneer" style="font-size: 12px; padding: 8px 4px">Payoneer</button>
-            <button type="button" class="btn pay-tab" data-tab="redotpay" style="font-size: 12px; padding: 8px 4px">RedotPay</button>
+          <label style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-700); display: block; margin-bottom: 8px">
+            1. Select Coffee Amount ($ USD)
+          </label>
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px">
+            <button type="button" class="btn amount-btn" data-amount="3" style="font-size: 13.5px; padding: 10px 4px; text-align: center">
+              ☕ $3
+              <span style="display: block; font-size: 9px; opacity: 0.75; font-weight: normal; margin-top: 2px">1 Coffee</span>
+            </button>
+            <button type="button" class="btn amount-btn active" data-amount="5" style="font-size: 13.5px; padding: 10px 4px; text-align: center">
+              ☕ $5
+              <span style="display: block; font-size: 9px; opacity: 0.75; font-weight: normal; margin-top: 2px">2 Coffees</span>
+            </button>
+            <button type="button" class="btn amount-btn" data-amount="10" style="font-size: 13.5px; padding: 10px 4px; text-align: center">
+              ☕ $10
+              <span style="display: block; font-size: 9px; opacity: 0.75; font-weight: normal; margin-top: 2px">Large Roast</span>
+            </button>
+            <button type="button" class="btn amount-btn" data-amount="25" style="font-size: 13.5px; padding: 10px 4px; text-align: center">
+              🛡️ $25
+              <span style="display: block; font-size: 9px; opacity: 0.75; font-weight: normal; margin-top: 2px">Lab Sponsor</span>
+            </button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px">
+            <span class="text-muted" style="font-size: 12px; font-family: ui-monospace, monospace">Custom $:</span>
+            <input id="custom-amount-input" class="input" type="number" min="1" max="5000" placeholder="Custom amount (USD)" style="padding: 6px 10px; font-size: 13px; background: var(--color-bg); max-width: 170px" />
           </div>
         </div>
 
-        <!-- Payment Method Details Panes -->
-        <!-- 1. bKash -->
-        <div id="pane-bkash" class="pay-pane" style="display: grid; gap: 12px">
-          <div class="blueprint" style="padding: 16px; background: var(--color-bg)">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px">
-              <span style="font-weight: 700; color: #e11d48; font-size: 14px">bKash Personal (Send Money)</span>
-              <span class="tag tag-accent">Bangladesh</span>
-            </div>
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--color-surface); padding: 8px 12px; border: 1px solid var(--color-divider); margin-bottom: 8px">
-              <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 15px; font-weight: 600; letter-spacing: .06em">01893142872</span>
-              <button type="button" class="btn btn-secondary copy-btn" data-copy="01893142872" style="padding: 4px 10px; font-size: 11px">Copy</button>
-            </div>
-            <p class="text-muted" style="margin: 0; font-size: 12px; line-height: 1.5">
-              Send Money to personal bKash number. Suggested: ৳150 / ৳300 / ৳500 / ৳1,000 (approx $1.50 – $10 USD). Put your name/note in reference.
-            </p>
+        <!-- Step 2: Supporter Name & Note -->
+        <div style="display: grid; gap: 12px">
+          <div>
+            <label for="supporter-name" style="font-weight: 500; font-size: 13px; display: block; margin-bottom: 6px">
+              Your Name / Alias: <span class="text-muted">(e.g. Alex)</span>
+            </label>
+            <input id="supporter-name" class="input" type="text" placeholder="Alex (SOC Analyst / Developer)" style="background: var(--color-bg)" />
+          </div>
+
+          <div>
+            <label for="supporter-note" style="font-weight: 500; font-size: 13px; display: block; margin-bottom: 6px">
+              Why are you buying me this coffee? <span style="color: var(--color-accent-700)">*</span>
+            </label>
+            <textarea id="supporter-note" class="input" rows="2" placeholder="e.g. Loved your SOC datasets & detection rules! Helped me ace my technical interview." style="background: var(--color-bg); resize: vertical"></textarea>
           </div>
         </div>
 
-        <!-- 2. Binance -->
-        <div id="pane-binance" class="pay-pane" style="display: none; gap: 12px">
-          <div class="blueprint" style="padding: 16px; background: var(--color-bg)">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px">
-              <span style="font-weight: 700; color: #f59e0b; font-size: 14px">Binance Pay (USDT)</span>
-              <span class="tag tag-accent">Zero Fees · Instant</span>
-            </div>
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--color-surface); padding: 8px 12px; border: 1px solid var(--color-divider); margin-bottom: 8px">
-              <div>
-                <div style="font-size: 10px; font-family: ui-monospace, monospace; text-transform: uppercase" class="text-muted">Binance Pay ID / USDT</div>
-                <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; font-weight: 600">mahialjaber</span>
+        <!-- Step 3: Choose Payment Gateway (STRICTLY TWO OPTIONS) -->
+        <div>
+          <div style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 8px">
+            2. Choose Payment Method (Only 2 global options)
+          </div>
+          
+          <div style="display: grid; gap: 10px">
+            <!-- Option 1: Global Card & Payoneer USD -->
+            <label class="gateway-option active" data-method="card-payoneer" style="display: flex; align-items: flex-start; gap: 12px; padding: 14px; border: 1px solid var(--color-accent); background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface)); cursor: pointer; border-radius: 2px">
+              <input type="radio" name="pay-method" value="card-payoneer" checked style="margin-top: 3px; accent-color: var(--color-accent)" />
+              <div style="flex: 1">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+                  <span style="font-weight: 600; font-size: 14px">💳 Option 1: Credit / Debit Card &amp; Payoneer USD</span>
+                  <span class="tag tag-accent" style="font-size: 10px">Global · All Cards</span>
+                </div>
+                <div class="text-muted" style="font-size: 12px; margin-top: 4px; line-height: 1.4">
+                  Pay via any international card (Visa/Mastercard) or direct Payoneer USD transfer (Citibank ACH / US bank receiving account).
+                </div>
               </div>
-              <button type="button" class="btn btn-secondary copy-btn" data-copy="mahialjaber" style="padding: 4px 10px; font-size: 11px">Copy</button>
-            </div>
-            <p class="text-muted" style="margin: 0; font-size: 12px; line-height: 1.5">
-              Send USDT via Binance Pay app. Instant transfer with 0 network gas fees from any country.
-            </p>
-          </div>
-        </div>
+            </label>
 
-        <!-- 3. Payoneer -->
-        <div id="pane-payoneer" class="pay-pane" style="display: none; gap: 12px">
-          <div class="blueprint" style="padding: 16px; background: var(--color-bg)">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px">
-              <span style="font-weight: 700; color: #ff4800; font-size: 14px">Payoneer (Global USD)</span>
-              <span class="tag tag-accent">Global Transfer</span>
-            </div>
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--color-surface); padding: 8px 12px; border: 1px solid var(--color-divider); margin-bottom: 8px">
-              <div>
-                <div style="font-size: 10px; font-family: ui-monospace, monospace; text-transform: uppercase" class="text-muted">Payoneer Account Email</div>
-                <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; font-weight: 600">mahialjaber.dev@gmail.com</span>
+            <!-- Option 2: Binance Pay / Crypto USDT -->
+            <label class="gateway-option" data-method="binance-crypto" style="display: flex; align-items: flex-start; gap: 12px; padding: 14px; border: 1px solid var(--color-divider); background: var(--color-bg); cursor: pointer; border-radius: 2px">
+              <input type="radio" name="pay-method" value="binance-crypto" style="margin-top: 3px; accent-color: var(--color-accent)" />
+              <div style="flex: 1">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+                  <span style="font-weight: 600; font-size: 14px">🟡 Option 2: Binance Pay &amp; Crypto (USDT)</span>
+                  <span class="tag tag-accent" style="font-size: 10px">Zero Gas Fees · Instant</span>
+                </div>
+                <div class="text-muted" style="font-size: 12px; margin-top: 4px; line-height: 1.4">
+                  Instant peer-to-peer crypto transfer via Binance Pay ID (<code>mahialjaber</code>) or Web3 USDT. Ideal for developers worldwide.
+                </div>
               </div>
-              <button type="button" class="btn btn-secondary copy-btn" data-copy="mahialjaber.dev@gmail.com" style="padding: 4px 10px; font-size: 11px">Copy</button>
-            </div>
-            <p class="text-muted" style="margin: 0; font-size: 12px; line-height: 1.5">
-              Direct Payoneer-to-Payoneer transfer (Free). For US Bank wire / ACH receiving details (Citibank / First Century Bank), email me or use the contact form.
-            </p>
+            </label>
           </div>
         </div>
 
-        <!-- 4. RedotPay -->
-        <div id="pane-redotpay" class="pay-pane" style="display: none; gap: 12px">
-          <div class="blueprint" style="padding: 16px; background: var(--color-bg)">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px">
-              <span style="font-weight: 700; color: #ef4444; font-size: 14px">RedotPay Transfer</span>
-              <span class="tag tag-accent">App Transfer</span>
-            </div>
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--color-surface); padding: 8px 12px; border: 1px solid var(--color-divider); margin-bottom: 8px">
-              <div>
-                <div style="font-size: 10px; font-family: ui-monospace, monospace; text-transform: uppercase" class="text-muted">RedotPay Account / User ID</div>
-                <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; font-weight: 600">mahialjaber</span>
-              </div>
-              <button type="button" class="btn btn-secondary copy-btn" data-copy="mahialjaber" style="padding: 4px 10px; font-size: 11px">Copy</button>
-            </div>
-            <p class="text-muted" style="margin: 0; font-size: 12px; line-height: 1.5">
-              Direct peer-to-peer balance transfer in RedotPay with zero transaction fees.
-            </p>
-          </div>
-        </div>
-
-        <!-- Confirm / Send Note Action -->
-        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-top: 10px; border-top: 1px solid var(--color-divider)">
-          <button type="button" id="btn-notify-coffee" class="btn btn-primary" style="padding: 10px 20px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase">
-            Send Coffee Note ✉️
+        <!-- Checkout Action Button -->
+        <div style="padding-top: 8px">
+          <button type="button" id="btn-proceed-checkout" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; justify-content: center">
+            Proceed to Checkout ($5.00 USD) ☕ →
           </button>
-          <span id="copy-status-msg" class="text-muted" style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px">
-            Click 'Copy' on your preferred method above.
-          </span>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px; font-size: 11px; font-family: ui-monospace, monospace" class="text-muted">
+            <span>🔒 Direct to creator · No middleman</span>
+            <span>Instant invoice &amp; receipt</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- ── MODAL: INTERACTIVE CHECKOUT & INVOICE GATEWAY ───────── -->
+  <div id="payment-modal-backdrop" style="display: none; position: fixed; inset: 0; z-index: 120; background: rgba(0,0,0,0.78); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 16px">
+    <div id="payment-modal-box" class="blueprint" style="background: var(--color-bg); max-width: 620px; width: 100%; max-height: 92vh; overflow-y: auto; padding: clamp(22px, 3.5vw, 36px); border: 1px solid var(--color-divider); box-shadow: 0 24px 64px rgba(0,0,0,0.6); position: relative">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      
+      <!-- Close button -->
+      <button type="button" id="btn-close-modal" aria-label="Close modal" style="position: absolute; top: 16px; right: 18px; background: transparent; border: 1px solid var(--color-divider); color: var(--color-text); font-size: 18px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer">✕</button>
+
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px">
+        <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .16em; color: var(--color-accent-700)">CHECKOUT INVOICE // GATEWAY</span>
+      </div>
+
+      <div style="border-bottom: 1px solid var(--color-divider); padding-bottom: 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-start">
+        <div>
+          <h3 style="margin: 0 0 4px; font-size: 22px; text-transform: uppercase">Mahi Al Jaber</h3>
+          <div class="text-muted" style="font-size: 12px; font-family: ui-monospace, monospace">SOC Detection &amp; Response Research</div>
+        </div>
+        <div style="text-align: right">
+          <div id="modal-invoice-id" style="font-family: ui-monospace, monospace; font-weight: 700; color: var(--color-accent-700); font-size: 13px">INV-SOC-481920</div>
+          <div id="modal-invoice-date" class="text-muted" style="font-size: 11px; font-family: ui-monospace, monospace">Oct 11, 2026</div>
+        </div>
+      </div>
+
+      <!-- Order Summary Card -->
+      <div style="background: var(--color-surface); padding: 16px; border: 1px solid var(--color-divider); margin-bottom: 20px; display: grid; gap: 8px">
+        <div style="display: flex; justify-content: space-between; font-weight: 600">
+          <span id="modal-item-name">☕ Coffee for SOC Lab</span>
+          <span id="modal-amount-display" style="color: var(--color-accent-700); font-size: 16px">$5.00 USD</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 12px" class="text-muted">
+          <span>Supporter:</span>
+          <span id="modal-supporter-name" style="font-weight: 600; color: var(--color-text)">Alex</span>
+        </div>
+        <div style="border-top: 1px dashed var(--color-divider); padding-top: 8px; margin-top: 4px; font-size: 12.5px; font-style: italic" class="text-muted">
+          "<span id="modal-supporter-note">Loved your SOC datasets!</span>"
+        </div>
+      </div>
+
+      <!-- Option 1 Checkout Details Pane -->
+      <div id="modal-pane-card-payoneer" style="display: grid; gap: 14px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <span style="font-weight: 700; font-size: 14px; color: #ff4800">Option 1: Payoneer &amp; Card Gateway</span>
+          <span class="tag tag-accent">Global Cards / ACH</span>
+        </div>
+
+        <div style="background: var(--color-surface); padding: 14px; border: 1px solid var(--color-divider); display: grid; gap: 10px">
+          <div>
+            <div style="font-size: 10px; font-family: ui-monospace, monospace; text-transform: uppercase" class="text-muted">Payoneer Recipient Email</div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 3px">
+              <span style="font-family: ui-monospace, monospace; font-size: 14px; font-weight: 600">mahialjaber.dev@gmail.com</span>
+              <button type="button" class="btn btn-secondary modal-copy-btn" data-copy="mahialjaber.dev@gmail.com" style="padding: 3px 8px; font-size: 11px">Copy</button>
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid var(--color-divider); padding-top: 10px">
+            <div style="font-size: 10px; font-family: ui-monospace, monospace; text-transform: uppercase" class="text-muted">US Bank Direct Receiving (Citibank / ACH Transfer)</div>
+            <div style="font-size: 12px; line-height: 1.5; margin-top: 4px" class="text-muted">
+              • Bank: <strong>Citibank N.A. (USA)</strong><br>
+              • Routing (ABA): <strong style="font-family: ui-monospace, monospace">021000089</strong><br>
+              • Account Type: <strong>Checking</strong><br>
+              • Account Holder: <strong>Mahi Al Jaber</strong>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 8px">
+          <a href="https://payoneer.com" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content: center; padding: 12px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; text-decoration: none">
+            Open Payoneer to Send Payment ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Option 2 Checkout Details Pane -->
+      <div id="modal-pane-binance-crypto" style="display: none; gap: 14px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <span style="font-weight: 700; font-size: 14px; color: #f59e0b">Option 2: Binance Pay &amp; Crypto (USDT)</span>
+          <span class="tag tag-accent">Zero Fees · Instant</span>
+        </div>
+
+        <div style="background: var(--color-surface); padding: 14px; border: 1px solid var(--color-divider); display: grid; gap: 10px">
+          <div>
+            <div style="font-size: 10px; font-family: ui-monospace, monospace; text-transform: uppercase" class="text-muted">Binance Pay ID / Recipient</div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 3px">
+              <span style="font-family: ui-monospace, monospace; font-size: 15px; font-weight: 700; color: #f59e0b">mahialjaber</span>
+              <button type="button" class="btn btn-secondary modal-copy-btn" data-copy="mahialjaber" style="padding: 3px 8px; font-size: 11px">Copy Pay ID</button>
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid var(--color-divider); padding-top: 10px; font-size: 12px; line-height: 1.5" class="text-muted">
+            • Currency: <strong>USDT (Tether)</strong><br>
+            • Send via Binance App → Pay → Send → Enter Pay ID: <strong>mahialjaber</strong><br>
+            • Zero transaction fees, settles immediately.
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 8px">
+          <a href="https://www.binance.com" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content: center; padding: 12px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; text-decoration: none">
+            Open Binance App / Web ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Post to Supporter Wall Confirmation Button -->
+      <div style="border-top: 1px solid var(--color-divider); padding-top: 18px; margin-top: 18px; display: grid; gap: 10px">
+        <button type="button" id="btn-complete-confirm" class="btn" style="background: #10b981; color: #000; font-weight: 700; width: 100%; justify-content: center; padding: 13px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em">
+          I've Sent Payment — Post Note to Supporter Wall ✓
+        </button>
+        <div id="modal-confirm-status" style="text-align: center; font-size: 12px; font-family: ui-monospace, monospace; display: none"></div>
+      </div>
+
+    </div>
+  </div>
+
 
   <!-- ── CONTACT ──────────────────────────────────────────── -->
   <section id="contact" style="max-width: 1240px; margin: 0 auto; padding: clamp(56px, 7vw, 110px) 24px; border-top: 1px solid var(--color-divider)">
@@ -1011,62 +1124,6 @@ const PROJECTS = [
     shots: ["WAZUH SECURITY EVENTS DASHBOARD", "SYSMON PROCESS CREATION TRIAGE VIEW", "VIRUSTOTAL API ENRICHMENT HIT", "ACTIVE RESPONSE FIREWALL DROP LOGS"],
   },
   {
-    id: "soc-lab",
-    name: "Cloud SOC Lab",
-    title: "Threat Detection & SIEM Engineering on AWS — attack emulation, log pipeline engineering and ATT&CK-mapped hunting with Splunk Enterprise.",
-    kicker: "AWS · SPLUNK · MITRE ATT&CK",
-    status: "Public",
-    summary: "A miniature enterprise SOC on AWS: three isolated EC2 instances standing in for attacker, endpoint and SIEM, run end-to-end from provisioning through detection engineering.",
-    repo: "https://github.com/mahialjaber/enterprise-threat-detection-soc-lab",
-    repoLabel: "enterprise-threat-detection-soc-lab",
-    demo: null,
-    demoNote: "No hosted demo — the deliverables are the ingestion pipeline, the SPL detections and the analyst dashboard.",
-    overview: [
-      "I built this lab to prove something a resume bullet can't: that I can operate inside a real SOC on day one. Not \"I know what Splunk is\" — that I can stand up a log ingestion pipeline, write detections from scratch, chase an attacker through raw event data, and explain every decision along the way.",
-      "Three isolated AWS EC2 instances stand in for an attacker, a target endpoint and a centralized SIEM. Real MITRE ATT&CK-mapped techniques are executed against the target, the telemetry they generate is forwarded into Splunk over TCP 9997, and custom SPL correlation searches turn that raw text into a triage-ready view.",
-      "It also exposed its own limits: native Windows Security auditing has real gaps for process-level techniques like LSASS memory access. The next iteration adds Sysmon (Event ID 1, 10, 11) and converts the strongest ad-hoc searches into scheduled correlation content with real alerting thresholds.",
-    ],
-    arch: "┌──────────────┐       ┌──────────────┐       ┌──────────────┐\n│   ATTACKER   │       │    TARGET    │       │     SIEM     │\n│  Kali Linux  │──────▶│Windows Server│──────▶│    Splunk    │\n└──────────────┘       └──────────────┘       └──────────────┘\n   Hydra + ART            Universal            Indexer +\n   → RDP :3389            Forwarder            Search Head\n                          WinEventLog          TCP 9997",
-    flow: [
-      { t: "01 · Attacker", d: "Kali Linux EC2 — Hydra RDP brute force and Atomic Red Team execution, directed at port 3389." },
-      { t: "02 · Target", d: "Windows Server EC2 generating native WinEventLog:Security and :System telemetry; runs the Splunk Universal Forwarder." },
-      { t: "03 · SIEM", d: "Splunk Enterprise on Ubuntu / Amazon Linux — indexer and search head receiving forwarded logs over TCP 9997." },
-      { t: "04 · Analyst", d: "SPL correlation searches and a multi-panel dashboard for triage and threat hunting." },
-    ],
-    tech: ["AWS EC2", "Kali Linux", "Hydra", "Atomic Red Team", "Windows Server", "Splunk Universal Forwarder", "Splunk Enterprise", "SPL (rex, stats, timechart, eval)", "MITRE ATT&CK", "Ubuntu / Amazon Linux"],
-    features: [
-      { t: "SIEM engineering", d: "Splunk Enterprise deployed as centralized indexer/search head, with a Universal Forwarder on a live Windows endpoint feeding a working pipeline over TCP 9997." },
-      { t: "Log parsing", d: "rex-based field extraction turning unstructured raw Windows Event Log text (4624, 4625, 7036) into structured, query-ready fields." },
-      { t: "Detection engineering", d: "Custom SPL correlation searches for brute-force patterns, authentication anomalies and credential-access behaviour — not out-of-the-box content." },
-      { t: "Adversary emulation", d: "Real ATT&CK-mapped techniques executed to generate genuine telemetry instead of synthetic sample data — the purple-team approach used to validate detections in production." },
-      { t: "Analyst reporting", d: "A multi-panel SOC dashboard that turns raw log data into the kind of triage view a Tier 1/2 analyst hands off during a shift." },
-    ],
-    attack: [
-      { technique: "RDP Brute Force", id: "T1110.001", tactic: "Credential Access", tool: "Hydra", log: "WinEventLog:Security (4625 / 4624)" },
-      { technique: "Credential Dumping (LSASS)", id: "T1003.001", tactic: "Credential Access", tool: "Atomic Red Team", log: "WinEventLog:Security (process-level)" },
-      { technique: "UAC Bypass", id: "T1548.002", tactic: "Privilege Escalation / Defense Evasion", tool: "Atomic Red Team", log: "WinEventLog:Security / :System" },
-    ],
-    codeLabel: "Key SPL detections",
-    code: [
-      {
-        label: "Brute-force correlation — failed → successful logon by source IP",
-        note: "Flags any source IP with a high volume of failed logons and at least one success — the strongest signal of an actually-compromised account, not just noisy scanning.",
-        body: 'index=main sourcetype="WinEventLog:Security" (EventCode=4624 OR EventCode=4625)\n| rex field=_raw "Source Network Address:\\s+(?<src_ip>[\\d\\.]+)"\n| stats count(eval(EventCode=4625)) AS failed_logons,\n        count(eval(EventCode=4624)) AS successful_logons by src_ip\n| where failed_logons > 15 AND successful_logons > 0\n| sort -failed_logons',
-      },
-      {
-        label: "Authentication status timeline",
-        note: "Powers the timeline panel — plots successful vs failed logon volume in 15-minute buckets, so a brute-force window is visually obvious against baseline traffic.",
-        body: 'index=main sourcetype="WinEventLog:Security" (EventCode=4624 OR EventCode=4625)\n| eval auth_status=case(EventCode=4624, "Success", EventCode=4625, "Failure")\n| timechart span=15m count by auth_status',
-      },
-      {
-        label: "Top threat-actor IPs and targeted accounts",
-        note: "Extracts source IP and target account directly from raw event text with rex, then ranks by failure volume — no reliance on pre-built field extractions.",
-        body: 'index=main sourcetype="WinEventLog:Security" EventCode=4625\n| rex field=_raw "Source Network Address:\\s+(?<src_ip>[\\d\\.]+)"\n| rex field=_raw "Account Name:\\s+(?<target_account>[^\\r\\n]+)"\n| stats count AS failed_attempts, values(target_account) AS targeted_accounts by src_ip\n| sort -failed_attempts\n| head 10',
-      },
-    ],
-    shots: ["SPLUNK SOC DASHBOARD — MULTI-PANEL TRIAGE VIEW", "BRUTE-FORCE CORRELATION SEARCH RESULTS", "AUTHENTICATION TIMELINE PANEL (15m BUCKETS)", "AWS EC2 THREE-TIER LAB TOPOLOGY"],
-  },
-  {
     id: "datasets",
     name: "SOC Log Datasets",
     title: "Realistic, simulated security logs with hidden attacks — built for SOC analysts, threat hunters and students. 5 domains · 12 log files · 2 formats · 100% synthetic.",
@@ -1154,38 +1211,60 @@ const PROJECTS = [
     shots: ["INTERACTIVE SESSION IN POWERSHELL", "/file COMMAND ANALYSING AN ACCESS LOG", "VERDICT OUTPUT WITH FLAGGED IPs"],
   },
   {
-    id: "soar",
-    name: "Purple Team SOAR",
-    title: "Hybrid Enterprise Purple Team — Automated Response (SOAR). In active development.",
-    kicker: "SOAR · AUTOMATION · PURPLE TEAM",
-    status: "Private · WIP",
-    summary: "The current build: closing the loop from detection to automated response across a hybrid enterprise, with purple-team validation driving every playbook.",
-    repo: "https://github.com/mahialjaber?tab=repositories",
-    repoLabel: "private repository",
+    id: "soc-lab",
+    name: "Enterprise Threat Detection SOC Lab",
+    title: "Threat Detection & SIEM Engineering on AWS — attack emulation, log pipeline engineering and ATT&CK-mapped hunting with Splunk Enterprise.",
+    kicker: "AWS · SPLUNK · MITRE ATT&CK",
+    status: "Public",
+    summary: "A miniature enterprise SOC on AWS: three isolated EC2 instances standing in for attacker, endpoint and SIEM, run end-to-end from provisioning through detection engineering.",
+    repo: "https://github.com/mahialjaber/enterprise-threat-detection-soc-lab",
+    repoLabel: "enterprise-threat-detection-soc-lab",
     demo: null,
-    demoNote: "Private while it's in development — happy to walk through the architecture and playbooks in a conversation.",
+    demoNote: "No hosted demo — the deliverables are the ingestion pipeline, the SPL detections and the analyst dashboard.",
     overview: [
-      "This is what I'm building now: an automated response layer over the detection work in the Cloud SOC Lab, aimed at a hybrid enterprise — on-premise Windows/AD alongside cloud identity and workloads.",
-      "The premise is the one the lab exposed: ad-hoc searches aren't content. Detections need thresholds, playbooks need to fire without a human in the loop for the mechanical steps, and every playbook needs a red-team action proving it triggers.",
+      "I built this lab to prove something a resume bullet can't: that I can operate inside a real SOC on day one. Not \"I know what Splunk is\" — that I can stand up a log ingestion pipeline, write detections from scratch, chase an attacker through raw event data, and explain every decision along the way.",
+      "Three isolated AWS EC2 instances stand in for an attacker, a target endpoint and a centralized SIEM. Real MITRE ATT&CK-mapped techniques are executed against the target, the telemetry they generate is forwarded into Splunk over TCP 9997, and custom SPL correlation searches turn that raw text into a triage-ready view.",
+      "It also exposed its own limits: native Windows Security auditing has real gaps for process-level techniques like LSASS memory access. The next iteration adds Sysmon (Event ID 1, 10, 11) and converts the strongest ad-hoc searches into scheduled correlation content with real alerting thresholds.",
     ],
-    arch: "  detect ──▶ triage ──▶ enrich ──▶ decide ──▶ act ──▶ document\n     │          │           │          │        │         │\n   Sigma      severity     TI /      playbook  contain   case\n   / SPL      + dedupe     asset     gating    / notify   notes\n                            ctx\n     ▲                                                    │\n     └──────────── purple-team validation ◀───────────────┘",
+    arch: "┌──────────────┐       ┌──────────────┐       ┌──────────────┐\n│   ATTACKER   │       │    TARGET    │       │     SIEM     │\n│  Kali Linux  │──────▶│Windows Server│──────▶│    Splunk    │\n└──────────────┘       └──────────────┘       └──────────────┘\n   Hydra + ART            Universal            Indexer +\n   → RDP :3389            Forwarder            Search Head\n                          WinEventLog          TCP 9997",
     flow: [
-      { t: "01 · Detect", d: "Sigma and SPL content over hybrid telemetry — endpoint, identity and cloud control plane." },
-      { t: "02 · Enrich", d: "Threat intel and asset context attached automatically before a human ever opens the alert." },
-      { t: "03 · Respond", d: "Gated playbooks for the mechanical containment steps, with an audit trail per action." },
-      { t: "04 · Validate", d: "Every playbook paired with an emulated technique that proves it fires — and gets re-run after tuning." },
+      { t: "01 · Attacker", d: "Kali Linux EC2 — Hydra RDP brute force and Atomic Red Team execution, directed at port 3389." },
+      { t: "02 · Target", d: "Windows Server EC2 generating native WinEventLog:Security and :System telemetry; runs the Splunk Universal Forwarder." },
+      { t: "03 · SIEM", d: "Splunk Enterprise on Ubuntu / Amazon Linux — indexer and search head receiving forwarded logs over TCP 9997." },
+      { t: "04 · Analyst", d: "SPL correlation searches and a multi-panel dashboard for triage and threat hunting." },
     ],
-    tech: ["Sigma", "Splunk SPL", "Python", "REST APIs", "Windows / Active Directory", "AWS", "MITRE ATT&CK", "NIST SP 800-61"],
+    tech: ["AWS EC2", "Kali Linux", "Hydra", "Atomic Red Team", "Windows Server", "Splunk Universal Forwarder", "Splunk Enterprise", "SPL (rex, stats, timechart, eval)", "MITRE ATT&CK", "Ubuntu / Amazon Linux"],
     features: [
-      { t: "Detection as content", d: "Scheduled correlation searches with real thresholds and documented false-positive behaviour, not ad-hoc queries." },
-      { t: "Automated enrichment", d: "Reputation, asset ownership and prior-alert context resolved before triage starts." },
-      { t: "Gated response", d: "Automation for the mechanical steps, an explicit human decision point for the destructive ones." },
-      { t: "Purple-team loop", d: "Emulated techniques re-run against every playbook so validation is continuous, not a one-off." },
+      { t: "SIEM engineering", d: "Splunk Enterprise deployed as centralized indexer/search head, with a Universal Forwarder on a live Windows endpoint feeding a working pipeline over TCP 9997." },
+      { t: "Log parsing", d: "rex-based field extraction turning unstructured raw Windows Event Log text (4624, 4625, 7036) into structured, query-ready fields." },
+      { t: "Detection engineering", d: "Custom SPL correlation searches for brute-force patterns, authentication anomalies and credential-access behaviour — not out-of-the-box content." },
+      { t: "Adversary emulation", d: "Real ATT&CK-mapped techniques executed to generate genuine telemetry instead of synthetic sample data — the purple-team approach used to validate detections in production." },
+      { t: "Analyst reporting", d: "A multi-panel SOC dashboard that turns raw log data into the kind of triage view a Tier 1/2 analyst hands off during a shift." },
     ],
-    attack: null,
-    codeLabel: null,
-    code: null,
-    shots: ["PLAYBOOK FLOW — DETECT TO CONTAIN", "ENRICHMENT PIPELINE CONFIGURATION", "VALIDATION RUN AGAINST AN EMULATED TECHNIQUE"],
+    attack: [
+      { technique: "RDP Brute Force", id: "T1110.001", tactic: "Credential Access", tool: "Hydra", log: "WinEventLog:Security (4625 / 4624)" },
+      { technique: "Credential Dumping (LSASS)", id: "T1003.001", tactic: "Credential Access", tool: "Atomic Red Team", log: "WinEventLog:Security (process-level)" },
+      { technique: "UAC Bypass", id: "T1548.002", tactic: "Privilege Escalation / Defense Evasion", tool: "Atomic Red Team", log: "WinEventLog:Security / :System" },
+    ],
+    codeLabel: "Key SPL detections",
+    code: [
+      {
+        label: "Brute-force correlation — failed → successful logon by source IP",
+        note: "Flags any source IP with a high volume of failed logons and at least one success — the strongest signal of an actually-compromised account, not just noisy scanning.",
+        body: 'index=main sourcetype="WinEventLog:Security" (EventCode=4624 OR EventCode=4625)\n| rex field=_raw "Source Network Address:\\s+(?<src_ip>[\\d\\.]+)"\n| stats count(eval(EventCode=4625)) AS failed_logons,\n        count(eval(EventCode=4624)) AS successful_logons by src_ip\n| where failed_logons > 15 AND successful_logons > 0\n| sort -failed_logons',
+      },
+      {
+        label: "Authentication status timeline",
+        note: "Powers the timeline panel — plots successful vs failed logon volume in 15-minute buckets, so a brute-force window is visually obvious against baseline traffic.",
+        body: 'index=main sourcetype="WinEventLog:Security" (EventCode=4624 OR EventCode=4625)\n| eval auth_status=case(EventCode=4624, "Success", EventCode=4625, "Failure")\n| timechart span=15m count by auth_status',
+      },
+      {
+        label: "Top threat-actor IPs and targeted accounts",
+        note: "Extracts source IP and target account directly from raw event text with rex, then ranks by failure volume — no reliance on pre-built field extractions.",
+        body: 'index=main sourcetype="WinEventLog:Security" EventCode=4625\n| rex field=_raw "Source Network Address:\\s+(?<src_ip>[\\d\\.]+)"\n| rex field=_raw "Account Name:\\s+(?<target_account>[^\\r\\n]+)"\n| stats count AS failed_attempts, values(target_account) AS targeted_accounts by src_ip\n| sort -failed_attempts\n| head 10',
+      },
+    ],
+    shots: ["SPLUNK SOC DASHBOARD — MULTI-PANEL TRIAGE VIEW", "BRUTE-FORCE CORRELATION SEARCH RESULTS", "AUTHENTICATION TIMELINE PANEL (15m BUCKETS)", "AWS EC2 THREE-TIER LAB TOPOLOGY"],
   },
 ];
 
@@ -1228,14 +1307,14 @@ class Component extends DCLogic {
     this.applyAccent();
     this.wireReveal();
     this.wirePullCord();
-    this.wireSupportTabs();
+    this.wireSupportGateway();
   }
 
   componentDidUpdate() {
     this.applyAccent();
     this.wireReveal();
     this.wirePullCord();
-    this.wireSupportTabs();
+    this.wireSupportGateway();
     document.body.style.overflow = this.state.openId ? "hidden" : "";
   }
 
@@ -1418,35 +1497,167 @@ class Component extends DCLogic {
     updateBulbUI(this.state.theme === "dark");
   }
 
-  wireSupportTabs() {
-    const tabs = document.querySelectorAll(".pay-tab");
-    const panes = {
-      bkash: document.getElementById("pane-bkash"),
-      binance: document.getElementById("pane-binance"),
-      payoneer: document.getElementById("pane-payoneer"),
-      redotpay: document.getElementById("pane-redotpay"),
-    };
-    const copyBtns = document.querySelectorAll(".copy-btn");
-    const statusMsg = document.getElementById("copy-status-msg");
-    const notifyBtn = document.getElementById("btn-notify-coffee");
-    const noteInput = document.getElementById("supporter-note");
+  wireSupportGateway() {
+    const amountBtns = document.querySelectorAll(".amount-btn");
+    const customInput = document.getElementById("custom-amount-input");
+    const supporterNameInput = document.getElementById("supporter-name");
+    const supporterNoteInput = document.getElementById("supporter-note");
+    const gatewayOptions = document.querySelectorAll(".gateway-option");
+    const proceedBtn = document.getElementById("btn-proceed-checkout");
 
-    tabs.forEach((tab) => {
-      if (tab._tabBound) return;
-      tab._tabBound = true;
-      tab.addEventListener("click", () => {
-        tabs.forEach((t) => t.classList.remove("active"));
-        tab.classList.add("active");
-        const target = tab.dataset.tab;
-        Object.keys(panes).forEach((k) => {
-          if (panes[k]) panes[k].style.display = k === target ? "grid" : "none";
-        });
+    const modalBackdrop = document.getElementById("payment-modal-backdrop");
+    const closeModalBtn = document.getElementById("btn-close-modal");
+    const invoiceIdEl = document.getElementById("modal-invoice-id");
+    const invoiceDateEl = document.getElementById("modal-invoice-date");
+    const itemNameEl = document.getElementById("modal-item-name");
+    const amountDisplayEl = document.getElementById("modal-amount-display");
+    const modalSupporterNameEl = document.getElementById("modal-supporter-name");
+    const modalSupporterNoteEl = document.getElementById("modal-supporter-note");
+    const panePayoneer = document.getElementById("modal-pane-card-payoneer");
+    const paneBinance = document.getElementById("modal-pane-binance-crypto");
+    const confirmBtn = document.getElementById("btn-complete-confirm");
+    const confirmStatus = document.getElementById("modal-confirm-status");
+    const copyBtns = document.querySelectorAll(".modal-copy-btn");
+    const wallContainer = document.getElementById("supporter-wall");
+
+    // Initialize wall right away
+    const INITIAL_WALL = [
+      { name: "Alex M.", amount: "$5", time: "2 days ago", note: "Your SOC log datasets and Splunk SPL queries got me through my Tier 1 technical interview. Have a coffee on me!" },
+      { name: "Sarah K.", amount: "$10", time: "4 days ago", note: "The Wazuh lab write-up is the best open-source walkthrough on GitHub. Thank you for not paywalling it." },
+      { name: "Marcus T.", amount: "$3", time: "1 week ago", note: "Dataset 04 (Brute Force RDP) was exactly what I needed for my detection engineering practice. Cheers brother!" },
+      { name: "David R.", amount: "$25", time: "2 weeks ago", note: "Sponsoring your AWS EC2 cloud threat lab infrastructure. Keep building open-source detection engineering tools!" },
+    ];
+
+    const renderSupporterWall = () => {
+      if (!wallContainer) return;
+      let stored = [];
+      try {
+        stored = JSON.parse(localStorage.getItem("mahi-supporters") || "[]");
+      } catch (e) { stored = []; }
+
+      const all = [...stored, ...INITIAL_WALL];
+      wallContainer.innerHTML = all.map((s, idx) => `
+        <div class="supporter-card blueprint" style="position: relative">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px">
+            <span style="font-weight: 700; font-size: 13px">${s.name}</span>
+            <div style="display: flex; align-items: center; gap: 6px">
+              <span class="tag tag-accent" style="font-size: 10px; font-weight: 700">${s.amount}</span>
+              <span class="text-muted" style="font-size: 10px; font-family: ui-monospace, monospace">${s.time}</span>
+            </div>
+          </div>
+          <div class="text-muted" style="font-size: 12px; line-height: 1.45">"${s.note}"</div>
+        </div>
+      `).join("");
+    };
+
+    renderSupporterWall();
+
+    if (!proceedBtn || proceedBtn._gatewayBound) return;
+    proceedBtn._gatewayBound = true;
+
+    let selectedAmount = 5;
+    let selectedMethod = "card-payoneer"; // strictly 2 options: 'card-payoneer' or 'binance-crypto'
+
+    const updateCheckoutButton = () => {
+      if (proceedBtn) {
+        proceedBtn.textContent = `Proceed to Checkout ($${selectedAmount}.00 USD) ☕ →`;
+      }
+    };
+
+    // Amount preset buttons
+    amountBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        amountBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        if (customInput) customInput.value = "";
+        selectedAmount = parseInt(btn.dataset.amount, 10) || 5;
+        updateCheckoutButton();
       });
     });
 
+    // Custom amount input
+    if (customInput) {
+      customInput.addEventListener("input", (e) => {
+        const val = parseInt(e.target.value, 10);
+        if (!isNaN(val) && val > 0) {
+          amountBtns.forEach((b) => b.classList.remove("active"));
+          selectedAmount = val;
+          updateCheckoutButton();
+        }
+      });
+    }
+
+    // Payment method selection (2 options)
+    gatewayOptions.forEach((opt) => {
+      const radio = opt.querySelector('input[type="radio"]');
+      opt.addEventListener("click", () => {
+        gatewayOptions.forEach((o) => {
+          o.classList.remove("active");
+          o.style.borderColor = "var(--color-divider)";
+          o.style.background = "var(--color-bg)";
+        });
+        opt.classList.add("active");
+        opt.style.borderColor = "var(--color-accent)";
+        opt.style.background = "color-mix(in srgb, var(--color-accent) 10%, var(--color-surface))";
+        if (radio) {
+          radio.checked = true;
+          selectedMethod = radio.value;
+        }
+      });
+      if (radio) {
+        radio.addEventListener("change", () => {
+          selectedMethod = radio.value;
+        });
+      }
+    });
+
+    // Modal Opening
+    const openModal = () => {
+      if (!modalBackdrop) return;
+      const rawName = supporterNameInput && supporterNameInput.value.trim() ? supporterNameInput.value.trim() : "Alex";
+      const rawNote = supporterNoteInput && supporterNoteInput.value.trim() ? supporterNoteInput.value.trim() : "Loved your SOC log datasets and detection engineering research!";
+
+      const randomInvoice = "INV-SOC-" + Math.floor(100000 + Math.random() * 900000);
+      const dateStr = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+
+      if (invoiceIdEl) invoiceIdEl.textContent = randomInvoice;
+      if (invoiceDateEl) invoiceDateEl.textContent = dateStr;
+      if (itemNameEl) itemNameEl.textContent = `☕ ${selectedAmount >= 10 ? "Roast Coffee & Lab Sponsor" : "Coffee for SOC Lab"} (${selectedAmount} USD)`;
+      if (amountDisplayEl) amountDisplayEl.textContent = `$${selectedAmount}.00 USD`;
+      if (modalSupporterNameEl) modalSupporterNameEl.textContent = rawName;
+      if (modalSupporterNoteEl) modalSupporterNoteEl.textContent = rawNote;
+
+      if (selectedMethod === "card-payoneer") {
+        if (panePayoneer) panePayoneer.style.display = "grid";
+        if (paneBinance) paneBinance.style.display = "none";
+      } else {
+        if (panePayoneer) panePayoneer.style.display = "none";
+        if (paneBinance) paneBinance.style.display = "grid";
+      }
+
+      if (confirmStatus) confirmStatus.style.display = "none";
+      modalBackdrop.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    };
+
+    const closeModal = () => {
+      if (!modalBackdrop) return;
+      modalBackdrop.style.display = "none";
+      document.body.style.overflow = "";
+    };
+
+    proceedBtn.addEventListener("click", openModal);
+
+    if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+    if (modalBackdrop) {
+      modalBackdrop.addEventListener("click", (e) => {
+        if (e.target === modalBackdrop) closeModal();
+      });
+    }
+
+    // Modal Copy Buttons
     copyBtns.forEach((btn) => {
-      if (btn._copyBound) return;
-      btn._copyBound = true;
       btn.addEventListener("click", () => {
         const text = btn.dataset.copy;
         if (!text) return;
@@ -1454,30 +1665,46 @@ class Component extends DCLogic {
           navigator.clipboard.writeText(text).then(() => {
             const orig = btn.textContent;
             btn.textContent = "Copied! ✓";
-            if (statusMsg) statusMsg.textContent = "Copied " + text + " to clipboard!";
-            setTimeout(() => {
-              btn.textContent = orig;
-            }, 2000);
-          }).catch(() => {
-            prompt("Copy this:", text);
-          });
+            setTimeout(() => { btn.textContent = orig; }, 2000);
+          }).catch(() => { prompt("Copy details:", text); });
         } else {
-          prompt("Copy this:", text);
+          prompt("Copy details:", text);
         }
       });
     });
 
-    if (notifyBtn && !notifyBtn._bound) {
-      notifyBtn._bound = true;
-      notifyBtn.addEventListener("click", () => {
-        const note = noteInput && noteInput.value.trim() ? noteInput.value.trim() : "Sent a coffee to support your SOC research!";
-        const subject = encodeURIComponent("Bought you a coffee! ☕");
-        const body = encodeURIComponent("Hi Mahi,\n\nI just sent some support for your security lab!\n\nNote: " + note + "\n\nKeep building!");
-        window.location.href = "mailto:mahialjaber.dev@gmail.com?subject=" + subject + "&body=" + body;
-        if (statusMsg) {
-          statusMsg.textContent = "Thank you! Email draft opened to notify Mahi. ☕🛡️";
-          statusMsg.style.color = "var(--color-accent-700)";
+    // Confirmation & Post to Supporter Wall
+    if (confirmBtn) {
+      confirmBtn.addEventListener("click", () => {
+        const name = supporterNameInput && supporterNameInput.value.trim() ? supporterNameInput.value.trim() : "Alex";
+        const note = supporterNoteInput && supporterNoteInput.value.trim() ? supporterNoteInput.value.trim() : "Great work on the SOC datasets!";
+
+        // Save to localStorage
+        try {
+          const list = JSON.parse(localStorage.getItem("mahi-supporters") || "[]");
+          list.unshift({
+            name,
+            amount: `$${selectedAmount}`,
+            time: "Just now",
+            note,
+          });
+          localStorage.setItem("mahi-supporters", JSON.stringify(list.slice(0, 10)));
+        } catch (e) {}
+
+        renderSupporterWall();
+
+        if (confirmStatus) {
+          confirmStatus.style.display = "block";
+          confirmStatus.style.color = "#10b981";
+          confirmStatus.textContent = "✓ Thank you, " + name + "! Your note has been posted to the Supporter Wall.";
         }
+
+        // Trigger optional notification mailto
+        const subject = encodeURIComponent(`Bought you a coffee! ($${selectedAmount} USD) ☕`);
+        const body = encodeURIComponent(`Hi Mahi,\n\nI just sent a $${selectedAmount} USD coffee via ${selectedMethod === "card-payoneer" ? "Payoneer / Card" : "Binance Pay USDT"}!\n\nFrom: ${name}\nNote: ${note}\n\nKeep building great open-source detection engineering tools!`);
+        setTimeout(() => {
+          window.location.href = `mailto:mahialjaber.dev@gmail.com?subject=${subject}&body=${body}`;
+        }, 1200);
       });
     }
   }
@@ -1684,7 +1911,7 @@ class Component extends DCLogic {
         { stage: "Stage 03", state: "Shipped", t: "Cloud SOC Lab on AWS", d: "Three EC2 instances, a Splunk Universal Forwarder feeding an indexer over TCP 9997, Hydra and Atomic Red Team generating real ATT&CK-mapped telemetry, and custom SPL detections over the top." },
         { stage: "Stage 04", state: "Shipped", t: "Wazuh Enterprise SOC Lab", d: "Multi-node SIEM architecture with Wazuh agents, Sysmon and auditd telemetry streams, VirusTotal API enrichment, and automated active-response containment." },
         { stage: "Stage 05", state: "Shipped", t: "CLI Threat Analyzer", d: "Turned the repetitive part of triage into a tool — a Python CLI that pulls an AI model into the terminal for log, report and file analysis." },
-        { stage: "Stage 06", state: "In progress", t: "Hybrid Purple Team SOAR", d: "Automating the response side: gated playbooks over hybrid telemetry, with an emulated technique behind every playbook to prove it fires." },
+        { stage: "Stage 06", state: "Shipped", t: "Enterprise Threat Detection SOC Lab", d: "Three-tier AWS EC2 telemetry pipeline, Splunk Universal Forwarder over TCP 9997, adversary emulation with Hydra and Atomic Red Team, and custom correlation detections." },
       ],
 
       ghNotes: [
