@@ -82,9 +82,192 @@
   }
   @media (max-width: 1100px) { .phase-grid { grid-template-columns: 1fr 1fr !important; } }
   @media (max-width: 640px) { .phase-grid { grid-template-columns: 1fr !important; } }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    * { animation: none !important; transition: none !important; }
+  /* Pull Cord Lamp Switch Toggle */
+  .cord-fixture {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: grab;
+    touch-action: none;
+    margin-top: -14px;
+    padding: 0 8px;
+    z-index: 25;
+  }
+  .cord-fixture:active { cursor: grabbing; }
+  .cord-anchor-plate {
+    width: 18px;
+    height: 9px;
+    border-radius: 0 0 3px 3px;
+    background: linear-gradient(180deg, #475569 0%, #1e293b 100%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-top: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cord-indicator-bulb {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  .bulb-lit {
+    background-color: #fbbf24;
+    box-shadow: 0 0 8px #f59e0b, 0 0 16px #fbbf24;
+  }
+  .bulb-off {
+    background-color: #38bdf8;
+    box-shadow: 0 0 5px #0284c7;
+  }
+  .cord-interactive-area {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 12px;
+    outline: none;
+  }
+  .rope-stem {
+    width: 2.5px;
+    height: 32px;
+    background: linear-gradient(180deg, #94a3b8 0%, #cbd5e1 50%, #fde68a 100%);
+    transform-origin: top center;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+  }
+  .rope-stem::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background: repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 1px, transparent 3px);
+  }
+  .cord-handle {
+    position: relative;
+    margin-top: -1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: filter 0.15s ease;
+  }
+  .cord-handle:hover { filter: brightness(1.15); }
+  .cord-bead-top {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #f59e0b;
+    border: 1px solid #b45309;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .cord-bead-main {
+    width: 12px;
+    height: 18px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #d97706 0%, #fef08a 40%, #b45309 100%);
+    border: 1px solid #92400e;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -1px;
+  }
+  .cord-bead-inner {
+    width: 4px;
+    height: 9px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.6);
+  }
+  .cord-bead-cap {
+    width: 6px;
+    height: 4px;
+    border-radius: 0 0 3px 3px;
+    background: #78350f;
+    margin-top: -1px;
+  }
+  .pull-cue {
+    position: absolute;
+    bottom: -8px;
+    width: 16px;
+    height: 2px;
+    border-radius: 2px;
+    background: transparent;
+    transition: all 0.2s ease;
+    pointer-events: none;
+  }
+  .cord-tooltip {
+    pointer-events: none;
+    position: absolute;
+    top: 100%;
+    margin-top: 10px;
+    white-space: nowrap;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    background: #0f172a;
+    color: #e2e8f0;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 50;
+  }
+  .cord-fixture:hover .cord-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes cordReleaseSnap {
+    0% { height: var(--release-height, 58px); }
+    30% { height: 25px; }
+    55% { height: 36px; }
+    75% { height: 30px; }
+    90% { height: 33px; }
+    100% { height: 32px; }
+  }
+  @keyframes handleReleaseSnap {
+    0% { transform: translateY(var(--release-y, 26px)); }
+    30% { transform: translateY(-7px); }
+    55% { transform: translateY(4px); }
+    75% { transform: translateY(-2px); }
+    90% { transform: translateY(1px); }
+    100% { transform: translateY(0); }
+  }
+  .cord-snapping .rope-stem {
+    animation: cordReleaseSnap 0.55s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+  }
+  .cord-snapping .cord-handle {
+    animation: handleReleaseSnap 0.55s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+  }
+
+  /* Support Tabs & Buttons */
+  .pay-tab {
+    cursor: pointer;
+    border: 1px solid var(--color-divider);
+    background: transparent;
+    color: var(--color-text);
+    opacity: 0.8;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    font-family: var(--font-heading);
+    letter-spacing: 0.05em;
+    padding: 8px 6px;
+  }
+  .pay-tab:hover { opacity: 1; background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
+  .pay-tab.active {
+    opacity: 1;
+    background: var(--color-accent);
+    color: var(--color-bg);
+    border-color: var(--color-accent);
   }
 </style>
 <script type="application/ld+json">
@@ -97,22 +280,40 @@
   <div style="position: fixed; top: 0; left: 0; height: 2px; z-index: 90; background: var(--color-accent); width: {{ progress }}%"></div>
 
   <header style="position: sticky; top: 0; z-index: 60; border-bottom: 1px solid var(--color-divider); background: color-mix(in srgb, var(--color-bg) 86%, transparent); backdrop-filter: blur(12px)">
-    <nav class="nav" style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; gap: 28px">
+    <nav class="nav" style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; gap: 24px; align-items: center">
       <a href="#top" class="nav-brand" style="display: flex; align-items: baseline; gap: 8px; letter-spacing: .04em; text-transform: uppercase; color: var(--color-text)">
         Mahi Al Jaber
         <span class="text-muted" style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .16em">/ BLUE TEAM</span>
       </a>
-      <div class="lg-only" style="align-items: center; gap: 24px; font-family: var(--font-heading); font-size: 14px; letter-spacing: .06em; text-transform: uppercase">
+      <div class="lg-only" style="align-items: center; gap: 22px; font-family: var(--font-heading); font-size: 14px; letter-spacing: .06em; text-transform: uppercase">
         <a href="#about">About</a>
         <a href="#skills">Toolchain</a>
         <a href="#projects">Projects</a>
         <a href="#phase">Phases</a>
         <a href="#journey">Journey</a>
         <a href="#github">GitHub</a>
+        <a href="#support">Support</a>
       </div>
-      <button type="button" class="btn btn-secondary" onClick="{{ toggleTheme }}" aria-label="Switch colour theme" title="Switch colour theme" style="gap: 8px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-text)">
-        <span style="width: 9px; height: 9px; border: 1px solid currentColor; background: var(--color-text)"></span>{{ themeLabel }}
-      </button>
+
+      <!-- Interactive Hanging Light Switch Pull Cord -->
+      <div class="cord-fixture" id="theme-cord-container" role="button" tabindex="0" aria-label="Pull cord to toggle lighting mode" title="Pull cord down or tap to toggle lights">
+        <div class="cord-anchor-plate">
+          <span id="bulb-indicator" class="cord-indicator-bulb bulb-off" title="Lighting Status"></span>
+        </div>
+        <div id="cord-interactive-area" class="cord-interactive-area">
+          <div id="rope-stem" class="rope-stem"></div>
+          <div id="cord-handle" class="cord-handle">
+            <div class="cord-bead-top"></div>
+            <div class="cord-bead-main">
+              <div class="cord-bead-inner"></div>
+            </div>
+            <div class="cord-bead-cap"></div>
+          </div>
+          <div id="pull-cue" class="pull-cue"></div>
+          <span id="cord-tooltip" class="cord-tooltip">Pull cord for Lights</span>
+        </div>
+      </div>
+
       <a href="#contact" class="btn btn-primary lg-only" style="letter-spacing: .08em; text-transform: uppercase; color: var(--color-bg)">Get in touch</a>
       <button type="button" class="btn btn-secondary sm-only" onClick="{{ toggleMenu }}" aria-label="Toggle navigation" style="letter-spacing: .1em; text-transform: uppercase">Menu</button>
     </nav>
@@ -124,6 +325,7 @@
         <a href="#phase" onClick="{{ closeMenu }}" style="padding: 14px 24px; border-bottom: 1px solid var(--color-divider)">Phases</a>
         <a href="#journey" onClick="{{ closeMenu }}" style="padding: 14px 24px; border-bottom: 1px solid var(--color-divider)">Journey</a>
         <a href="#github" onClick="{{ closeMenu }}" style="padding: 14px 24px; border-bottom: 1px solid var(--color-divider)">GitHub</a>
+        <a href="#support" onClick="{{ closeMenu }}" style="padding: 14px 24px; border-bottom: 1px solid var(--color-divider); color: var(--color-accent-700)">Support ☕</a>
         <a href="#contact" onClick="{{ closeMenu }}" style="padding: 14px 24px; color: var(--color-accent-700)">Contact</a>
       </div>
     </sc-if>
@@ -254,7 +456,7 @@
       <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase">Case files</h2>
       <span style="flex: 1; height: 1px; background: var(--color-divider)"></span>
     </div>
-    <p class="text-muted" data-reveal="" style="max-width: 62ch; margin: 0 0 38px; line-height: 1.65">Four projects, each with its own architecture, telemetry and detections. Open one for the full write-up — overview, architecture, technologies, features, screenshots and the repository.</p>
+    <p class="text-muted" data-reveal="" style="max-width: 62ch; margin: 0 0 38px; line-height: 1.65">Five projects, each with its own architecture, telemetry and detections. Open one for the full write-up — overview, architecture, technologies, features, screenshots and the repository.</p>
     <div data-reveal="" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 22px">
       <sc-for list="{{ projects }}" as="p" hint-placeholder-count="4">
         <article class="blueprint" style="padding: 24px 22px; display: flex; flex-direction: column; gap: 14px; cursor: pointer; transition: background .25s ease, transform .25s ease" style-hover="background: color-mix(in srgb, var(--color-accent) 6%, transparent); transform: translateY(-3px)" onClick="{{ p.open }}" tabIndex="0" onKeyDown="{{ p.onKey }}" role="button">
@@ -361,13 +563,189 @@
     </div>
   </section>
 
-  <!-- ── CONTACT ──────────────────────────────────────────── -->
-  
+  <!-- ── SUPPORT / BUY ME A COFFEE ────────────────────────── -->
+  <section id="support" style="max-width: 1240px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) 24px; border-top: 1px solid var(--color-divider)">
+    <div data-reveal="" style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px">
+      <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .16em; color: var(--color-accent-700)">07</span>
+      <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase">Support the lab</h2>
+      <span style="flex: 1; height: 1px; background: var(--color-divider)"></span>
+      <span class="tag tag-accent lg-only">Direct Creator Support</span>
+    </div>
 
+    <div class="split" data-reveal="" style="display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(28px, 4vw, 64px); align-items: start">
+      <div>
+        <p style="font-size: clamp(20px, 2.6vw, 30px); font-family: var(--font-heading); line-height: 1.22; letter-spacing: -.015em; margin: 0 0 20px">
+          Fueling open-source detection engineering &amp; realistic SOC datasets.
+        </p>
+        <p style="line-height: 1.7; text-wrap: pretty; margin: 0 0 16px">
+          Maintaining cloud SIEM labs, running AWS EC2 telemetry instances, and generating synthetic attack datasets like <a href="https://github.com/mahialjaber/SOC-Log-Analysis-Datasets" target="_blank" rel="noopener" style="font-weight: 600; text-decoration: underline">SOC-Log-Analysis-Datasets</a> (<strong>23+ ⭐ stars</strong>) takes real infrastructure costs and late nights.
+        </p>
+        <p class="text-muted" style="line-height: 1.7; text-wrap: pretty; margin: 0 0 24px">
+          If my repositories, Splunk SPL queries, Wazuh labs, or free log datasets helped your interview prep or blue team studies, you can buy me a coffee or support the lab directly. No corporate middleman — 100% goes into compute, tools, and research.
+        </p>
+
+        <!-- Supporter Tiers -->
+        <div style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 12px">Support tiers ($ USD)</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 24px">
+          <div class="blueprint" style="padding: 12px; background: var(--color-surface); text-align: center">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <div style="font-family: var(--font-heading); font-size: 24px; color: var(--color-accent-700)">$3</div>
+            <div style="font-size: 12px; font-weight: 600; text-transform: uppercase">☕ Coffee</div>
+            <div class="text-muted" style="font-size: 11px; margin-top: 4px; line-height: 1.3">Late-night log triage &amp; query writing</div>
+          </div>
+          <div class="blueprint" style="padding: 12px; background: var(--color-surface); text-align: center">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <div style="font-family: var(--font-heading); font-size: 24px; color: var(--color-accent-700)">$5</div>
+            <div style="font-size: 12px; font-weight: 600; text-transform: uppercase">🛡️ Supporter</div>
+            <div class="text-muted" style="font-size: 11px; margin-top: 4px; line-height: 1.3">Covers AWS EC2 telemetry compute</div>
+          </div>
+          <div class="blueprint" style="padding: 12px; background: var(--color-surface); text-align: center">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <div style="font-family: var(--font-heading); font-size: 24px; color: var(--color-accent-700)">$10</div>
+            <div style="font-size: 12px; font-weight: 600; text-transform: uppercase">🌟 Dataset Hero</div>
+            <div class="text-muted" style="font-size: 11px; margin-top: 4px; line-height: 1.3">Funds new attack vector simulations</div>
+          </div>
+          <div class="blueprint" style="padding: 12px; background: var(--color-surface); text-align: center">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <div style="font-family: var(--font-heading); font-size: 24px; color: var(--color-accent-700)">$25</div>
+            <div style="font-size: 12px; font-weight: 600; text-transform: uppercase">💎 Sponsor</div>
+            <div class="text-muted" style="font-size: 11px; margin-top: 4px; line-height: 1.3">Multi-node attack lab infrastructure</div>
+          </div>
+        </div>
+
+        <div class="blueprint" style="padding: 16px; background: color-mix(in srgb, var(--color-accent) 8%, transparent)">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px">
+            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981"></span>
+            <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600">Zero Commercial Paywalls</span>
+          </div>
+          <p class="text-muted" style="margin: 0; font-size: 13px; line-height: 1.55">All my datasets, detection rules, and lab walk-throughs remain 100% open-source under MIT license. Tips are optional appreciation from the community.</p>
+        </div>
+      </div>
+
+      <!-- Payment Integration Box with Tabs -->
+      <div class="blueprint" style="padding: clamp(22px, 3vw, 32px); display: grid; gap: 20px; background: var(--color-surface)">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+          <h3 style="font-size: 20px; margin: 0; text-transform: uppercase; letter-spacing: .04em">Buy a coffee / Send Support</h3>
+          <span class="text-muted" style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .12em">DIRECT CHANNELS</span>
+        </div>
+
+        <!-- Note Field: Why are you buying me this coffee? -->
+        <div class="field">
+          <label for="supporter-note" style="font-weight: 500">
+            Why are you buying me this coffee? <span class="text-muted">(Optional note / message)</span>
+          </label>
+          <input id="supporter-note" class="input" type="text" placeholder="e.g. Loved your SOC Log Dataset! Keep up the great Splunk work!" style="background: var(--color-bg)" />
+        </div>
+
+        <!-- Payment Method Tabs -->
+        <div>
+          <div style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 8px">Select Payment Method</div>
+          <div class="seg" style="width: 100%; display: grid; grid-template-columns: repeat(4, 1fr)">
+            <button type="button" class="btn pay-tab active" data-tab="bkash" style="font-size: 12px; padding: 8px 4px">bKash</button>
+            <button type="button" class="btn pay-tab" data-tab="binance" style="font-size: 12px; padding: 8px 4px">Binance</button>
+            <button type="button" class="btn pay-tab" data-tab="payoneer" style="font-size: 12px; padding: 8px 4px">Payoneer</button>
+            <button type="button" class="btn pay-tab" data-tab="redotpay" style="font-size: 12px; padding: 8px 4px">RedotPay</button>
+          </div>
+        </div>
+
+        <!-- Payment Method Details Panes -->
+        <!-- 1. bKash -->
+        <div id="pane-bkash" class="pay-pane" style="display: grid; gap: 12px">
+          <div class="blueprint" style="padding: 16px; background: var(--color-bg)">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px">
+              <span style="font-weight: 700; color: #e11d48; font-size: 14px">bKash Personal (Send Money)</span>
+              <span class="tag tag-accent">Bangladesh</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--color-surface); padding: 8px 12px; border: 1px solid var(--color-divider); margin-bottom: 8px">
+              <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 15px; font-weight: 600; letter-spacing: .06em">01893142872</span>
+              <button type="button" class="btn btn-secondary copy-btn" data-copy="01893142872" style="padding: 4px 10px; font-size: 11px">Copy</button>
+            </div>
+            <p class="text-muted" style="margin: 0; font-size: 12px; line-height: 1.5">
+              Send Money to personal bKash number. Suggested: ৳150 / ৳300 / ৳500 / ৳1,000 (approx $1.50 – $10 USD). Put your name/note in reference.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2. Binance -->
+        <div id="pane-binance" class="pay-pane" style="display: none; gap: 12px">
+          <div class="blueprint" style="padding: 16px; background: var(--color-bg)">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px">
+              <span style="font-weight: 700; color: #f59e0b; font-size: 14px">Binance Pay (USDT)</span>
+              <span class="tag tag-accent">Zero Fees · Instant</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--color-surface); padding: 8px 12px; border: 1px solid var(--color-divider); margin-bottom: 8px">
+              <div>
+                <div style="font-size: 10px; font-family: ui-monospace, monospace; text-transform: uppercase" class="text-muted">Binance Pay ID / USDT</div>
+                <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; font-weight: 600">mahialjaber</span>
+              </div>
+              <button type="button" class="btn btn-secondary copy-btn" data-copy="mahialjaber" style="padding: 4px 10px; font-size: 11px">Copy</button>
+            </div>
+            <p class="text-muted" style="margin: 0; font-size: 12px; line-height: 1.5">
+              Send USDT via Binance Pay app. Instant transfer with 0 network gas fees from any country.
+            </p>
+          </div>
+        </div>
+
+        <!-- 3. Payoneer -->
+        <div id="pane-payoneer" class="pay-pane" style="display: none; gap: 12px">
+          <div class="blueprint" style="padding: 16px; background: var(--color-bg)">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px">
+              <span style="font-weight: 700; color: #ff4800; font-size: 14px">Payoneer (Global USD)</span>
+              <span class="tag tag-accent">Global Transfer</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--color-surface); padding: 8px 12px; border: 1px solid var(--color-divider); margin-bottom: 8px">
+              <div>
+                <div style="font-size: 10px; font-family: ui-monospace, monospace; text-transform: uppercase" class="text-muted">Payoneer Account Email</div>
+                <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; font-weight: 600">mahialjaber.dev@gmail.com</span>
+              </div>
+              <button type="button" class="btn btn-secondary copy-btn" data-copy="mahialjaber.dev@gmail.com" style="padding: 4px 10px; font-size: 11px">Copy</button>
+            </div>
+            <p class="text-muted" style="margin: 0; font-size: 12px; line-height: 1.5">
+              Direct Payoneer-to-Payoneer transfer (Free). For US Bank wire / ACH receiving details (Citibank / First Century Bank), email me or use the contact form.
+            </p>
+          </div>
+        </div>
+
+        <!-- 4. RedotPay -->
+        <div id="pane-redotpay" class="pay-pane" style="display: none; gap: 12px">
+          <div class="blueprint" style="padding: 16px; background: var(--color-bg)">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px">
+              <span style="font-weight: 700; color: #ef4444; font-size: 14px">RedotPay Transfer</span>
+              <span class="tag tag-accent">App Transfer</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--color-surface); padding: 8px 12px; border: 1px solid var(--color-divider); margin-bottom: 8px">
+              <div>
+                <div style="font-size: 10px; font-family: ui-monospace, monospace; text-transform: uppercase" class="text-muted">RedotPay Account / User ID</div>
+                <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; font-weight: 600">mahialjaber</span>
+              </div>
+              <button type="button" class="btn btn-secondary copy-btn" data-copy="mahialjaber" style="padding: 4px 10px; font-size: 11px">Copy</button>
+            </div>
+            <p class="text-muted" style="margin: 0; font-size: 12px; line-height: 1.5">
+              Direct peer-to-peer balance transfer in RedotPay with zero transaction fees.
+            </p>
+          </div>
+        </div>
+
+        <!-- Confirm / Send Note Action -->
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-top: 10px; border-top: 1px solid var(--color-divider)">
+          <button type="button" id="btn-notify-coffee" class="btn btn-primary" style="padding: 10px 20px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase">
+            Send Coffee Note ✉️
+          </button>
+          <span id="copy-status-msg" class="text-muted" style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px">
+            Click 'Copy' on your preferred method above.
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ──────────────────────────────────────────── -->
   <section id="contact" style="max-width: 1240px; margin: 0 auto; padding: clamp(56px, 7vw, 110px) 24px; border-top: 1px solid var(--color-divider)">
     <div data-reveal="" style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 40px">
-      <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .16em; color: var(--color-accent-700)">07</span>
-      
+      <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .16em; color: var(--color-accent-700)">08</span>
       <span style="flex: 1; height: 1px; background: var(--color-divider)"></span>
     </div>
     <div class="split" style="display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(28px, 4vw, 60px); align-items: start">
@@ -581,6 +959,57 @@ const ROT = [
 ];
 
 const PROJECTS = [
+  {
+    id: "wazuh-lab",
+    name: "Wazuh Enterprise SOC Lab",
+    title: "Multi-Node Threat Hunting & Active Response — deep endpoint telemetry (Sysmon & Auditd), VirusTotal intelligence, custom detection rules, and automated containment.",
+    kicker: "WAZUH SIEM · SYSMON · ACTIVE RESPONSE",
+    status: "Public · Active Lab",
+    summary: "A production-grade multi-node SOC architecture: centralized Wazuh Manager ingesting high-fidelity telemetry from Windows and Linux endpoints with automated active containment.",
+    repo: "https://github.com/mahialjaber/wazuh-enterprise-soc-lab",
+    repoLabel: "wazuh-enterprise-soc-lab",
+    demo: null,
+    demoNote: "Full architecture, agent configs, Sysmon XML profiles, custom decoders and containment scripts documented in the repository.",
+    overview: [
+      "Engineered an enterprise multi-node security operations center using Wazuh SIEM to achieve unified detection and containment across both Windows and Linux endpoints. Rather than relying solely on out-of-the-box alerts, this lab focuses on fine-tuning detection rules, eliminating noise, and executing automated active responses against live attack techniques.",
+      "Endpoints stream telemetry through Wazuh agents: Sysmon on Windows provides granular process creation (EID 1), network connections (EID 3), and image loading (EID 7), while Linux auditd captures privileged command execution and unauthorized credential alterations. All event streams converge at the Wazuh Manager for real-time decoding, VirusTotal API enrichment, and correlation.",
+      "Automated containment triggers via Wazuh Active Response scripts: suspicious processes are killed, and adversary IP addresses are dropped via local firewalls upon high-severity detection, proving the loop from initial detection to immediate triage and containment.",
+    ],
+    arch: "┌──────────────────────┐       ┌──────────────────────┐\n│   WINDOWS ENDPOINT   │       │     LINUX SERVER     │\n│  Sysmon + Wazuh Agt  │       │  auditd + Wazuh Agt  │\n└──────────┬───────────┘       └───────────┬──────────┘\n           │                               │\n           │ Encrypted Telemetry (TCP 1514)│\n           ▼                               ▼\n┌─────────────────────────────────────────────────────┐\n│               WAZUH MANAGER & INDEXER               │\n│  • Custom Decoders & XML Rules (syscheck / auth)    │\n│  • VirusTotal Threat Intel Integration              │\n│  • Automated Active Response Trigger (Firewall Drop)│\n└──────────────────────────┬──────────────────────────┘\n                           │\n                           ▼\n┌─────────────────────────────────────────────────────┐\n│              ANALYST SECURITY DASHBOARD             │\n│  Real-time alert triage, MITRE ATT&CK mapping,      │\n│  File Integrity Monitoring (FIM) & containment logs │\n└─────────────────────────────────────────────────────┘",
+    flow: [
+      { t: "01 · Endpoint Telemetry", d: "Sysmon on Windows (EIDs 1, 3, 7) and auditd on Linux feeding process-level telemetry into Wazuh agents over secure port 1514." },
+      { t: "02 · Ingestion & Decoding", d: "Custom decoders and correlation rules parse logs against known attacker tactics (brute force, persistence, priv-esc)." },
+      { t: "03 · Threat Intelligence", d: "Automated hash extraction queried against VirusTotal API for zero-delay verdict validation." },
+      { t: "04 · Active Response", d: "Automated containment executes — firewall IP drop and process termination without manual analyst delay." },
+    ],
+    tech: ["Wazuh SIEM", "Wazuh Manager", "Sysmon", "Linux auditd", "VirusTotal API", "Active Response (Bash/PS)", "File Integrity Monitoring (FIM)", "MITRE ATT&CK", "Docker / Linux"],
+    features: [
+      { t: "Multi-node architecture", d: "Centralized Wazuh Server ingesting and correlating live telemetry across heterogeneous Windows & Linux infrastructure." },
+      { t: "Custom detection rules", d: "Handcrafted Wazuh XML detection rules extending native capabilities to catch evasion techniques and brute-force spikes." },
+      { t: "VirusTotal enrichment", d: "Automated file hash querying against threat intelligence feeds for rapid triage of dropped payloads." },
+      { t: "Active response automation", d: "Configured automated containment scripts to isolate offending IPs and kill unauthorized processes instantaneously." },
+      { t: "FIM & compliance", d: "File Integrity Monitoring auditing critical system binaries and registry keys (Run / RunOnce) for tamper attempts." },
+    ],
+    attack: [
+      { technique: "SSH / RDP Brute Force", id: "T1110", tactic: "Credential Access", tool: "Hydra / Script", log: "sshd / WinEventLog (4625)" },
+      { technique: "Privileged Execution", id: "T1548", tactic: "Privilege Escalation", tool: "sudo / auditd", log: "Linux audit.log / execve" },
+      { technique: "Persistence via Run Keys", id: "T1547.001", tactic: "Persistence", tool: "Reg / Sysmon", log: "Sysmon EID 13 / Wazuh syscheck" },
+    ],
+    codeLabel: "Wazuh detection rule & active response configuration",
+    code: [
+      {
+        label: "Custom Wazuh XML Rule — Brute force threshold correlation",
+        note: "Triggers alert level 10 and executes active response after 8 failed SSH/RDP authentications within 120 seconds.",
+        body: '<group name="syslog,sshd,">\n  <rule id="100002" level="10" frequency="8" timeframe="120">\n    <if_matched_sid>5710</if_matched_sid>\n    <same_source_ip />\n    <description>Multiple SSH failed attempts from same IP (Brute Force detected).</description>\n    <mitre>\n      <id>T1110</id>\n    </mitre>\n  </rule>\n</group>',
+      },
+      {
+        label: "Active response configuration — Automated firewall drop",
+        note: "Ties rule 100002 to immediate firewall-drop script on host for 600 seconds.",
+        body: '<active-response>\n  <command>firewall-drop</command>\n  <location>local</location>\n  <rules_id>100002</rules_id>\n  <timeout>600</timeout>\n</active-response>',
+      },
+    ],
+    shots: ["WAZUH SECURITY EVENTS DASHBOARD", "SYSMON PROCESS CREATION TRIAGE VIEW", "VIRUSTOTAL API ENRICHMENT HIT", "ACTIVE RESPONSE FIREWALL DROP LOGS"],
+  },
   {
     id: "soc-lab",
     name: "Cloud SOC Lab",
@@ -798,11 +1227,15 @@ class Component extends DCLogic {
 
     this.applyAccent();
     this.wireReveal();
+    this.wirePullCord();
+    this.wireSupportTabs();
   }
 
   componentDidUpdate() {
     this.applyAccent();
     this.wireReveal();
+    this.wirePullCord();
+    this.wireSupportTabs();
     document.body.style.overflow = this.state.openId ? "hidden" : "";
   }
 
@@ -819,6 +1252,14 @@ class Component extends DCLogic {
     document.documentElement.setAttribute("data-theme", t);
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute("content", t === "dark" ? "#14171a" : "#f2f2f3");
+    const bulb = document.getElementById("bulb-indicator");
+    const tooltip = document.getElementById("cord-tooltip");
+    if (bulb) {
+      bulb.className = t === "dark" ? "cord-indicator-bulb bulb-off" : "cord-indicator-bulb bulb-lit";
+      if (tooltip) {
+        tooltip.textContent = t === "dark" ? "Pull for Lights ON (Light Mode)" : "Pull for Lights OFF (Dark Mode)";
+      }
+    }
   }
 
   toggleTheme() {
@@ -826,6 +1267,219 @@ class Component extends DCLogic {
     this.setState({ theme: next });
     this.applyTheme(next);
     try { localStorage.setItem("mahi-portfolio-theme", next); } catch (e) { /* storage blocked */ }
+  }
+
+  wirePullCord() {
+    const fixture = document.getElementById("theme-cord-container");
+    const area = document.getElementById("cord-interactive-area");
+    const stem = document.getElementById("rope-stem");
+    const handle = document.getElementById("cord-handle");
+    const bulb = document.getElementById("bulb-indicator");
+    const tooltip = document.getElementById("cord-tooltip");
+    const cue = document.getElementById("pull-cue");
+
+    if (!fixture || !area || !stem || !handle || fixture._cordBound) return;
+    fixture._cordBound = true;
+
+    const BASE_HEIGHT = 32;
+    const MAX_PULL = 36;
+    const PULL_THRESHOLD = 18;
+
+    let isDragging = false;
+    let startY = 0;
+    let currentStretch = 0;
+    let dragStartTime = 0;
+
+    const updateBulbUI = (isDark) => {
+      if (bulb) {
+        bulb.className = isDark ? "cord-indicator-bulb bulb-off" : "cord-indicator-bulb bulb-lit";
+        if (tooltip) {
+          tooltip.textContent = isDark ? "Pull for Lights ON (Light Mode)" : "Pull for Lights OFF (Dark Mode)";
+        }
+      }
+    };
+
+    const playTactileClick = () => {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(160, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.05);
+
+        gain.gain.setValueAtTime(0.18, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start();
+        osc.stop(ctx.currentTime + 0.05);
+      } catch (e) {
+        // audio disabled
+      }
+    };
+
+    const snapBack = (shouldToggle, finalStretch) => {
+      fixture.classList.remove("cord-snapping");
+      const releaseHeight = BASE_HEIGHT + finalStretch;
+      stem.style.setProperty("--release-height", releaseHeight + "px");
+      handle.style.setProperty("--release-y", finalStretch + "px");
+
+      stem.style.height = "";
+      handle.style.transform = "";
+
+      void fixture.offsetWidth;
+      fixture.classList.add("cord-snapping");
+
+      if (shouldToggle) {
+        this.toggleTheme();
+        playTactileClick();
+      }
+
+      if (cue) {
+        cue.style.background = "transparent";
+        cue.style.boxShadow = "none";
+      }
+
+      setTimeout(() => {
+        fixture.classList.remove("cord-snapping");
+        stem.style.height = BASE_HEIGHT + "px";
+        handle.style.transform = "translateY(0px)";
+      }, 550);
+    };
+
+    area.addEventListener("pointerdown", (e) => {
+      isDragging = true;
+      startY = e.clientY;
+      currentStretch = 0;
+      dragStartTime = Date.now();
+      fixture.classList.remove("cord-snapping");
+      area.setPointerCapture(e.pointerId);
+    });
+
+    area.addEventListener("pointermove", (e) => {
+      if (!isDragging) return;
+      const rawDeltaY = e.clientY - startY;
+      if (rawDeltaY > 0) {
+        currentStretch = Math.min(MAX_PULL, Math.pow(rawDeltaY, 0.85) * 1.3);
+      } else {
+        currentStretch = 0;
+      }
+      stem.style.height = (BASE_HEIGHT + currentStretch) + "px";
+      handle.style.transform = "translateY(" + currentStretch + "px)";
+
+      if (cue) {
+        if (currentStretch >= PULL_THRESHOLD) {
+          cue.style.background = "#fbbf24";
+          cue.style.boxShadow = "0 0 8px #fbbf24";
+        } else {
+          cue.style.background = "transparent";
+          cue.style.boxShadow = "none";
+        }
+      }
+    });
+
+    const finishPull = (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      try { area.releasePointerCapture(e.pointerId); } catch (err) {}
+
+      const duration = Date.now() - dragStartTime;
+      const finalStretch = currentStretch;
+      const isQuickTap = duration < 240 && finalStretch < 8;
+
+      if (finalStretch >= PULL_THRESHOLD || isQuickTap) {
+        snapBack(true, isQuickTap ? 24 : finalStretch);
+      } else {
+        snapBack(false, finalStretch);
+      }
+    };
+
+    area.addEventListener("pointerup", finishPull);
+    area.addEventListener("pointercancel", (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      try { area.releasePointerCapture(e.pointerId); } catch (err) {}
+      snapBack(false, currentStretch);
+    });
+
+    fixture.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        snapBack(true, 24);
+      }
+    });
+
+    updateBulbUI(this.state.theme === "dark");
+  }
+
+  wireSupportTabs() {
+    const tabs = document.querySelectorAll(".pay-tab");
+    const panes = {
+      bkash: document.getElementById("pane-bkash"),
+      binance: document.getElementById("pane-binance"),
+      payoneer: document.getElementById("pane-payoneer"),
+      redotpay: document.getElementById("pane-redotpay"),
+    };
+    const copyBtns = document.querySelectorAll(".copy-btn");
+    const statusMsg = document.getElementById("copy-status-msg");
+    const notifyBtn = document.getElementById("btn-notify-coffee");
+    const noteInput = document.getElementById("supporter-note");
+
+    tabs.forEach((tab) => {
+      if (tab._tabBound) return;
+      tab._tabBound = true;
+      tab.addEventListener("click", () => {
+        tabs.forEach((t) => t.classList.remove("active"));
+        tab.classList.add("active");
+        const target = tab.dataset.tab;
+        Object.keys(panes).forEach((k) => {
+          if (panes[k]) panes[k].style.display = k === target ? "grid" : "none";
+        });
+      });
+    });
+
+    copyBtns.forEach((btn) => {
+      if (btn._copyBound) return;
+      btn._copyBound = true;
+      btn.addEventListener("click", () => {
+        const text = btn.dataset.copy;
+        if (!text) return;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            const orig = btn.textContent;
+            btn.textContent = "Copied! ✓";
+            if (statusMsg) statusMsg.textContent = "Copied " + text + " to clipboard!";
+            setTimeout(() => {
+              btn.textContent = orig;
+            }, 2000);
+          }).catch(() => {
+            prompt("Copy this:", text);
+          });
+        } else {
+          prompt("Copy this:", text);
+        }
+      });
+    });
+
+    if (notifyBtn && !notifyBtn._bound) {
+      notifyBtn._bound = true;
+      notifyBtn.addEventListener("click", () => {
+        const note = noteInput && noteInput.value.trim() ? noteInput.value.trim() : "Sent a coffee to support your SOC research!";
+        const subject = encodeURIComponent("Bought you a coffee! ☕");
+        const body = encodeURIComponent("Hi Mahi,\n\nI just sent some support for your security lab!\n\nNote: " + note + "\n\nKeep building!");
+        window.location.href = "mailto:mahialjaber.dev@gmail.com?subject=" + subject + "&body=" + body;
+        if (statusMsg) {
+          statusMsg.textContent = "Thank you! Email draft opened to notify Mahi. ☕🛡️";
+          statusMsg.style.color = "var(--color-accent-700)";
+        }
+      });
+    }
   }
 
   applyAccent() {
@@ -983,7 +1637,7 @@ class Component extends DCLogic {
       ],
 
       toolchain: [
-        { idx: "01", group: "SIEM & Detection", items: ["Splunk (SPL)", "Sigma", "MITRE ATT&CK", "Microsoft Sentinel (KQL)"] },
+        { idx: "01", group: "SIEM & Detection", items: ["Wazuh SIEM", "Splunk (SPL)", "Sigma", "MITRE ATT&CK", "Microsoft Sentinel (KQL)"] },
         { idx: "02", group: "Endpoint & Identity", items: ["Sysmon", "Windows Event Logs", "Active Directory", "PowerShell logging"] },
         { idx: "03", group: "Cloud", items: ["AWS CloudTrail", "IAM", "GuardDuty", "CloudWatch", "S3", "VPC", "Lambda"] },
         { idx: "04", group: "Network", items: ["Wireshark", "TCP/IP", "DNS", "HTTP", "Packet analysis"] },
@@ -1026,11 +1680,11 @@ class Component extends DCLogic {
 
       journey: [
         { stage: "Stage 01", state: "Shipped", t: "Foundations — logs, networks, frameworks", d: "Windows Event Logs, TCP/IP and packet analysis, and the frameworks that give triage a structure: MITRE ATT&CK, the Cyber Kill Chain and NIST SP 800-61." },
-        { stage: "Stage 02", state: "Shipped", t: "SOC Log Analysis Datasets", d: "Built the practice data I couldn't find: 12 synthetic log files across five domains with embedded attack vectors, plus a hunting playbook in SPL, KQL and CLI. MIT licensed so other analysts can use it." },
+        { stage: "Stage 02", state: "Shipped", t: "SOC Log Analysis Datasets", d: "Built the practice data I couldn't find: 12 synthetic log files across five domains with embedded attack vectors, plus a hunting playbook in SPL, KQL and CLI. MIT licensed — 23+ stars on GitHub." },
         { stage: "Stage 03", state: "Shipped", t: "Cloud SOC Lab on AWS", d: "Three EC2 instances, a Splunk Universal Forwarder feeding an indexer over TCP 9997, Hydra and Atomic Red Team generating real ATT&CK-mapped telemetry, and custom SPL detections over the top." },
-        { stage: "Stage 04", state: "Shipped", t: "CLI Threat Analyzer", d: "Turned the repetitive part of triage into a tool — a Python CLI that pulls an AI model into the terminal for log, report and file analysis." },
-        { stage: "Stage 05", state: "In progress", t: "Hybrid Purple Team SOAR", d: "Automating the response side: gated playbooks over hybrid telemetry, with an emulated technique behind every playbook to prove it fires." },
-        { stage: "Stage 06", state: "Next", t: "Sysmon depth, scheduled content, certification", d: "Add Sysmon (Event ID 1, 10, 11) for process-level visibility, convert the strongest searches into scheduled correlation content, expand the lab to multi-host lateral movement — and finish Splunk Core Certified Power User." },
+        { stage: "Stage 04", state: "Shipped", t: "Wazuh Enterprise SOC Lab", d: "Multi-node SIEM architecture with Wazuh agents, Sysmon and auditd telemetry streams, VirusTotal API enrichment, and automated active-response containment." },
+        { stage: "Stage 05", state: "Shipped", t: "CLI Threat Analyzer", d: "Turned the repetitive part of triage into a tool — a Python CLI that pulls an AI model into the terminal for log, report and file analysis." },
+        { stage: "Stage 06", state: "In progress", t: "Hybrid Purple Team SOAR", d: "Automating the response side: gated playbooks over hybrid telemetry, with an emulated technique behind every playbook to prove it fires." },
       ],
 
       ghNotes: [

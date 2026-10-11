@@ -1,26 +1,107 @@
-repo: mahialjaber/mahialjaber
-branch: main
+# 🛡️ Mahi Al Jaber — SOC Analyst & Detection Engineering Portfolio
 
-Related repos read for project content:
-- mahialjaber/enterprise-threat-detection-soc-lab (main)
-- mahialjaber/SOC-Log-Analysis-Datasets (main)
-- mahialjaber/CLI-Threat-Analyzer (main)
-- mahialjaber/Hybrid-Enterprise-Purple-Team-Automated-Response-SOAR- (private, metadata only)
+[![Live Site](https://img.shields.io/badge/Live_Site-GitHub_Pages-0ea5e9?style=for-the-badge&logo=github)](https://mahialjaber.github.io/My-Portfolio_Website/)
+[![SOC Lab](https://img.shields.io/badge/SIEM-Splunk_%26_Wazuh-059669?style=for-the-badge&logo=splunk)](https://github.com/mahialjaber/enterprise-threat-detection-soc-lab)
+[![Datasets](https://img.shields.io/badge/Datasets-23%2B_Stars-f59e0b?style=for-the-badge&logo=star)](https://github.com/mahialjaber/SOC-Log-Analysis-Datasets)
+[![License](https://img.shields.io/badge/License-MIT-6366f1?style=for-the-badge)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Open_to_Roles-10b981?style=for-the-badge)](#contact)
 
-## Last sync
-date: 2026-08-12T11:19:43Z
+> **"Detection. Response. Evidence."**  
+> An evidence-first, industrial-styled security portfolio demonstrating hands-on Blue Team operations, cloud telemetry analysis, adversary emulation, and custom detection engineering.
 
-### Updated in this project
-- Built `Portfolio.dc.html` from the profile README and all three public project READMEs
-- Project detail pages use real architecture, SPL queries, ATT&CK mappings and feature lists from each repo README
-- Contact details (email, WhatsApp) taken from the profile README badges
-- Added `server/` — Express + Nodemailer contact API the front end posts to
+---
 
-## Screen map
-| Screen / section | Built from |
-| --- | --- |
-| Hero, About, Toolchain, Journey, Contact | mahialjaber/mahialjaber → README.md |
-| Project: Cloud SOC Lab | enterprise-threat-detection-soc-lab → README.md |
-| Project: SOC Log Analysis Datasets | SOC-Log-Analysis-Datasets → README.md |
-| Project: CLI Threat Analyzer | CLI-Threat-Analyzer → README.md |
-| Project: Purple Team SOAR | repo description (private) |
+## 🧭 Overview
+
+This repository hosts the personal portfolio of **Mahi Al Jaber** — an aspiring Tier 1 SOC Analyst and Detection Engineer. Rather than displaying generic course certifications, every project presented here links directly to reproducible laboratory environments, raw telemetry evidence, ATT&CK-mapped adversary emulation, and custom detection queries.
+
+Hosted live on GitHub Pages: **[mahialjaber.github.io/My-Portfolio_Website/](https://mahialjaber.github.io/My-Portfolio_Website/)**
+
+---
+
+## 📂 Featured Case Files & Repositories
+
+| Project | Environment / Stack | Focus & Highlights | Status |
+|:---|:---|:---|:---:|
+| [**Wazuh Enterprise SOC Lab**](https://github.com/mahialjaber/wazuh-enterprise-soc-lab) | Wazuh SIEM · Sysmon · Linux auditd · VirusTotal | Multi-node endpoint telemetry pipeline, custom XML decoders, VirusTotal API enrichment, and automated active-response firewall containment. | Active Lab |
+| [**Cloud SOC Lab on AWS**](https://github.com/mahialjaber/enterprise-threat-detection-soc-lab) | AWS EC2 · Kali Linux · Windows Server · Splunk | Three-tier architecture, Universal Forwarder over TCP 9997, Hydra RDP brute force, Atomic Red Team execution, and custom SPL correlation searches. | Public |
+| [**SOC Log Analysis Datasets**](https://github.com/mahialjaber/SOC-Log-Analysis-Datasets) | Plain text · JSONL · Splunk SPL · Sentinel KQL | **23+ ⭐ Stars** — Curated synthetic log files across 5 security domains (App, Cloud, Email, Endpoints, Network) with hidden attack vectors and a hunting playbook. | Public · MIT |
+| [**CLI Threat Analyzer**](https://github.com/mahialjaber/CLI-Threat-Analyzer) | Python · Google Gemini API · Terminal | Command-line security copilot for instant server log triage, IOC extraction, and security report summarization without leaving the terminal. | Public |
+| [**Hybrid Purple Team SOAR**](https://github.com/mahialjaber?tab=repositories) | Python · REST APIs · Sigma · MITRE ATT&CK | Automated response framework closing the loop from detection to containment across on-prem Active Directory and cloud workloads. | In Progress |
+
+---
+
+## ✨ Key Portfolio Features
+
+### 1. 💡 Interactive Light-Switch Pull Cord
+A handcrafted physics-based light cord widget inspired by classic lamps:
+- **Real Drag Physics**: Pull downwards with cursor or touch; rope dynamically stretches with realistic exponential damping.
+- **Spring Elastic Snap-Back**: Realistic spring overshoot animation upon release (`@keyframes cordReleaseSnap`).
+- **Tactile Sound Feedback**: Synthesized realistic acoustic switch click using the browser's native **Web Audio API** (zero external audio files).
+- **Persistent Theme Sync**: Toggles between Dark Mode and Light Mode, updating the anchor fixture's status bulb and syncing with `localStorage`.
+
+### 2. ☕ Direct Creator Support / "Buy Me a Coffee"
+A clean, non-intrusive community backing module enabling supporters and researchers to fuel cloud lab compute costs:
+- **Tiers ($ USD)**: $3 (Coffee), $5 (Supporter), $10 (Dataset Hero), $25 (Sponsor).
+- **"Why are you buying me this coffee?"**: Supporter note input field.
+- **Multiple Payment Channels**:
+  - **bKash (Bangladesh)**: Personal Send Money to `01893142872` with one-click copy.
+  - **Binance Pay / Crypto**: USDT (BEP-20 / TRC-20) Pay ID `mahialjaber`.
+  - **Payoneer**: Global USD peer transfer to `mahialjaber.dev@gmail.com` / US Bank receiving details.
+  - **RedotPay**: Instant transfer via user ID `mahialjaber`.
+
+### 3. 📐 Blueprint / Industrial Design Language
+- Clean wireframe blueprint aesthetics with technical corner registration marks.
+- Precision typography (`Barlow Condensed` for headings, `ui-monospace` for metadata and telemetry).
+- Fully responsive across mobile, tablet, and widescreen monitors.
+- Full accessibility support (reduced-motion queries, keyboard navigation, high-contrast OKLCH tonal scales).
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+- **Markup & Styling**: Semantic HTML5, CSS3 Custom Properties (`OKLCH` tonal ramps), responsive grid & flexbox layouts.
+- **Frontend Architecture**: Standalone DesignCraft (`<x-dc>`) reactive component architecture with React UMD runtime.
+- **Backend API (Optional)**: Node.js Express server located in [`server/`](server/) with Nodemailer for handling contact submissions.
+
+---
+
+## 🚀 Running Locally
+
+You do not need complicated build tools or bundlers to run the frontend:
+
+```bash
+# Clone the repository
+git clone https://github.com/mahialjaber/My-Portfolio_Website.git
+cd My-Portfolio_Website
+
+# Run using Python built-in HTTP server
+python -m http.server 8000
+
+# Open your browser at
+# http://localhost:8000/
+```
+
+### Running the Contact API (Optional)
+
+```bash
+cd server
+npm install
+cp .env.example .env   # Configure SMTP credentials
+npm start
+```
+
+---
+
+## 📬 Contact & Connect
+
+- **Portfolio**: [mahialjaber.github.io/My-Portfolio_Website/](https://mahialjaber.github.io/My-Portfolio_Website/)
+- **GitHub**: [@mahialjaber](https://github.com/mahialjaber)
+- **Email**: [mahialjaber.dev@gmail.com](mailto:mahialjaber.dev@gmail.com)
+- **WhatsApp**: [linkedin.com/in/mahialjaber](https://www.linkedin.com/in/mahialjaber)
+
+---
+
+<p align="center">
+  <sub>Designed &amp; engineered by Mahi Al Jaber · 100% Evidence-Backed Security Engineering</sub>
+</p>
