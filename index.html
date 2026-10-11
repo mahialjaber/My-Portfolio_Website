@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -589,12 +590,12 @@
   <section id="support" style="max-width: 1240px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) 24px; border-top: 1px solid var(--color-divider)">
     <div data-reveal="" style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px">
       <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .16em; color: var(--color-accent-700)">07</span>
-      <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase">Buy a coffee / Support the lab</h2>
+      <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase">Support the lab</h2>
       <span style="flex: 1; height: 1px; background: var(--color-divider)"></span>
-      <a href="support.html" class="tag tag-accent lg-only" style="text-decoration: none" title="Open Full Screen Payment Gateway">⚡ Standalone Gateway ↗</a>
+      <a href="support.html" class="tag tag-accent lg-only" style="text-decoration: none" title="Open Dedicated Payment Gateway">Dedicated Gateway ↗</a>
     </div>
 
-    <div class="split" data-reveal="" style="display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(28px, 4vw, 64px); align-items: start">
+    <div class="split" data-reveal="" style="display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(28px, 4vw, 64px); align-items: start">
       <div>
         <p style="font-size: clamp(20px, 2.6vw, 30px); font-family: var(--font-heading); line-height: 1.22; letter-spacing: -.015em; margin: 0 0 20px">
           Fueling open-source detection engineering &amp; realistic SOC datasets.
@@ -603,15 +604,15 @@
           Maintaining cloud SIEM labs, running AWS EC2 telemetry forwarders, and publishing synthetic attack datasets like <a href="https://github.com/mahialjaber/SOC-Log-Analysis-Datasets" target="_blank" rel="noopener" style="font-weight: 600; text-decoration: underline">SOC-Log-Analysis-Datasets</a> (<strong>23+ ⭐ stars</strong>) requires real cloud compute and late-night research.
         </p>
         <p class="text-muted" style="line-height: 1.7; text-wrap: pretty; margin: 0 0 24px">
-          If my repositories, Splunk SPL correlation searches, Wazuh labs, or free log datasets helped your interview prep or blue team career, you can buy me a coffee! In the developer community, supporting creators keeps open-source research alive.
+          If my repositories, Splunk SPL correlation searches, Wazuh labs, or free log datasets helped your interview prep or blue team career, you can buy me a coffee! In the developer community, supporting creators keeps open-source research alive without commercial paywalls.
         </p>
 
-        <!-- Supporter Perks / Principles -->
-        <div class="blueprint" style="padding: 18px; background: color-mix(in srgb, var(--color-accent) 8%, transparent); margin-bottom: 24px">
+        <!-- Infrastructure Transparency Card -->
+        <div class="blueprint" style="padding: 18px; background: color-mix(in srgb, var(--color-accent) 6%, transparent); margin-bottom: 24px">
           <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px">
             <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981"></span>
-            <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600">Where does your coffee money go?</span>
+            <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600">Infrastructure Transparency</span>
           </div>
           <ul style="margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.6" class="text-muted">
             <li><strong>AWS EC2 Telemetry Instances:</strong> Running active forwarders &amp; Splunk indexers</li>
@@ -619,243 +620,67 @@
             <li><strong>100% Free &amp; Open Access:</strong> All datasets and queries remain MIT-licensed forever</li>
           </ul>
         </div>
-
-        <!-- Live Community Supporter Wall -->
-        <div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px">
-            <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent-700)">Recent Supporter Notes</span>
-            <span style="font-size: 11px; color: var(--color-accent-700); font-family: ui-monospace, monospace">● COMMUNITY WALL</span>
-          </div>
-          <div id="supporter-wall" style="display: grid; gap: 10px; max-height: 300px; overflow-y: auto; padding-right: 4px">
-            <!-- Dynamic Supporter Cards populated via JS -->
-          </div>
-        </div>
       </div>
 
-      <!-- Functional Payment Gateway Box -->
+      <!-- Functional Payment Gateway Box (Clean Industrial Theme) -->
       <div class="blueprint" style="padding: clamp(22px, 3vw, 34px); display: grid; gap: 20px; background: var(--color-surface); position: relative">
         <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
         
         <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--color-divider); padding-bottom: 14px">
           <div>
-            <h3 style="font-size: 20px; margin: 0; text-transform: uppercase; letter-spacing: .04em">Payment Gateway</h3>
-            <div class="text-muted" style="font-size: 12px; margin-top: 4px">Direct developer support · Safe &amp; verified checkout</div>
+            <h3 style="font-size: 20px; margin: 0; text-transform: uppercase; letter-spacing: .04em">Direct Support Gateway</h3>
+            <div class="text-muted" style="font-size: 12px; margin-top: 4px">Safe &amp; encrypted checkout · Zero commercial paywalls</div>
           </div>
           <span class="tag tag-accent" style="font-size: 10px">2 OPTIONS AVAILABLE</span>
         </div>
 
-        <!-- Step 1: Select Coffee Amount -->
-        <div>
-          <label style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-700); display: block; margin-bottom: 8px">
-            1. Select Coffee Amount ($ USD)
-          </label>
-          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px">
-            <button type="button" class="btn amount-btn" data-amount="3" style="font-size: 13.5px; padding: 10px 4px; text-align: center">
-              ☕ $3
-              <span style="display: block; font-size: 9px; opacity: 0.75; font-weight: normal; margin-top: 2px">1 Coffee</span>
-            </button>
-            <button type="button" class="btn amount-btn active" data-amount="5" style="font-size: 13.5px; padding: 10px 4px; text-align: center">
-              ☕ $5
-              <span style="display: block; font-size: 9px; opacity: 0.75; font-weight: normal; margin-top: 2px">2 Coffees</span>
-            </button>
-            <button type="button" class="btn amount-btn" data-amount="10" style="font-size: 13.5px; padding: 10px 4px; text-align: center">
-              ☕ $10
-              <span style="display: block; font-size: 9px; opacity: 0.75; font-weight: normal; margin-top: 2px">Large Roast</span>
-            </button>
-            <button type="button" class="btn amount-btn" data-amount="25" style="font-size: 13.5px; padding: 10px 4px; text-align: center">
-              🛡️ $25
-              <span style="display: block; font-size: 9px; opacity: 0.75; font-weight: normal; margin-top: 2px">Lab Sponsor</span>
-            </button>
+        <!-- Option 1: Credit / Debit Card & Apple Pay (Lemon Squeezy Overlay) -->
+        <div class="blueprint" style="padding: 18px; background: var(--color-bg); display: grid; gap: 12px">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="display: flex; align-items: center; justify-content: space-between">
+            <span style="font-weight: 700; font-size: 14px">Option 1: Credit / Debit Card &amp; Apple Pay</span>
+            <span class="tag tag-accent" style="font-size: 10px">Encrypted · Instant</span>
           </div>
-          <div style="display: flex; align-items: center; gap: 8px">
-            <span class="text-muted" style="font-size: 12px; font-family: ui-monospace, monospace">Custom $:</span>
-            <input id="custom-amount-input" class="input" type="number" min="1" max="5000" placeholder="Custom amount (USD)" style="padding: 6px 10px; font-size: 13px; background: var(--color-bg); max-width: 170px" />
-          </div>
-        </div>
-
-        <!-- Step 2: Supporter Name & Note -->
-        <div style="display: grid; gap: 12px">
-          <div>
-            <label for="supporter-name" style="font-weight: 500; font-size: 13px; display: block; margin-bottom: 6px">
-              Your Name / Alias: <span class="text-muted">(e.g. Alex)</span>
-            </label>
-            <input id="supporter-name" class="input" type="text" placeholder="Alex (SOC Analyst / Developer)" style="background: var(--color-bg)" />
-          </div>
-
-          <div>
-            <label for="supporter-note" style="font-weight: 500; font-size: 13px; display: block; margin-bottom: 6px">
-              Why are you buying me this coffee? <span style="color: var(--color-accent-700)">*</span>
-            </label>
-            <textarea id="supporter-note" class="input" rows="2" placeholder="e.g. Loved your SOC datasets & detection rules! Helped me ace my technical interview." style="background: var(--color-bg); resize: vertical"></textarea>
-          </div>
-        </div>
-
-        <!-- Step 3: Choose Payment Gateway (STRICTLY TWO OPTIONS) -->
-        <div>
-          <div style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 8px">
-            2. Choose Payment Method (Only 2 global options)
-          </div>
-          
-          <div style="display: grid; gap: 10px">
-            <!-- Option 1: Global Card & Payoneer USD -->
-            <label class="gateway-option active" data-method="card-payoneer" style="display: flex; align-items: flex-start; gap: 12px; padding: 14px; border: 1px solid var(--color-accent); background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface)); cursor: pointer; border-radius: 2px">
-              <input type="radio" name="pay-method" value="card-payoneer" checked style="margin-top: 3px; accent-color: var(--color-accent)" />
-              <div style="flex: 1">
-                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
-                  <span style="font-weight: 600; font-size: 14px">💳 Option 1: Credit / Debit Card &amp; Payoneer USD</span>
-                  <span class="tag tag-accent" style="font-size: 10px">Global · All Cards</span>
-                </div>
-                <div class="text-muted" style="font-size: 12px; margin-top: 4px; line-height: 1.4">
-                  Pay via any international card (Visa/Mastercard) or direct Payoneer USD transfer (Citibank ACH / US bank receiving account).
-                </div>
-              </div>
-            </label>
-
-            <!-- Option 2: Binance Pay / Crypto USDT -->
-            <label class="gateway-option" data-method="binance-crypto" style="display: flex; align-items: flex-start; gap: 12px; padding: 14px; border: 1px solid var(--color-divider); background: var(--color-bg); cursor: pointer; border-radius: 2px">
-              <input type="radio" name="pay-method" value="binance-crypto" style="margin-top: 3px; accent-color: var(--color-accent)" />
-              <div style="flex: 1">
-                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
-                  <span style="font-weight: 600; font-size: 14px">🟡 Option 2: Binance Pay &amp; Crypto (USDT)</span>
-                  <span class="tag tag-accent" style="font-size: 10px">Zero Gas Fees · Instant</span>
-                </div>
-                <div class="text-muted" style="font-size: 12px; margin-top: 4px; line-height: 1.4">
-                  Instant peer-to-peer crypto transfer via Binance Pay ID (<code>mahialjaber</code>) or Web3 USDT. Ideal for developers worldwide.
-                </div>
-              </div>
-            </label>
-          </div>
-        </div>
-
-        <!-- Checkout Action Button -->
-        <div style="padding-top: 8px; display: grid; gap: 8px">
-          <a href="support.html" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; justify-content: center; text-decoration: none; color: var(--color-bg)">
-            Open Dedicated Payment Gateway ($5.00 USD) ☕ ↗
+          <p class="text-muted" style="margin: 0; font-size: 12.5px; line-height: 1.5">
+            Support with Visa, Mastercard, American Express, Apple Pay, or Google Pay via Lemon Squeezy's encrypted checkout overlay.
+          </p>
+          <a href="https://mahialjaber.lemonsqueezy.com/checkout/buy/7460b413-f840-4930-b4fc-6ea155476086?embed=1" class="lemonsqueezy-button btn btn-primary" style="justify-content: center; padding: 13px; font-size: 13.5px; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; color: var(--color-bg); font-weight: 700">
+            Buy a Coffee ($10.00+ USD) ☕ ↗
           </a>
-          <button type="button" id="btn-proceed-checkout" class="btn btn-secondary" style="width: 100%; padding: 10px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; justify-content: center">
-            Quick Invoice Summary 🧾
-          </button>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px; font-size: 11px; font-family: ui-monospace, monospace" class="text-muted">
-            <span>🔒 Direct to creator · No middleman</span>
-            <span>Encrypted Card &amp; Binance Checkout</span>
-          </div>
         </div>
+
+        <!-- Option 2: Binance Pay (USDT Instant) -->
+        <div class="blueprint" style="padding: 18px; background: var(--color-bg); display: grid; gap: 12px">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="display: flex; align-items: center; justify-content: space-between">
+            <span style="font-weight: 700; font-size: 14px">Option 2: Binance Pay &amp; Crypto (USDT)</span>
+            <span class="tag tag-accent" style="font-size: 10px">Zero Gas Fees · Instant</span>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--color-surface); padding: 8px 12px; border: 1px solid var(--color-divider)">
+            <div>
+              <div style="font-size: 10px; font-family: ui-monospace, monospace; text-transform: uppercase" class="text-muted">Binance Pay ID / USDT</div>
+              <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; font-weight: 700">mahialjaber</span>
+            </div>
+            <button type="button" class="btn btn-secondary copy-btn" data-copy="mahialjaber" style="padding: 4px 10px; font-size: 11px">Copy Pay ID</button>
+          </div>
+          <p class="text-muted" style="margin: 0; font-size: 12px; line-height: 1.5">
+            Instant peer-to-peer crypto transfer via Binance Pay app with 0 network gas fees.
+          </p>
+        </div>
+
+        <!-- Link to Dedicated Full Screen Gateway -->
+        <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--color-divider)">
+          <a href="support.html" class="text-muted" style="font-size: 12px; text-decoration: underline; font-family: ui-monospace, monospace">
+            Open dedicated full-screen checkout page ↗
+          </a>
+          <span class="text-muted" style="font-size: 11px; font-family: ui-monospace, monospace">
+            🔒 PCI-DSS Compliant · TLS 1.3
+          </span>
+        </div>
+
       </div>
     </div>
   </section>
-
-  <!-- ── MODAL: INTERACTIVE CHECKOUT & INVOICE GATEWAY ───────── -->
-  <div id="payment-modal-backdrop" style="display: none; position: fixed; inset: 0; z-index: 120; background: rgba(0,0,0,0.78); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 16px">
-    <div id="payment-modal-box" class="blueprint" style="background: var(--color-bg); max-width: 620px; width: 100%; max-height: 92vh; overflow-y: auto; padding: clamp(22px, 3.5vw, 36px); border: 1px solid var(--color-divider); box-shadow: 0 24px 64px rgba(0,0,0,0.6); position: relative">
-      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      
-      <!-- Close button -->
-      <button type="button" id="btn-close-modal" aria-label="Close modal" style="position: absolute; top: 16px; right: 18px; background: transparent; border: 1px solid var(--color-divider); color: var(--color-text); font-size: 18px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer">✕</button>
-
-      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px">
-        <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .16em; color: var(--color-accent-700)">CHECKOUT INVOICE // GATEWAY</span>
-      </div>
-
-      <div style="border-bottom: 1px solid var(--color-divider); padding-bottom: 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-start">
-        <div>
-          <h3 style="margin: 0 0 4px; font-size: 22px; text-transform: uppercase">Mahi Al Jaber</h3>
-          <div class="text-muted" style="font-size: 12px; font-family: ui-monospace, monospace">SOC Detection &amp; Response Research</div>
-        </div>
-        <div style="text-align: right">
-          <div id="modal-invoice-id" style="font-family: ui-monospace, monospace; font-weight: 700; color: var(--color-accent-700); font-size: 13px">INV-SOC-481920</div>
-          <div id="modal-invoice-date" class="text-muted" style="font-size: 11px; font-family: ui-monospace, monospace">Oct 11, 2026</div>
-        </div>
-      </div>
-
-      <!-- Order Summary Card -->
-      <div style="background: var(--color-surface); padding: 16px; border: 1px solid var(--color-divider); margin-bottom: 20px; display: grid; gap: 8px">
-        <div style="display: flex; justify-content: space-between; font-weight: 600">
-          <span id="modal-item-name">☕ Coffee for SOC Lab</span>
-          <span id="modal-amount-display" style="color: var(--color-accent-700); font-size: 16px">$5.00 USD</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; font-size: 12px" class="text-muted">
-          <span>Supporter:</span>
-          <span id="modal-supporter-name" style="font-weight: 600; color: var(--color-text)">Alex</span>
-        </div>
-        <div style="border-top: 1px dashed var(--color-divider); padding-top: 8px; margin-top: 4px; font-size: 12.5px; font-style: italic" class="text-muted">
-          "<span id="modal-supporter-note">Loved your SOC datasets!</span>"
-        </div>
-      </div>
-
-      <!-- Option 1 Checkout Details Pane -->
-      <div id="modal-pane-card-payoneer" style="display: grid; gap: 14px">
-        <div style="display: flex; align-items: center; justify-content: space-between">
-          <span style="font-weight: 700; font-size: 14px; color: #ff4800">Option 1: Payoneer &amp; Card Gateway</span>
-          <span class="tag tag-accent">Global Cards / ACH</span>
-        </div>
-
-        <div style="background: var(--color-surface); padding: 14px; border: 1px solid var(--color-divider); display: grid; gap: 10px">
-          <div>
-            <div style="font-size: 10px; font-family: ui-monospace, monospace; text-transform: uppercase" class="text-muted">Payoneer Recipient Email</div>
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 3px">
-              <span style="font-family: ui-monospace, monospace; font-size: 14px; font-weight: 600">mahialjaber.dev@gmail.com</span>
-              <button type="button" class="btn btn-secondary modal-copy-btn" data-copy="mahialjaber.dev@gmail.com" style="padding: 3px 8px; font-size: 11px">Copy</button>
-            </div>
-          </div>
-
-          <div style="border-top: 1px solid var(--color-divider); padding-top: 10px">
-            <div style="font-size: 10px; font-family: ui-monospace, monospace; text-transform: uppercase" class="text-muted">US Bank Direct Receiving (Citibank / ACH Transfer)</div>
-            <div style="font-size: 12px; line-height: 1.5; margin-top: 4px" class="text-muted">
-              • Bank: <strong>Citibank N.A. (USA)</strong><br>
-              • Routing (ABA): <strong style="font-family: ui-monospace, monospace">021000089</strong><br>
-              • Account Type: <strong>Checking</strong><br>
-              • Account Holder: <strong>Mahi Al Jaber</strong>
-            </div>
-          </div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr; gap: 8px">
-          <a href="https://payoneer.com" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content: center; padding: 12px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; text-decoration: none">
-            Open Payoneer to Send Payment ↗
-          </a>
-        </div>
-      </div>
-
-      <!-- Option 2 Checkout Details Pane -->
-      <div id="modal-pane-binance-crypto" style="display: none; gap: 14px">
-        <div style="display: flex; align-items: center; justify-content: space-between">
-          <span style="font-weight: 700; font-size: 14px; color: #f59e0b">Option 2: Binance Pay &amp; Crypto (USDT)</span>
-          <span class="tag tag-accent">Zero Fees · Instant</span>
-        </div>
-
-        <div style="background: var(--color-surface); padding: 14px; border: 1px solid var(--color-divider); display: grid; gap: 10px">
-          <div>
-            <div style="font-size: 10px; font-family: ui-monospace, monospace; text-transform: uppercase" class="text-muted">Binance Pay ID / Recipient</div>
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 3px">
-              <span style="font-family: ui-monospace, monospace; font-size: 15px; font-weight: 700; color: #f59e0b">mahialjaber</span>
-              <button type="button" class="btn btn-secondary modal-copy-btn" data-copy="mahialjaber" style="padding: 3px 8px; font-size: 11px">Copy Pay ID</button>
-            </div>
-          </div>
-
-          <div style="border-top: 1px solid var(--color-divider); padding-top: 10px; font-size: 12px; line-height: 1.5" class="text-muted">
-            • Currency: <strong>USDT (Tether)</strong><br>
-            • Send via Binance App → Pay → Send → Enter Pay ID: <strong>mahialjaber</strong><br>
-            • Zero transaction fees, settles immediately.
-          </div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr; gap: 8px">
-          <a href="https://www.binance.com" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content: center; padding: 12px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; text-decoration: none">
-            Open Binance App / Web ↗
-          </a>
-        </div>
-      </div>
-
-      <!-- Post to Supporter Wall Confirmation Button -->
-      <div style="border-top: 1px solid var(--color-divider); padding-top: 18px; margin-top: 18px; display: grid; gap: 10px">
-        <button type="button" id="btn-complete-confirm" class="btn" style="background: #10b981; color: #000; font-weight: 700; width: 100%; justify-content: center; padding: 13px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em">
-          I've Sent Payment — Post Note to Supporter Wall ✓
-        </button>
-        <div id="modal-confirm-status" style="text-align: center; font-size: 12px; font-family: ui-monospace, monospace; display: none"></div>
-      </div>
-
-    </div>
-  </div>
 
 
   <!-- ── CONTACT ──────────────────────────────────────────── -->
@@ -1501,166 +1326,29 @@ class Component extends DCLogic {
   }
 
   wireSupportGateway() {
-    const amountBtns = document.querySelectorAll(".amount-btn");
-    const customInput = document.getElementById("custom-amount-input");
-    const supporterNameInput = document.getElementById("supporter-name");
-    const supporterNoteInput = document.getElementById("supporter-note");
-    const gatewayOptions = document.querySelectorAll(".gateway-option");
-    const proceedBtn = document.getElementById("btn-proceed-checkout");
+    // Initialize Lemon Squeezy embed overlay handler if available
+    if (window.createLemonSqueezy) {
+      try { window.createLemonSqueezy(); } catch (e) {}
+    }
 
-    const modalBackdrop = document.getElementById("payment-modal-backdrop");
-    const closeModalBtn = document.getElementById("btn-close-modal");
-    const invoiceIdEl = document.getElementById("modal-invoice-id");
-    const invoiceDateEl = document.getElementById("modal-invoice-date");
-    const itemNameEl = document.getElementById("modal-item-name");
-    const amountDisplayEl = document.getElementById("modal-amount-display");
-    const modalSupporterNameEl = document.getElementById("modal-supporter-name");
-    const modalSupporterNoteEl = document.getElementById("modal-supporter-note");
-    const panePayoneer = document.getElementById("modal-pane-card-payoneer");
-    const paneBinance = document.getElementById("modal-pane-binance-crypto");
-    const confirmBtn = document.getElementById("btn-complete-confirm");
-    const confirmStatus = document.getElementById("modal-confirm-status");
-    const copyBtns = document.querySelectorAll(".modal-copy-btn");
-    const wallContainer = document.getElementById("supporter-wall");
-
-    // Initialize wall right away
-    const INITIAL_WALL = [
-      { name: "Alex M.", amount: "$5", time: "2 days ago", note: "Your SOC log datasets and Splunk SPL queries got me through my Tier 1 technical interview. Have a coffee on me!" },
-      { name: "Sarah K.", amount: "$10", time: "4 days ago", note: "The Wazuh lab write-up is the best open-source walkthrough on GitHub. Thank you for not paywalling it." },
-      { name: "Marcus T.", amount: "$3", time: "1 week ago", note: "Dataset 04 (Brute Force RDP) was exactly what I needed for my detection engineering practice. Cheers brother!" },
-      { name: "David R.", amount: "$25", time: "2 weeks ago", note: "Sponsoring your AWS EC2 cloud threat lab infrastructure. Keep building open-source detection engineering tools!" },
-    ];
-
-    const renderSupporterWall = () => {
-      if (!wallContainer) return;
-      let stored = [];
-      try {
-        stored = JSON.parse(localStorage.getItem("mahi-supporters") || "[]");
-      } catch (e) { stored = []; }
-
-      const all = [...stored, ...INITIAL_WALL];
-      wallContainer.innerHTML = all.map((s, idx) => `
-        <div class="supporter-card blueprint" style="position: relative">
-          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px">
-            <span style="font-weight: 700; font-size: 13px">${s.name}</span>
-            <div style="display: flex; align-items: center; gap: 6px">
-              <span class="tag tag-accent" style="font-size: 10px; font-weight: 700">${s.amount}</span>
-              <span class="text-muted" style="font-size: 10px; font-family: ui-monospace, monospace">${s.time}</span>
-            </div>
-          </div>
-          <div class="text-muted" style="font-size: 12px; line-height: 1.45">"${s.note}"</div>
-        </div>
-      `).join("");
-    };
-
-    renderSupporterWall();
-
-    if (!proceedBtn || proceedBtn._gatewayBound) return;
-    proceedBtn._gatewayBound = true;
-
-    let selectedAmount = 5;
-    let selectedMethod = "card-payoneer"; // strictly 2 options: 'card-payoneer' or 'binance-crypto'
-
-    const updateCheckoutButton = () => {
-      if (proceedBtn) {
-        proceedBtn.textContent = `Proceed to Checkout ($${selectedAmount}.00 USD) ☕ →`;
-      }
-    };
-
-    // Amount preset buttons
-    amountBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        amountBtns.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        if (customInput) customInput.value = "";
-        selectedAmount = parseInt(btn.dataset.amount, 10) || 5;
-        updateCheckoutButton();
+    // Direct event listener for Lemon Squeezy buttons (guarantees smooth overlay)
+    const lemonBtns = document.querySelectorAll(".lemonsqueezy-button");
+    lemonBtns.forEach((btn) => {
+      if (btn._lemonBound) return;
+      btn._lemonBound = true;
+      btn.addEventListener("click", (e) => {
+        if (window.LemonSqueezy && window.LemonSqueezy.Url) {
+          e.preventDefault();
+          window.LemonSqueezy.Url.Open(btn.href);
+        }
       });
     });
 
-    // Custom amount input
-    if (customInput) {
-      customInput.addEventListener("input", (e) => {
-        const val = parseInt(e.target.value, 10);
-        if (!isNaN(val) && val > 0) {
-          amountBtns.forEach((b) => b.classList.remove("active"));
-          selectedAmount = val;
-          updateCheckoutButton();
-        }
-      });
-    }
-
-    // Payment method selection (2 options)
-    gatewayOptions.forEach((opt) => {
-      const radio = opt.querySelector('input[type="radio"]');
-      opt.addEventListener("click", () => {
-        gatewayOptions.forEach((o) => {
-          o.classList.remove("active");
-          o.style.borderColor = "var(--color-divider)";
-          o.style.background = "var(--color-bg)";
-        });
-        opt.classList.add("active");
-        opt.style.borderColor = "var(--color-accent)";
-        opt.style.background = "color-mix(in srgb, var(--color-accent) 10%, var(--color-surface))";
-        if (radio) {
-          radio.checked = true;
-          selectedMethod = radio.value;
-        }
-      });
-      if (radio) {
-        radio.addEventListener("change", () => {
-          selectedMethod = radio.value;
-        });
-      }
-    });
-
-    // Modal Opening
-    const openModal = () => {
-      if (!modalBackdrop) return;
-      const rawName = supporterNameInput && supporterNameInput.value.trim() ? supporterNameInput.value.trim() : "Alex";
-      const rawNote = supporterNoteInput && supporterNoteInput.value.trim() ? supporterNoteInput.value.trim() : "Loved your SOC log datasets and detection engineering research!";
-
-      const randomInvoice = "INV-SOC-" + Math.floor(100000 + Math.random() * 900000);
-      const dateStr = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-
-      if (invoiceIdEl) invoiceIdEl.textContent = randomInvoice;
-      if (invoiceDateEl) invoiceDateEl.textContent = dateStr;
-      if (itemNameEl) itemNameEl.textContent = `☕ ${selectedAmount >= 10 ? "Roast Coffee & Lab Sponsor" : "Coffee for SOC Lab"} (${selectedAmount} USD)`;
-      if (amountDisplayEl) amountDisplayEl.textContent = `$${selectedAmount}.00 USD`;
-      if (modalSupporterNameEl) modalSupporterNameEl.textContent = rawName;
-      if (modalSupporterNoteEl) modalSupporterNoteEl.textContent = rawNote;
-
-      if (selectedMethod === "card-payoneer") {
-        if (panePayoneer) panePayoneer.style.display = "grid";
-        if (paneBinance) paneBinance.style.display = "none";
-      } else {
-        if (panePayoneer) panePayoneer.style.display = "none";
-        if (paneBinance) paneBinance.style.display = "grid";
-      }
-
-      if (confirmStatus) confirmStatus.style.display = "none";
-      modalBackdrop.style.display = "flex";
-      document.body.style.overflow = "hidden";
-    };
-
-    const closeModal = () => {
-      if (!modalBackdrop) return;
-      modalBackdrop.style.display = "none";
-      document.body.style.overflow = "";
-    };
-
-    proceedBtn.addEventListener("click", openModal);
-
-    if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
-    if (modalBackdrop) {
-      modalBackdrop.addEventListener("click", (e) => {
-        if (e.target === modalBackdrop) closeModal();
-      });
-    }
-
-    // Modal Copy Buttons
+    // Copy action for Binance Pay ID
+    const copyBtns = document.querySelectorAll(".copy-btn");
     copyBtns.forEach((btn) => {
+      if (btn._copyBound) return;
+      btn._copyBound = true;
       btn.addEventListener("click", () => {
         const text = btn.dataset.copy;
         if (!text) return;
@@ -1669,47 +1357,14 @@ class Component extends DCLogic {
             const orig = btn.textContent;
             btn.textContent = "Copied! ✓";
             setTimeout(() => { btn.textContent = orig; }, 2000);
-          }).catch(() => { prompt("Copy details:", text); });
+          }).catch(() => {
+            prompt("Binance Pay ID:", text);
+          });
         } else {
-          prompt("Copy details:", text);
+          prompt("Binance Pay ID:", text);
         }
       });
     });
-
-    // Confirmation & Post to Supporter Wall
-    if (confirmBtn) {
-      confirmBtn.addEventListener("click", () => {
-        const name = supporterNameInput && supporterNameInput.value.trim() ? supporterNameInput.value.trim() : "Alex";
-        const note = supporterNoteInput && supporterNoteInput.value.trim() ? supporterNoteInput.value.trim() : "Great work on the SOC datasets!";
-
-        // Save to localStorage
-        try {
-          const list = JSON.parse(localStorage.getItem("mahi-supporters") || "[]");
-          list.unshift({
-            name,
-            amount: `$${selectedAmount}`,
-            time: "Just now",
-            note,
-          });
-          localStorage.setItem("mahi-supporters", JSON.stringify(list.slice(0, 10)));
-        } catch (e) {}
-
-        renderSupporterWall();
-
-        if (confirmStatus) {
-          confirmStatus.style.display = "block";
-          confirmStatus.style.color = "#10b981";
-          confirmStatus.textContent = "✓ Thank you, " + name + "! Your note has been posted to the Supporter Wall.";
-        }
-
-        // Trigger optional notification mailto
-        const subject = encodeURIComponent(`Bought you a coffee! ($${selectedAmount} USD) ☕`);
-        const body = encodeURIComponent(`Hi Mahi,\n\nI just sent a $${selectedAmount} USD coffee via ${selectedMethod === "card-payoneer" ? "Payoneer / Card" : "Binance Pay USDT"}!\n\nFrom: ${name}\nNote: ${note}\n\nKeep building great open-source detection engineering tools!`);
-        setTimeout(() => {
-          window.location.href = `mailto:mahialjaber.dev@gmail.com?subject=${subject}&body=${body}`;
-        }, 1200);
-      });
-    }
   }
 
   applyAccent() {

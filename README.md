@@ -39,16 +39,13 @@ A handcrafted physics-based light cord widget inspired by classic lamps:
 - **Tactile Sound Feedback**: Synthesized realistic acoustic switch click using the browser's native **Web Audio API** (zero external audio files).
 - **Persistent Theme Sync**: Toggles between Dark Mode and Light Mode, updating the anchor fixture's status bulb and syncing with `localStorage`.
 
-### 2. ☕ Two-Option Payment Gateway & Live Supporter Wall
-A clean, interactive payment checkout gateway enabling developers and learners to send support or buy a coffee:
-- **Quick Preset & Custom Tiers ($ USD)**: $3 (Coffee), $5 (Supporter), $10 (Dataset Hero), $25 (Lab Sponsor), plus custom amount.
-- **"Why are you buying me this coffee?"**: Supporter name and message field.
+### 2. ☕ Two-Option Direct Support Gateway
+A clean, secure developer support gateway enabling visitors to support open-source SOC labs and threat datasets:
 - **Strictly Two Global Payment Options**:
-  - **Option 1: Credit / Debit Card & Payoneer USD**: Pay with any international card or direct USD ACH / Citibank transfer to `mahialjaber.dev@gmail.com`.
+  - **Option 1: Cards & Apple Pay (Lemon Squeezy Merchant Gateway)**: Instant, encrypted in-page checkout overlay powered by Lemon Squeezy (Stripe PCI-DSS Level 1 compliance) accepting Visa, Mastercard, American Express, Apple Pay, and Google Pay.
   - **Option 2: Binance Pay & Crypto (USDT)**: Zero gas fee instant global transfers via Binance Pay ID `mahialjaber`.
-- **Interactive Checkout Invoice Modal**: Generates a real-time invoice receipt with one-click payment links and copy actions.
-- **Live Community Supporter Wall**: Real-time supporter feed displaying community notes from fellow developers.
-- **Standalone Payment Page**: Dedicated checkout page available at [`support.html`](support.html).
+- **Infrastructure Funding Transparency**: Clear breakdown of compute allocation (AWS EC2 telemetry forwarders, adversary simulation, free datasets).
+- **Standalone Payment Page**: Dedicated full-screen industrial checkout page available at [`support.html`](support.html).
 
 ### 3. 📐 Blueprint / Industrial Design Language
 - Clean wireframe blueprint aesthetics with technical corner registration marks.

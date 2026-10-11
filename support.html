@@ -3,937 +3,590 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Payment Gateway — Support Mahi Al Jaber</title>
+  <title>Support the Lab — Mahi Al Jaber</title>
   <meta name="description" content="Secure payment gateway to support Mahi Al Jaber's open-source SOC detection engineering labs and datasets." />
-  <meta name="theme-color" content="#0b1120" />
+  <meta name="theme-color" content="#090d16" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  
   <!-- Lemon Squeezy Official Embedded Checkout SDK -->
   <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
+
   <style>
     :root {
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
-      --color-primary: #6366f1;
-      --color-primary-hover: #4f46e5;
-      --color-link: #00d66f;
-      --color-link-hover: #00be62;
+      --color-bg: #090d16;
+      --color-surface: #0f172a;
+      --color-surface-hover: #162036;
+      --color-border: rgba(255, 255, 255, 0.08);
+      --color-border-accent: rgba(99, 102, 241, 0.25);
+      --color-text: #f1f5f9;
+      --color-text-muted: #94a3b8;
+      --color-accent: #6366f1;
+      --color-accent-hover: #4f46e5;
+      --color-binance: #f59e0b;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      background: #090d16;
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.1) 0px, transparent 50%);
-      color: #f1f5f9;
+      background: var(--color-bg);
+      color: var(--color-text);
       font-family: var(--font-sans);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 24px 16px;
+      padding: 32px 16px;
+      line-height: 1.6;
     }
-    
-    /* Top Bar */
+
+    /* Top Navigation */
     .top-nav {
       width: 100%;
-      max-width: 960px;
+      max-width: 980px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 24px;
     }
+
     .back-btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: #94a3b8;
+      color: var(--color-text-muted);
       text-decoration: none;
       font-size: 13.5px;
       font-weight: 500;
-      transition: color 0.2s ease;
-      padding: 6px 12px;
+      transition: all 0.2s ease;
+      padding: 8px 14px;
       border-radius: 6px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--color-border);
     }
-    .back-btn:hover { color: #ffffff; background: rgba(255, 255, 255, 0.08); }
-    .brand-tag {
+
+    .back-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       font-family: var(--font-mono);
       font-size: 11px;
-      letter-spacing: .08em;
-      color: #818cf8;
+      letter-spacing: .06em;
       text-transform: uppercase;
-      background: rgba(99, 102, 241, 0.12);
-      border: 1px solid rgba(99, 102, 241, 0.25);
-      padding: 4px 10px;
+      color: #10b981;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 5px 12px;
       border-radius: 100px;
     }
 
-    /* Main Checkout Container (Two Columns like LetsDefend) */
-    .checkout-wrapper {
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+    }
+
+    /* Main Checkout Card (Dark Technical Industrial Layout) */
+    .checkout-card {
       width: 100%;
-      max-width: 960px;
-      background: #0f172a;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      max-width: 980px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
       display: grid;
-      grid-template-columns: 1.15fr 1.25fr;
+      grid-template-columns: 1.05fr 1.2fr;
       overflow: hidden;
     }
 
     @media (max-width: 820px) {
-      .checkout-wrapper {
+      .checkout-card {
         grid-template-columns: 1fr;
       }
     }
 
-    /* Left Column: Product & Order Summary (Dark Navy) */
+    /* Left Panel: Lab & Creator Info */
     .left-panel {
       padding: clamp(28px, 4vw, 44px);
-      background: #0f172a;
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      background: #0b1120;
+      border-right: 1px solid var(--color-border);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       gap: 28px;
     }
-    .product-badge {
+
+    .creator-header {
       display: flex;
       align-items: center;
       gap: 12px;
       margin-bottom: 20px;
     }
-    .product-icon {
+
+    .creator-avatar {
       width: 44px;
       height: 44px;
       border-radius: 10px;
-      background: linear-gradient(135deg, #4f46e5, #06b6d4);
+      background: #1e293b;
+      border: 1px solid var(--color-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
-      box-shadow: 0 8px 16px rgba(79, 70, 229, 0.3);
-    }
-    .product-title {
       font-size: 20px;
-      font-weight: 700;
-      color: #f8fafc;
-      letter-spacing: -0.02em;
-    }
-    .product-sub {
-      font-size: 12px;
-      color: #94a3b8;
     }
 
-    /* Coffee Tier Selector */
-    .tier-label {
+    .creator-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: -0.01em;
+    }
+
+    .creator-role {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: #818cf8;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .mission-desc {
+      font-size: 13.5px;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    .transparency-box {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .transparency-title {
       font-size: 11px;
       font-family: var(--font-mono);
       text-transform: uppercase;
       letter-spacing: .08em;
-      color: #818cf8;
+      color: var(--color-text-muted);
       margin-bottom: 10px;
-      display: block;
-    }
-    .tier-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-    .tier-btn {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #f1f5f9;
-      padding: 10px 4px;
-      border-radius: 8px;
-      font-size: 13.5px;
-      font-weight: 600;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.2s ease;
-    }
-    .tier-btn:hover {
-      border-color: #6366f1;
-      background: rgba(99, 102, 241, 0.1);
-    }
-    .tier-btn.active {
-      border-color: #6366f1;
-      background: #6366f1;
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
-    }
-    .tier-sub {
-      display: block;
-      font-size: 9px;
-      font-weight: 400;
-      opacity: 0.8;
-      margin-top: 2px;
-    }
-
-    /* Supporter Inputs */
-    .input-group {
-      margin-bottom: 14px;
-    }
-    .input-label {
-      display: block;
-      font-size: 12px;
-      font-weight: 500;
-      color: #cbd5e1;
-      margin-bottom: 6px;
-    }
-    .dark-input {
-      width: 100%;
-      background: rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 6px;
-      padding: 9px 12px;
-      font-size: 13px;
-      color: #f8fafc;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.2s ease;
-    }
-    .dark-input:focus {
-      border-color: #6366f1;
-    }
-
-    /* Price Breakdown */
-    .breakdown {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 16px;
-      display: grid;
-      gap: 8px;
-    }
-    .breakdown-row {
       display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-      color: #94a3b8;
-    }
-    .breakdown-row.total {
-      font-size: 16px;
-      font-weight: 700;
-      color: #ffffff;
-      border-top: 1px dashed rgba(255, 255, 255, 0.12);
-      padding-top: 10px;
-      margin-top: 4px;
+      align-items: center;
+      gap: 6px;
     }
 
-    /* Right Column: Exact LetsDefend / Stripe Form (White Card) */
+    .transparency-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      font-size: 12.5px;
+      color: var(--color-text-muted);
+    }
+
+    .transparency-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .transparency-list li strong {
+      color: #f8fafc;
+    }
+
+    .left-footer {
+      font-size: 11.5px;
+      color: #64748b;
+      line-height: 1.5;
+      border-top: 1px solid var(--color-border);
+      padding-top: 18px;
+    }
+
+    /* Right Panel: Active Payment Gateway Options */
     .right-panel {
       padding: clamp(28px, 4vw, 44px);
-      background: #ffffff;
-      color: #1e293b;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 20px;
+      gap: 24px;
     }
 
-    /* Link Fast Checkout Button */
-    .link-btn {
-      width: 100%;
-      background: var(--color-link);
-      color: #052e16;
-      border: none;
-      border-radius: 8px;
-      padding: 12px;
-      font-size: 15px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      cursor: pointer;
-      transition: background 0.2s ease, transform 0.1s ease;
-    }
-    .link-btn:hover { background: var(--color-link-hover); }
-    .link-btn:active { transform: scale(0.99); }
-
-    .or-divider {
-      display: flex;
-      align-items: center;
-      text-align: center;
-      color: #94a3b8;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      margin: 8px 0;
-    }
-    .or-divider::before, .or-divider::after {
-      content: '';
-      flex: 1;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .or-divider:not(:empty)::before { margin-right: 12px; }
-    .or-divider:not(:empty)::after { margin-left: 12px; }
-
-    /* Payment Method Tabs (Card vs Binance Pay) */
-    .method-selector {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-    .method-tab {
-      padding: 9px;
-      border-radius: 6px;
-      border: 1px solid #cbd5e1;
-      background: #f8fafc;
-      color: #334155;
-      font-size: 12.5px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .method-tab.active {
-      border-color: #6366f1;
-      background: #eef2ff;
-      color: #4f46e5;
+    .gateway-header {
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 14px;
+      margin-bottom: 4px;
     }
 
-    /* Light Inputs */
-    .field-group {
-      margin-bottom: 14px;
-    }
-    .field-label {
-      display: block;
-      font-size: 12px;
-      font-weight: 500;
-      color: #475569;
-      margin-bottom: 5px;
-    }
-    .light-input {
-      width: 100%;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      padding: 10px 12px;
-      font-size: 14px;
-      color: #0f172a;
-      background: #ffffff;
-      outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-    .light-input:focus {
-      border-color: #6366f1;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
-    }
-
-    /* Card Details Compound Box */
-    .card-compound {
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      overflow: hidden;
-      background: #ffffff;
-    }
-    .card-compound:focus-within {
-      border-color: #6366f1;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
-    }
-    .card-top {
-      display: flex;
-      align-items: center;
-      padding: 10px 12px;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .card-top input {
-      border: none;
-      outline: none;
-      width: 100%;
-      font-size: 14px;
-      color: #0f172a;
-      letter-spacing: 0.04em;
-    }
-    .card-icons {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .card-icons span {
-      font-size: 9px;
+    .gateway-title {
+      font-size: 17px;
       font-weight: 700;
-      padding: 2px 4px;
-      border-radius: 3px;
-      background: #f1f5f9;
-      color: #475569;
-      border: 1px solid #e2e8f0;
-    }
-    .card-bottom {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-    .card-bottom input {
-      border: none;
-      outline: none;
-      padding: 10px 12px;
-      font-size: 14px;
-      color: #0f172a;
-    }
-    .card-bottom input:first-child {
-      border-right: 1px solid #e2e8f0;
-    }
-
-    /* Checkout CTA Button */
-    .submit-btn {
-      width: 100%;
-      background: var(--color-primary);
       color: #ffffff;
-      border: none;
-      border-radius: 8px;
-      padding: 13px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
-      transition: background 0.2s ease, transform 0.1s ease;
-    }
-    .submit-btn:hover { background: var(--color-primary-hover); }
-    .submit-btn:active { transform: scale(0.99); }
-
-    /* Footer / Powered By */
-    .powered-by {
-      text-align: center;
-      font-size: 11.5px;
-      color: #64748b;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 6px;
-    }
-    .powered-by strong { color: #0f172a; font-weight: 600; }
-    .powered-by a { color: inherit; text-decoration: none; }
-    .powered-by a:hover { text-decoration: underline; }
-
-    /* Binance Pay Pane */
-    .binance-pane {
-      display: none;
-      padding: 16px;
-      background: #fefce8;
-      border: 1px solid #fef08a;
-      border-radius: 8px;
-      color: #713f12;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-    .binance-pane.active { display: block; }
-    .copy-chip {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #ffffff;
-      padding: 8px 12px;
-      border-radius: 6px;
-      border: 1px solid #fde047;
-      margin: 8px 0;
-      font-family: var(--font-mono);
-      font-weight: 600;
-      color: #a16207;
-    }
-    .chip-btn {
-      background: #eab308;
-      color: #000;
-      border: none;
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    /* Live Community Wall on bottom */
-    .wall-section {
-      width: 100%;
-      max-width: 960px;
-      margin-top: 36px;
-    }
-    .wall-title {
-      font-size: 12px;
-      font-family: var(--font-mono);
       text-transform: uppercase;
-      letter-spacing: .08em;
-      color: #94a3b8;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      letter-spacing: .03em;
     }
-    .wall-grid {
+
+    .gateway-subtitle {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+
+    /* Payment Gateway Option Card */
+    .option-card {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 20px;
+      transition: border-color 0.2s ease, background 0.2s ease;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 12px;
     }
-    .wall-card {
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px;
-      padding: 14px;
-      font-size: 13px;
+
+    .option-card:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.02);
     }
-    .wall-card-top {
+
+    .option-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 6px;
     }
-    .wall-name { font-weight: 600; color: #f8fafc; }
-    .wall-amount {
-      font-size: 11px;
+
+    .option-title {
+      font-size: 14.5px;
       font-weight: 700;
-      color: #818cf8;
-      background: rgba(99, 102, 241, 0.15);
-      padding: 2px 6px;
-      border-radius: 4px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .wall-note { color: #94a3b8; line-height: 1.45; font-size: 12px; }
+
+    .pill-tag {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .pill-green {
+      background: rgba(16, 185, 129, 0.12);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .pill-yellow {
+      background: rgba(245, 158, 11, 0.12);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .option-desc {
+      font-size: 12.5px;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* Primary Checkout Button (Lemon Squeezy Trigger) */
+    .btn-checkout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--color-accent);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 13px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .btn-checkout:hover {
+      background: var(--color-accent-hover);
+      box-shadow: 0 6px 18px rgba(99, 102, 241, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .btn-checkout:active {
+      transform: translateY(0);
+    }
+
+    .card-support-icons {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: #64748b;
+      padding-top: 4px;
+    }
+
+    .direct-link {
+      color: var(--color-text-muted);
+      font-size: 11.5px;
+      text-decoration: underline;
+      font-family: var(--font-mono);
+      transition: color 0.15s ease;
+    }
+
+    .direct-link:hover {
+      color: #ffffff;
+    }
+
+    /* Binance Pay Box */
+    .binance-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 10px 14px;
+    }
+
+    .binance-label {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--color-text-muted);
+    }
+
+    .binance-id {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--color-binance);
+      margin-top: 2px;
+    }
+
+    .btn-copy {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #fbbf24;
+      font-size: 11.5px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-copy:hover {
+      background: rgba(245, 158, 11, 0.25);
+      color: #ffffff;
+      border-color: rgba(245, 158, 11, 0.6);
+    }
+
+    .security-footer {
+      border-top: 1px solid var(--color-border);
+      padding-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: #64748b;
+    }
   </style>
 </head>
 <body>
 
   <!-- Top Navigation -->
-  <div class="top-nav">
+  <header class="top-nav">
     <a href="index.html" class="back-btn">
-      ← Back to Portfolio
+      ← Return to Portfolio
     </a>
-    <div style="display: flex; align-items: center; gap: 10px">
-      <span class="brand-tag">Mahi Al Jaber // Blue Team</span>
-      <span style="font-size: 12px; color: #10b981; display: flex; align-items: center; gap: 4px">
-        <span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981; display: inline-block"></span>
-        Encrypted Checkout
-      </span>
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      <span>Encrypted Gateway · TLS 1.3</span>
     </div>
-  </div>
+  </header>
 
-  <!-- The Two-Column Checkout Card (Modeled directly after LetsDefend / Stripe) -->
-  <div class="checkout-wrapper">
+  <!-- Main Checkout Container -->
+  <main class="checkout-card">
     
-    <!-- ── LEFT COLUMN: Product & Order Summary (Dark Navy) ── -->
-    <div class="left-panel">
+    <!-- ── LEFT PANEL: Lab Details & Infrastructure ── -->
+    <section class="left-panel">
       <div>
-        <div class="product-badge">
-          <div class="product-icon">☕</div>
+        <div class="creator-header">
+          <div class="creator-avatar">🛡️</div>
           <div>
-            <div class="product-title">Support Mahi Al Jaber</div>
-            <div class="product-sub">Open-Source Detection Engineering &amp; SOC Datasets</div>
+            <h1 class="creator-title">Support the Lab</h1>
+            <div class="creator-role">Mahi Al Jaber · SOC Analyst</div>
           </div>
         </div>
 
-        <!-- Coffee Tier Preset Buttons -->
-        <div style="margin-bottom: 20px">
-          <span class="tier-label">Select Coffee Amount</span>
-          <div class="tier-grid">
-            <button type="button" class="tier-btn" data-amount="3">
-              $3
-              <span class="tier-sub">1 Coffee</span>
-            </button>
-            <button type="button" class="tier-btn active" data-amount="5">
-              $5
-              <span class="tier-sub">2 Coffees</span>
-            </button>
-            <button type="button" class="tier-btn" data-amount="10">
-              $10
-              <span class="tier-sub">Roast 🌟</span>
-            </button>
-            <button type="button" class="tier-btn" data-amount="25">
-              $25
-              <span class="tier-sub">Sponsor 🛡️</span>
-            </button>
-          </div>
-          <div style="display: flex; align-items: center; gap: 8px">
-            <span style="font-size: 12px; color: #94a3b8">Custom: $</span>
-            <input id="custom-amount" class="dark-input" type="number" min="1" placeholder="Enter custom amount" style="max-width: 140px; padding: 6px 10px" />
-          </div>
-        </div>
+        <p class="mission-desc">
+          Maintaining cloud SIEM labs, running AWS EC2 telemetry forwarders, and publishing open synthetic attack datasets like <strong>SOC-Log-Analysis-Datasets</strong> (23+ ⭐ stars on GitHub) requires cloud compute and ongoing research.
+        </p>
 
-        <!-- Supporter Details -->
-        <div class="input-group">
-          <label class="input-label" for="supporter-name">Your Name / Alias</label>
-          <input id="supporter-name" class="dark-input" type="text" placeholder="e.g. Alex (SOC Analyst / Developer)" />
-        </div>
-
-        <div class="input-group">
-          <label class="input-label" for="supporter-note">
-            Why are you buying me this coffee? <span style="color: #818cf8">*</span>
-          </label>
-          <textarea id="supporter-note" class="dark-input" rows="2" placeholder="e.g. Loved your SOC Log Datasets! Helped me ace my Tier 1 technical interview." style="resize: vertical"></textarea>
+        <!-- Infrastructure Allocation -->
+        <div class="transparency-box">
+          <div class="transparency-title">
+            <span>●</span> Where your support goes
+          </div>
+          <ul class="transparency-list">
+            <li>
+              <span>•</span>
+              <span><strong>AWS EC2 Telemetry Nodes:</strong> Splunk indexers, Universal Forwarders, and Linux auditd pipelines.</span>
+            </li>
+            <li>
+              <span>•</span>
+              <span><strong>Adversary Simulation:</strong> Compute for Hydra, Atomic Red Team, and threat hunting datasets.</span>
+            </li>
+            <li>
+              <span>•</span>
+              <span><strong>100% Free &amp; Open Access:</strong> Detections and datasets remain open-source under the MIT license.</span>
+            </li>
+          </ul>
         </div>
       </div>
 
-      <!-- Price Breakdown -->
-      <div class="breakdown">
-        <div class="breakdown-row">
-          <span id="summary-tier-name">2x Artisan Coffee</span>
-          <span id="summary-tier-price">$5.00</span>
-        </div>
-        <div class="breakdown-row">
-          <span>Processing fee</span>
-          <span style="color: #10b981">Covered ($0.00)</span>
-        </div>
-        <div class="breakdown-row total">
-          <span>Total due today</span>
-          <span id="summary-total-price" style="color: #818cf8">$5.00 USD</span>
-        </div>
-        <div style="font-size: 11px; color: #64748b; margin-top: 6px; line-height: 1.4">
-          Direct creator support. Fuels AWS EC2 telemetry forwarders and open-source lab compute.
-        </div>
+      <div class="left-footer">
+        Zero commercial paywalls · Merchant of Record: Lemon Squeezy · Verified authentic creator gateway
       </div>
-    </div>
+    </section>
 
-    <!-- ── RIGHT COLUMN: Exact LetsDefend / Stripe Form (White Card) ── -->
-    <div class="right-panel">
+    <!-- ── RIGHT PANEL: Strictly 2 Clean Payment Methods ── -->
+    <section class="right-panel">
       
-      <!-- Top Fast Checkout (Stripe Link style) -->
       <div>
-        <button type="button" id="btn-fast-checkout" class="link-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-          Pay securely with <strong>link</strong> / 1-Click
-        </button>
-
-        <div class="or-divider">OR</div>
-
-        <!-- Section: Enter Payment Details -->
-        <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 12px; color: #0f172a">
-          Enter payment details
-        </h3>
-
-        <!-- Email Field -->
-        <div class="field-group">
-          <label class="field-label" for="buyer-email">Email</label>
-          <input id="buyer-email" class="light-input" type="email" placeholder="alex.developer@gmail.com" required />
-        </div>
-
-        <!-- Payment Method Tabs (ONLY 2 OPTIONS: Card vs Binance Pay) -->
-        <div class="field-group">
-          <label class="field-label">Payment method</label>
-          <div class="method-selector">
-            <div class="method-tab active" data-method="card">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-              Credit / Debit Card
-            </div>
-            <div class="method-tab" data-method="binance">
-              <span style="color: #eab308; font-weight: 700">🟡</span>
-              Binance Pay (USDT)
-            </div>
-          </div>
-        </div>
-
-        <!-- Pane 1: Card Fields (Exact Stripe Layout) -->
-        <div id="pane-card" style="display: block">
-          <div class="field-group">
-            <label class="field-label">Card information</label>
-            <div class="card-compound">
-              <div class="card-top">
-                <input id="card-number" type="text" placeholder="1234 1234 1234 1234" maxlength="19" />
-                <div class="card-icons">
-                  <span>VISA</span>
-                  <span>MC</span>
-                  <span>AMEX</span>
-                </div>
-              </div>
-              <div class="card-bottom">
-                <input id="card-expiry" type="text" placeholder="MM / YY" maxlength="5" />
-                <input id="card-cvc" type="text" placeholder="CVC" maxlength="4" />
-              </div>
-            </div>
-          </div>
-
-          <div class="field-group">
-            <label class="field-label" for="card-holder">Cardholder name</label>
-            <input id="card-holder" class="light-input" type="text" placeholder="Full name on card" />
-          </div>
-
-          <div class="field-group">
-            <label class="field-label" for="card-country">Country or region</label>
-            <select id="card-country" class="light-input">
-              <option value="US">United States</option>
-              <option value="BD">Bangladesh</option>
-              <option value="GB">United Kingdom</option>
-              <option value="CA">Canada</option>
-              <option value="DE">Germany</option>
-              <option value="AU">Australia</option>
-              <option value="SG">Singapore</option>
-              <option value="NL">Netherlands</option>
-              <option value="IN">India</option>
-              <option value="OTHER">Other Country</option>
-            </select>
-          </div>
-
-          <div style="display: flex; align-items: flex-start; gap: 8px; margin: 12px 0 16px; font-size: 12px; color: #64748b">
-            <input type="checkbox" id="save-info" checked style="margin-top: 2px; accent-color: #6366f1" />
-            <label for="save-info">Save my information for faster 1-click checkout next time.</label>
-          </div>
-        </div>
-
-        <!-- Pane 2: Binance Pay Fields -->
-        <div id="pane-binance" class="binance-pane">
-          <div style="font-weight: 700; margin-bottom: 4px">Binance Pay (Zero Gas Fees · Instant)</div>
-          <div>Send USDT instantly from anywhere in the world to:</div>
-          <div class="copy-chip">
-            <span>Pay ID: <strong>mahialjaber</strong></span>
-            <button type="button" class="chip-btn" id="btn-copy-binance">Copy Pay ID</button>
-          </div>
-          <div style="font-size: 11px; color: #854d0e">
-            Open Binance App ➔ Pay ➔ Send ➔ Enter Pay ID <code>mahialjaber</code>.
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Action Button & Footer -->
-      <div>
-        <button type="button" id="btn-submit-payment" class="submit-btn">
-          Pay $5.00 USD ☕
-        </button>
-
-        <div id="checkout-status-msg" style="display: none; margin-top: 10px; font-size: 12px; text-align: center; font-weight: 600"></div>
-
-        <div class="powered-by">
-          <span>Powered by <strong>stripe</strong> &amp; <strong>lemonsqueezy</strong></span>
-          <span>·</span>
-          <a href="#">Terms</a>
-          <span>·</span>
-          <a href="#">Privacy</a>
-          <span>·</span>
-          <span>Direct Payout to Payoneer</span>
+        <div class="gateway-header">
+          <h2 class="gateway-title">Direct Support Gateway</h2>
+          <div class="gateway-subtitle">Choose your preferred payment method below</div>
         </div>
       </div>
 
-    </div>
+      <!-- Option 1: Credit / Debit Card & Apple Pay (Lemon Squeezy Official Overlay) -->
+      <div class="option-card">
+        <div class="option-header">
+          <div class="option-title">
+            <span>💳</span>
+            <span>Option 1: Cards &amp; Apple Pay</span>
+          </div>
+          <span class="pill-tag pill-green">Official Gateway</span>
+        </div>
 
-  </div>
+        <p class="option-desc">
+          Support via Visa, Mastercard, American Express, Apple Pay, or Google Pay through Lemon Squeezy's secure checkout overlay.
+        </p>
 
-  <!-- ── Live Community Supporter Wall ── -->
-  <div class="wall-section">
-    <div class="wall-title">
-      <span>Community Supporter Wall</span>
-      <span style="color: #818cf8">● Verified Backers</span>
-    </div>
-    <div id="supporter-wall" class="wall-grid">
-      <!-- Dynamic supporter cards -->
-    </div>
-  </div>
+        <!-- Official Lemon Squeezy Button with ?embed=1 -->
+        <a href="https://mahialjaber.lemonsqueezy.com/checkout/buy/7460b413-f840-4930-b4fc-6ea155476086?embed=1"
+           class="lemonsqueezy-button btn-checkout">
+          Buy Mahi a Coffee ☕ ($10.00+ USD)
+        </a>
 
+        <div class="card-support-icons">
+          <span>Visa · MC · Amex · Apple Pay · GPay</span>
+          <a href="https://mahialjaber.lemonsqueezy.com/checkout/buy/7460b413-f840-4930-b4fc-6ea155476086"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="direct-link">
+            Direct checkout tab ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Option 2: Binance Pay (USDT Instant) -->
+      <div class="option-card">
+        <div class="option-header">
+          <div class="option-title">
+            <span>🟡</span>
+            <span>Option 2: Binance Pay (USDT)</span>
+          </div>
+          <span class="pill-tag pill-yellow">Zero Gas Fees</span>
+        </div>
+
+        <p class="option-desc">
+          Send USDT peer-to-peer from anywhere worldwide with zero transaction fees and instant confirmation.
+        </p>
+
+        <div class="binance-row">
+          <div>
+            <div class="binance-label">Binance Pay ID / USDT</div>
+            <div class="binance-id">mahialjaber</div>
+          </div>
+          <button type="button" class="btn-copy" id="btn-copy-binance" data-copy="mahialjaber">
+            Copy Pay ID
+          </button>
+        </div>
+
+        <div style="font-size: 11.5px; color: #64748b; line-height: 1.4">
+          Open Binance App → Pay → Send → Enter Pay ID: <code>mahialjaber</code>
+        </div>
+      </div>
+
+      <!-- Security & PCI Compliance Note -->
+      <footer class="security-footer">
+        <span>🔒 PCI-DSS Compliant via Lemon Squeezy</span>
+        <span>TLS 1.3 Encrypted</span>
+      </footer>
+
+    </section>
+
+  </main>
+
+  <!-- Interactive JavaScript -->
   <script>
-    // Configuration: Replace with your actual Lemon Squeezy checkout link once created
-    // e.g., 'https://mahialjaber.lemonsqueezy.com/buy/xxxx'
-    const LEMON_SQUEEZY_CHECKOUT_URL = ''; 
-
-    // State
-    let selectedAmount = 5;
-    let selectedMethod = 'card';
-
-    // Elements
-    const tierBtns = document.querySelectorAll('.tier-btn');
-    const customAmountInput = document.getElementById('custom-amount');
-    const summaryTierName = document.getElementById('summary-tier-name');
-    const summaryTierPrice = document.getElementById('summary-tier-price');
-    const summaryTotalPrice = document.getElementById('summary-total-price');
-    const submitBtn = document.getElementById('btn-submit-payment');
-    const fastCheckoutBtn = document.getElementById('btn-fast-checkout');
-    const methodTabs = document.querySelectorAll('.method-tab');
-    const paneCard = document.getElementById('pane-card');
-    const paneBinance = document.getElementById('pane-binance');
-    const statusMsg = document.getElementById('checkout-status-msg');
-    const copyBinanceBtn = document.getElementById('btn-copy-binance');
-    const wallContainer = document.getElementById('supporter-wall');
-
-    const supporterNameInput = document.getElementById('supporter-name');
-    const supporterNoteInput = document.getElementById('supporter-note');
-    const buyerEmailInput = document.getElementById('buyer-email');
-    const cardNumberInput = document.getElementById('card-number');
-    const cardExpiryInput = document.getElementById('card-expiry');
-
-    // Format Card Number (adds spaces every 4 digits)
-    if (cardNumberInput) {
-      cardNumberInput.addEventListener('input', (e) => {
-        let val = e.target.value.replace(/\D/g, '').substring(0, 16);
-        let formatted = val.match(/.{1,4}/g)?.join(' ') || val;
-        e.target.value = formatted;
-      });
+    // Initialize Lemon Squeezy overlay handler
+    if (window.createLemonSqueezy) {
+      try { window.createLemonSqueezy(); } catch (e) {}
     }
 
-    // Format Card Expiry (MM/YY)
-    if (cardExpiryInput) {
-      cardExpiryInput.addEventListener('input', (e) => {
-        let val = e.target.value.replace(/\D/g, '').substring(0, 4);
-        if (val.length >= 3) {
-          e.target.value = val.substring(0, 2) + ' / ' + val.substring(2);
-        } else {
-          e.target.value = val;
-        }
-      });
-    }
-
-    // Update Totals UI
-    const updateAmountUI = (amt) => {
-      selectedAmount = amt;
-      const names = {
-        3: '1x Cold Brew Coffee',
-        5: '2x Artisan Coffee',
-        10: 'Roast Coffee & Snack',
-        25: 'Cloud Lab Sponsor Tier'
-      };
-      const name = names[amt] || 'Custom Creator Coffee';
-      if (summaryTierName) summaryTierName.textContent = name;
-      if (summaryTierPrice) summaryTierPrice.textContent = `$${amt}.00`;
-      if (summaryTotalPrice) summaryTotalPrice.textContent = `$${amt}.00 USD`;
-      if (submitBtn) {
-        submitBtn.textContent = selectedMethod === 'card' 
-          ? `Pay $${amt}.00 USD ☕` 
-          : `Open Binance Pay ($${amt} USDT) 🟡`;
-      }
-    };
-
-    // Tier preset selection
-    tierBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tierBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        if (customAmountInput) customAmountInput.value = '';
-        const amt = parseInt(btn.dataset.amount, 10);
-        updateAmountUI(amt);
-      });
-    });
-
-    // Custom amount input
-    if (customAmountInput) {
-      customAmountInput.addEventListener('input', (e) => {
-        const val = parseInt(e.target.value, 10);
-        if (!isNaN(val) && val > 0) {
-          tierBtns.forEach(b => b.classList.remove('active'));
-          updateAmountUI(val);
-        }
-      });
-    }
-
-    // Payment method tabs (Card vs Binance)
-    methodTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        methodTabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        selectedMethod = tab.dataset.method;
-
-        if (selectedMethod === 'card') {
-          paneCard.style.display = 'block';
-          paneBinance.classList.remove('active');
-          submitBtn.textContent = `Pay $${selectedAmount}.00 USD ☕`;
-          submitBtn.style.background = 'var(--color-primary)';
-        } else {
-          paneCard.style.display = 'none';
-          paneBinance.classList.add('active');
-          submitBtn.textContent = `Open Binance Pay ($${selectedAmount} USDT) 🟡`;
-          submitBtn.style.background = '#eab308';
-          submitBtn.style.color = '#000000';
+    // Direct event listener for Lemon Squeezy buttons to ensure smooth popup
+    const lemonBtns = document.querySelectorAll('.lemonsqueezy-button');
+    lemonBtns.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        if (window.LemonSqueezy && window.LemonSqueezy.Url) {
+          e.preventDefault();
+          window.LemonSqueezy.Url.Open(btn.href);
         }
       });
     });
 
     // Copy Binance Pay ID
-    if (copyBinanceBtn) {
-      copyBinanceBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText('mahialjaber').then(() => {
-          copyBinanceBtn.textContent = 'Copied! ✓';
-          setTimeout(() => { copyBinanceBtn.textContent = 'Copy Pay ID'; }, 2000);
-        });
+    const copyBtn = document.getElementById('btn-copy-binance');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const text = copyBtn.dataset.copy || 'mahialjaber';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied! ✓';
+            setTimeout(() => { copyBtn.textContent = originalText; }, 2000);
+          }).catch(() => {
+            prompt('Binance Pay ID:', text);
+          });
+        } else {
+          prompt('Binance Pay ID:', text);
+        }
       });
     }
-
-    // Live Supporter Wall
-    const INITIAL_WALL = [
-      { name: "Alex M.", amount: "$5", time: "2 days ago", note: "Your SOC log datasets and Splunk SPL queries got me through my Tier 1 technical interview. Have a coffee on me!" },
-      { name: "Sarah K.", amount: "$10", time: "4 days ago", note: "The Wazuh lab write-up is the best open-source walkthrough on GitHub. Thank you for not paywalling it." },
-      { name: "Marcus T.", amount: "$3", time: "1 week ago", note: "Dataset 04 (Brute Force RDP) was exactly what I needed for my detection engineering practice. Cheers brother!" },
-      { name: "David R.", amount: "$25", time: "2 weeks ago", note: "Sponsoring your AWS EC2 cloud threat lab infrastructure. Keep building open-source detection engineering tools!" },
-    ];
-
-    const renderWall = () => {
-      if (!wallContainer) return;
-      let stored = [];
-      try { stored = JSON.parse(localStorage.getItem('mahi-supporters') || '[]'); } catch (e) { stored = []; }
-      const all = [...stored, ...INITIAL_WALL];
-      wallContainer.innerHTML = all.map(s => `
-        <div class="wall-card">
-          <div class="wall-card-top">
-            <span class="wall-name">${s.name}</span>
-            <span class="wall-amount">${s.amount}</span>
-          </div>
-          <div class="wall-note">"${s.note}"</div>
-        </div>
-      `).join('');
-    };
-
-    renderWall();
-
-    // Trigger Payment Execution
-    const executePayment = () => {
-      const email = buyerEmailInput ? buyerEmailInput.value.trim() : '';
-      const name = (supporterNameInput && supporterNameInput.value.trim()) || 'Alex';
-      const note = (supporterNoteInput && supporterNoteInput.value.trim()) || 'Loved your open-source security work!';
-
-      if (selectedMethod === 'card') {
-        if (!email) {
-          if (buyerEmailInput) buyerEmailInput.focus();
-          alert('Please enter your email address to receive your payment receipt.');
-          return;
-        }
-
-        // If Lemon Squeezy URL is configured, launch official overlay checkout
-        if (LEMON_SQUEEZY_CHECKOUT_URL && window.createLemonSqueezy) {
-          window.LemonSqueezy.Url.Open(LEMON_SQUEEZY_CHECKOUT_URL);
-          return;
-        }
-
-        // Real checkout feedback
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Processing Payment…';
-
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = `Pay $${selectedAmount}.00 USD ☕`;
-          
-          if (statusMsg) {
-            statusMsg.style.display = 'block';
-            statusMsg.style.color = '#10b981';
-            statusMsg.textContent = `✓ Payment verified for $${selectedAmount}.00 USD. Thank you, ${name}!`;
-          }
-
-          // Save to local supporter wall
-          try {
-            const list = JSON.parse(localStorage.getItem('mahi-supporters') || '[]');
-            list.unshift({ name, amount: `$${selectedAmount}`, time: 'Just now', note });
-            localStorage.setItem('mahi-supporters', JSON.stringify(list.slice(0, 10)));
-          } catch (e) {}
-
-          renderWall();
-
-          // Open instant mailto receipt
-          const subject = encodeURIComponent(`Coffee Support Received ($${selectedAmount} USD) ☕`);
-          const body = encodeURIComponent(`Hi Mahi,\n\nI just sent a $${selectedAmount} USD coffee payment!\n\nSupporter: ${name}\nEmail: ${email}\nNote: ${note}\n\nKeep building great open-source detection engineering labs!`);
-          window.location.href = `mailto:mahialjaber.dev@gmail.com?subject=${subject}&body=${body}`;
-        }, 1200);
-
-      } else {
-        // Binance Pay Execution
-        window.open('https://app.binance.com', '_blank');
-        if (statusMsg) {
-          statusMsg.style.display = 'block';
-          statusMsg.style.color = '#ca8a04';
-          statusMsg.textContent = `Binance Pay portal opened. Send ${selectedAmount} USDT to Pay ID: mahialjaber.`;
-        }
-      }
-    };
-
-    if (submitBtn) submitBtn.addEventListener('click', executePayment);
-    if (fastCheckoutBtn) fastCheckoutBtn.addEventListener('click', executePayment);
   </script>
 </body>
 </html>
