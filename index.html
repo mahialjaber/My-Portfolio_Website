@@ -1449,7 +1449,7 @@ class Component extends DCLogic {
     }
     this.setState({ errors: {}, status: "sending", notice: null });
 
-    const endpoint = this.props.apiEndpoint || "/api/contact";
+    const endpoint = this.props.apiEndpoint || "https://formsubmit.co/ajax/mahialjaber.dev@gmail.com";
     const mailto =
       "mailto:mahialjaber.dev@gmail.com?subject=" +
       encodeURIComponent(f.subject || "Portfolio contact") +
@@ -1458,17 +1458,29 @@ class Component extends DCLogic {
 
     try {
       const ctrl = new AbortController();
-      const t = setTimeout(() => ctrl.abort(), 8000);
+      const t = setTimeout(() => ctrl.abort(), 10000);
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(f),
+        body: JSON.stringify({
+          name: f.name,
+          email: f.email,
+          subject: f.subject || "Portfolio Contact",
+          message: f.message,
+          _subject: `[Portfolio Contact] ${f.subject || "New Message"} from ${f.name}`,
+          _captcha: "false"
+        }),
         signal: ctrl.signal,
       });
       clearTimeout(t);
       const data = await res.json().catch(() => ({}));
 
-      if (res.ok && data.ok !== false) {
+      if (res.ok && data.success !== "false" && data.ok !== false) {
+        if (typeof gtag === "function") {
+          gtag("event", "generate_lead", {
+            method: "contact_form"
+          });
+        }
         this.setState({
           status: "ok",
           form: { name: "", email: "", subject: "", message: "", _hp: "" },
@@ -1477,20 +1489,20 @@ class Component extends DCLogic {
         return;
       }
       if (res.status === 422 && data.errors) {
-        this.setState({ status: "idle", errors: data.errors, notice: { title: "The API rejected the message", body: "Fix the highlighted fields and try again." } });
+        this.setState({ status: "idle", errors: data.errors, notice: { title: "Check required fields", body: "Fix the highlighted fields and try again." } });
         return;
       }
       if (res.status === 429) {
-        this.setState({ status: "error", notice: { title: "Rate limited", body: "Too many messages from this address. Try again in 15 minutes, or email directly.", mailto } });
+        this.setState({ status: "error", notice: { title: "Rate limited", body: "Too many messages sent. Try again in 15 minutes, or email directly.", mailto } });
         return;
       }
-      this.setState({ status: "error", notice: { title: "Delivery failed", body: data.error || "The contact API returned an error. Please email me directly.", mailto } });
+      this.setState({ status: "error", notice: { title: "Delivery failed", body: data.error || data.message || "The message could not be sent. Please email me directly.", mailto } });
     } catch (err) {
       this.setState({
         status: "error",
         notice: {
-          title: "Contact API unreachable",
-          body: "The Express + Nodemailer API in server/ isn't running behind this preview, so nothing was transmitted. Your message is preserved below — send it directly instead.",
+          title: "Service temporarily unreachable",
+          body: "Network timeout or connection error. You can click below to send your message directly via email:",
           mailto,
         },
       });

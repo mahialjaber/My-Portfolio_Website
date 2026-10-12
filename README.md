@@ -3,7 +3,7 @@
 [![Live Site](https://img.shields.io/badge/Live_Site-GitHub_Pages-0ea5e9?style=for-the-badge&logo=github)](https://mahialjaber.github.io/My-Portfolio_Website/)
 [![SOC Lab](https://img.shields.io/badge/SIEM-Splunk_%26_Wazuh-059669?style=for-the-badge&logo=splunk)](https://github.com/mahialjaber/enterprise-threat-detection-soc-lab)
 [![Datasets](https://img.shields.io/badge/Datasets-23%2B_Stars-f59e0b?style=for-the-badge&logo=star)](https://github.com/mahialjaber/SOC-Log-Analysis-Datasets)
-[![License](https://img.shields.io/badge/License-MIT-6366f1?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/badge/License-All_Rights_Reserved-red?style=for-the-badge)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Open_to_Roles-10b981?style=for-the-badge)](#contact)
 
 > **"Detection. Response. Evidence."**  
