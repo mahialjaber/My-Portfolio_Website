@@ -3,6 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5WM13GC6V"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z5WM13GC6V');
+</script>
 <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
 <script src="./support.js"></script>
 </head>
@@ -1337,6 +1346,12 @@ class Component extends DCLogic {
       if (btn._lemonBound) return;
       btn._lemonBound = true;
       btn.addEventListener("click", (e) => {
+        if (typeof gtag === "function") {
+          gtag("event", "begin_checkout", {
+            item_name: "Lab Sponsorship",
+            method: "Lemon Squeezy"
+          });
+        }
         if (window.LemonSqueezy && window.LemonSqueezy.Url) {
           e.preventDefault();
           window.LemonSqueezy.Url.Open(btn.href);
@@ -1352,6 +1367,11 @@ class Component extends DCLogic {
       btn.addEventListener("click", () => {
         const text = btn.dataset.copy;
         if (!text) return;
+        if (typeof gtag === "function") {
+          gtag("event", "donate_crypto_copy", {
+            method: "Binance Pay"
+          });
+        }
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(text).then(() => {
             const orig = btn.textContent;

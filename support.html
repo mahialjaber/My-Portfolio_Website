@@ -6,6 +6,17 @@
   <title>Support the Lab — Mahi Al Jaber</title>
   <meta name="description" content="Secure payment gateway to support Mahi Al Jaber's open-source SOC detection engineering labs and datasets." />
   <meta name="theme-color" content="#090d16" />
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5WM13GC6V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-Z5WM13GC6V');
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -562,6 +573,12 @@
     const lemonBtns = document.querySelectorAll('.lemonsqueezy-button');
     lemonBtns.forEach((btn) => {
       btn.addEventListener('click', (e) => {
+        if (typeof gtag === 'function') {
+          gtag('event', 'begin_checkout', {
+            item_name: 'Lab Sponsorship',
+            method: 'Lemon Squeezy'
+          });
+        }
         if (window.LemonSqueezy && window.LemonSqueezy.Url) {
           e.preventDefault();
           window.LemonSqueezy.Url.Open(btn.href);
@@ -574,6 +591,11 @@
     if (copyBtn) {
       copyBtn.addEventListener('click', () => {
         const text = copyBtn.dataset.copy || 'mahialjaber';
+        if (typeof gtag === 'function') {
+          gtag('event', 'donate_crypto_copy', {
+            method: 'Binance Pay'
+          });
+        }
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(text).then(() => {
             const originalText = copyBtn.textContent;
