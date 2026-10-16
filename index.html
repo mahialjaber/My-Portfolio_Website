@@ -23,9 +23,9 @@
 <meta name="description" content="Mahi Al Jaber — entry-level SOC / Blue Team analyst. Alert triage, Sigma detection engineering, Splunk SPL, AWS CloudTrail threat detection, MITRE ATT&amp;CK-mapped adversary emulation. Evidence-backed lab projects.">
 <meta name="author" content="Mahi Al Jaber">
 <meta name="theme-color" content="#f2f2f3">
-<link rel="canonical" href="https://mahialjaber.me/">
+<link rel="canonical" href="https://mahialjaber.github.io/My-Portfolio_Website/">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://mahialjaber.me/">
+<meta property="og:url" content="https://mahialjaber.github.io/My-Portfolio_Website/">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:title" content="Mahi Al Jaber — SOC Analyst · Detection &amp; Response">
 <meta property="og:description" content="I investigate alerts and write the detections that generate them. Splunk · Sigma · AWS · MITRE ATT&amp;CK.">
@@ -916,8 +916,8 @@ const PROJECTS = [
     kicker: "WAZUH SIEM · SYSMON · ACTIVE RESPONSE",
     status: "Public · Active Lab",
     summary: "A production-grade multi-node SOC architecture: centralized Wazuh Manager ingesting high-fidelity telemetry from Windows and Linux endpoints with automated active containment.",
-    repo: "https://github.com/mahialjaber/wazuh-enterprise-soc-lab",
-    repoLabel: "wazuh-enterprise-soc-lab",
+    repo: "https://github.com/mahialjaber/the-10-task-to-master-wazuh",
+    repoLabel: "the-10-task-to-master-wazuh",
     demo: null,
     demoNote: "Full architecture, agent configs, Sysmon XML profiles, custom decoders and containment scripts documented in the repository.",
     overview: [
@@ -1042,7 +1042,7 @@ const PROJECTS = [
       {
         label: "File analysis",
         note: "Point the analyzer at a log and give it the question you actually have.",
-        body: "$ python chat1.py\n> /file sample_access.log Analyze these server logs for security breaches.",
+        body: "$ python cli.py\n> /file sample_access.log Analyze these server logs for security breaches.",
       },
     ],
     shots: ["INTERACTIVE SESSION IN POWERSHELL", "/file COMMAND ANALYSING AN ACCESS LOG", "VERDICT OUTPUT WITH FLAGGED IPs"],
@@ -1442,6 +1442,11 @@ class Component extends DCLogic {
     ev.preventDefault();
     const f = this.state.form;
     if (f._hp) return; // honeypot
+    const lastSent = Number(localStorage.getItem("mahi-contact-ts") || 0);
+    if (Date.now() - lastSent < 60000) {
+      this.setState({ status: "error", notice: { title: "Rate limited", body: "Please wait a minute before sending another message." } });
+      return;
+    }
     const errors = this.validate(f);
     if (Object.keys(errors).length) {
       this.setState({ errors, status: "idle", notice: { title: "Check the highlighted fields", body: "Nothing was sent yet." } });
@@ -1468,7 +1473,7 @@ class Component extends DCLogic {
           subject: f.subject || "Portfolio Contact",
           message: f.message,
           _subject: `[Portfolio Contact] ${f.subject || "New Message"} from ${f.name}`,
-          _captcha: "false"
+          _honey: f._hp
         }),
         signal: ctrl.signal,
       });
@@ -1476,6 +1481,7 @@ class Component extends DCLogic {
       const data = await res.json().catch(() => ({}));
 
       if (res.ok && data.success !== "false" && data.ok !== false) {
+        try { localStorage.setItem("mahi-contact-ts", String(Date.now())); } catch (e) {}
         if (typeof gtag === "function") {
           gtag("event", "generate_lead", {
             method: "contact_form"
@@ -1613,7 +1619,7 @@ class Component extends DCLogic {
 
       channels: [
         { k: "Email", v: "mahialjaber.dev@gmail.com", href: "mailto:mahialjaber.dev@gmail.com" },
-        { k: "WhatsApp", v: "linkedin.com/in/mahialjaber", href: "https://www.linkedin.com/in/mahialjaber" },
+        { k: "LinkedIn", v: "linkedin.com/in/mahialjaber", href: "https://www.linkedin.com/in/mahialjaber" },
         { k: "GitHub", v: "github.com/mahialjaber", href: "https://github.com/mahialjaber" },
       ],
 
