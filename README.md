@@ -95,7 +95,8 @@ npm start
 - **Portfolio**: [mahialjaber.github.io/My-Portfolio_Website/](https://mahialjaber.github.io/My-Portfolio_Website/)
 - **GitHub**: [@mahialjaber](https://github.com/mahialjaber)
 - **Email**: [mahialjaber.dev@gmail.com](mailto:mahialjaber.dev@gmail.com)
-- **LinkedIn**: [linkedin.com/in/mahialjaber](https://www.linkedin.com/in/mahialjaber)
+- **X (Twitter)**: [@mahialjaber](https://x.com/mahialjaber)
+- **Discord**: `mahialjaber`
 
 ---
 
