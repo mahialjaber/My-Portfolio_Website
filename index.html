@@ -12,8 +12,6 @@
 
   gtag('config', 'G-Z5WM13GC6V');
 </script>
-<script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
-<script src="./support.js"></script>
 </head>
 <body>
 <x-dc>
@@ -290,17 +288,7 @@
     border-color: var(--color-accent) !important;
     background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface)) !important;
   }
-  .supporter-card {
-    padding: 12px 14px;
-    background: var(--color-surface);
-    border: 1px solid var(--color-divider);
-    border-left: 3px solid var(--color-accent);
-    border-radius: 2px;
-    transition: transform 0.2s ease;
-  }
-  .supporter-card:hover {
-    transform: translateX(3px);
-  }
+
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Mahi Al Jaber","jobTitle":"SOC Analyst — Detection & Response","email":"mailto:mahialjaber.dev@gmail.com","url":"https://github.com/mahialjaber","knowsAbout":["Security Operations","Splunk SPL","Sigma","MITRE ATT&CK","AWS CloudTrail","Threat Hunting","Incident Response"],"sameAs":["https://github.com/mahialjaber"]}
@@ -324,7 +312,6 @@
         <a href="#phase">Phases</a>
         <a href="#journey">Journey</a>
         <a href="#github">GitHub</a>
-        <a href="#support">Support</a>
       </div>
 
       <!-- Interactive Hanging Light Switch Pull Cord -->
@@ -357,7 +344,6 @@
         <a href="#phase" onClick="{{ closeMenu }}" style="padding: 14px 24px; border-bottom: 1px solid var(--color-divider)">Phases</a>
         <a href="#journey" onClick="{{ closeMenu }}" style="padding: 14px 24px; border-bottom: 1px solid var(--color-divider)">Journey</a>
         <a href="#github" onClick="{{ closeMenu }}" style="padding: 14px 24px; border-bottom: 1px solid var(--color-divider)">GitHub</a>
-        <a href="#support" onClick="{{ closeMenu }}" style="padding: 14px 24px; border-bottom: 1px solid var(--color-divider); color: var(--color-accent-700)">Support ☕</a>
         <a href="#contact" onClick="{{ closeMenu }}" style="padding: 14px 24px; color: var(--color-accent-700)">Contact</a>
       </div>
     </sc-if>
@@ -594,103 +580,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ── SUPPORT / BUY ME A COFFEE ────────────────────────── -->
-  <section id="support" style="max-width: 1240px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) 24px; border-top: 1px solid var(--color-divider)">
-    <div data-reveal="" style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px">
-      <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .16em; color: var(--color-accent-700)">07</span>
-      <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase">Support the lab</h2>
-      <span style="flex: 1; height: 1px; background: var(--color-divider)"></span>
-      <a href="support.html" class="tag tag-accent lg-only" style="text-decoration: none" title="Open Dedicated Payment Gateway">Dedicated Gateway ↗</a>
-    </div>
-
-    <div class="split" data-reveal="" style="display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(28px, 4vw, 64px); align-items: start">
-      <div>
-        <p style="font-size: clamp(20px, 2.6vw, 30px); font-family: var(--font-heading); line-height: 1.22; letter-spacing: -.015em; margin: 0 0 20px">
-          Fueling open-source detection engineering &amp; realistic SOC datasets.
-        </p>
-        <p style="line-height: 1.7; text-wrap: pretty; margin: 0 0 16px">
-          Maintaining cloud SIEM labs, running AWS EC2 telemetry forwarders, and publishing synthetic attack datasets like <a href="https://github.com/mahialjaber/SOC-Log-Analysis-Datasets" target="_blank" rel="noopener" style="font-weight: 600; text-decoration: underline">SOC-Log-Analysis-Datasets</a> (<strong>23+ ⭐ stars</strong>) requires real cloud compute and late-night research.
-        </p>
-        <p class="text-muted" style="line-height: 1.7; text-wrap: pretty; margin: 0 0 24px">
-          If my repositories, Splunk SPL correlation searches, Wazuh labs, or free log datasets helped your interview prep or blue team career, you can buy me a coffee! In the developer community, supporting creators keeps open-source research alive without commercial paywalls.
-        </p>
-
-        <!-- Infrastructure Transparency Card -->
-        <div class="blueprint" style="padding: 18px; background: color-mix(in srgb, var(--color-accent) 6%, transparent); margin-bottom: 24px">
-          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px">
-            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981"></span>
-            <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600">Infrastructure Transparency</span>
-          </div>
-          <ul style="margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.6" class="text-muted">
-            <li><strong>AWS EC2 Telemetry Instances:</strong> Running active forwarders &amp; Splunk indexers</li>
-            <li><strong>Adversary Simulation Compute:</strong> Generating high-fidelity attack telemetry</li>
-            <li><strong>100% Free &amp; Open Access:</strong> All datasets and queries remain MIT-licensed forever</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Functional Payment Gateway Box (Clean Industrial Theme) -->
-      <div class="blueprint" style="padding: clamp(22px, 3vw, 34px); display: grid; gap: 20px; background: var(--color-surface); position: relative">
-        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-        
-        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--color-divider); padding-bottom: 14px">
-          <div>
-            <h3 style="font-size: 20px; margin: 0; text-transform: uppercase; letter-spacing: .04em">Direct Support Gateway</h3>
-            <div class="text-muted" style="font-size: 12px; margin-top: 4px">Safe &amp; encrypted checkout · Zero commercial paywalls</div>
-          </div>
-          <span class="tag tag-accent" style="font-size: 10px">2 OPTIONS AVAILABLE</span>
-        </div>
-
-        <!-- Option 1: Credit / Debit Card & Apple Pay (Lemon Squeezy Overlay) -->
-        <div class="blueprint" style="padding: 18px; background: var(--color-bg); display: grid; gap: 12px">
-          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-          <div style="display: flex; align-items: center; justify-content: space-between">
-            <span style="font-weight: 700; font-size: 14px">Option 1: Credit / Debit Card &amp; Apple Pay</span>
-            <span class="tag tag-accent" style="font-size: 10px">Encrypted · Instant</span>
-          </div>
-          <p class="text-muted" style="margin: 0; font-size: 12.5px; line-height: 1.5">
-            Support with Visa, Mastercard, American Express, Apple Pay, or Google Pay via Lemon Squeezy's encrypted checkout overlay.
-          </p>
-          <a href="https://mahialjaber.lemonsqueezy.com/checkout/buy/7460b413-f840-4930-b4fc-6ea155476086?embed=1" class="lemonsqueezy-button btn btn-primary" style="justify-content: center; padding: 13px; font-size: 13.5px; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; color: var(--color-bg); font-weight: 700">
-            Buy a Coffee ($10.00+ USD) ☕ ↗
-          </a>
-        </div>
-
-        <!-- Option 2: Binance Pay (USDT Instant) -->
-        <div class="blueprint" style="padding: 18px; background: var(--color-bg); display: grid; gap: 12px">
-          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-          <div style="display: flex; align-items: center; justify-content: space-between">
-            <span style="font-weight: 700; font-size: 14px">Option 2: Binance Pay &amp; Crypto (USDT)</span>
-            <span class="tag tag-accent" style="font-size: 10px">Zero Gas Fees · Instant</span>
-          </div>
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--color-surface); padding: 8px 12px; border: 1px solid var(--color-divider)">
-            <div>
-              <div style="font-size: 10px; font-family: ui-monospace, monospace; text-transform: uppercase" class="text-muted">Binance Pay ID / USDT</div>
-              <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; font-weight: 700">mahialjaber</span>
-            </div>
-            <button type="button" class="btn btn-secondary copy-btn" data-copy="mahialjaber" style="padding: 4px 10px; font-size: 11px">Copy Pay ID</button>
-          </div>
-          <p class="text-muted" style="margin: 0; font-size: 12px; line-height: 1.5">
-            Instant peer-to-peer crypto transfer via Binance Pay app with 0 network gas fees.
-          </p>
-        </div>
-
-        <!-- Link to Dedicated Full Screen Gateway -->
-        <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--color-divider)">
-          <a href="support.html" class="text-muted" style="font-size: 12px; text-decoration: underline; font-family: ui-monospace, monospace">
-            Open dedicated full-screen checkout page ↗
-          </a>
-          <span class="text-muted" style="font-size: 11px; font-family: ui-monospace, monospace">
-            🔒 PCI-DSS Compliant · TLS 1.3
-          </span>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
 
   <!-- ── CONTACT ──────────────────────────────────────────── -->
   <section id="contact" style="max-width: 1240px; margin: 0 auto; padding: clamp(56px, 7vw, 110px) 24px; border-top: 1px solid var(--color-divider)">
@@ -1144,14 +1033,12 @@ class Component extends DCLogic {
     this.applyAccent();
     this.wireReveal();
     this.wirePullCord();
-    this.wireSupportGateway();
   }
 
   componentDidUpdate() {
     this.applyAccent();
     this.wireReveal();
     this.wirePullCord();
-    this.wireSupportGateway();
     document.body.style.overflow = this.state.openId ? "hidden" : "";
   }
 
@@ -1332,59 +1219,6 @@ class Component extends DCLogic {
     });
 
     updateBulbUI(this.state.theme === "dark");
-  }
-
-  wireSupportGateway() {
-    // Initialize Lemon Squeezy embed overlay handler if available
-    if (window.createLemonSqueezy) {
-      try { window.createLemonSqueezy(); } catch (e) {}
-    }
-
-    // Direct event listener for Lemon Squeezy buttons (guarantees smooth overlay)
-    const lemonBtns = document.querySelectorAll(".lemonsqueezy-button");
-    lemonBtns.forEach((btn) => {
-      if (btn._lemonBound) return;
-      btn._lemonBound = true;
-      btn.addEventListener("click", (e) => {
-        if (typeof gtag === "function") {
-          gtag("event", "begin_checkout", {
-            item_name: "Lab Sponsorship",
-            method: "Lemon Squeezy"
-          });
-        }
-        if (window.LemonSqueezy && window.LemonSqueezy.Url) {
-          e.preventDefault();
-          window.LemonSqueezy.Url.Open(btn.href);
-        }
-      });
-    });
-
-    // Copy action for Binance Pay ID
-    const copyBtns = document.querySelectorAll(".copy-btn");
-    copyBtns.forEach((btn) => {
-      if (btn._copyBound) return;
-      btn._copyBound = true;
-      btn.addEventListener("click", () => {
-        const text = btn.dataset.copy;
-        if (!text) return;
-        if (typeof gtag === "function") {
-          gtag("event", "donate_crypto_copy", {
-            method: "Binance Pay"
-          });
-        }
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(() => {
-            const orig = btn.textContent;
-            btn.textContent = "Copied! ✓";
-            setTimeout(() => { btn.textContent = orig; }, 2000);
-          }).catch(() => {
-            prompt("Binance Pay ID:", text);
-          });
-        } else {
-          prompt("Binance Pay ID:", text);
-        }
-      });
-    });
   }
 
   applyAccent() {
