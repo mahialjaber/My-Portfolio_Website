@@ -783,7 +783,7 @@
 </div>
 
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#7a6a8f&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#7f62a6&quot;,&quot;#6a4f96&quot;,&quot;#8f5f8f&quot;,&quot;#5980a6&quot;],&quot;section&quot;:&quot;Theme&quot;},&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;system&quot;,&quot;options&quot;:[&quot;system&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;portrait&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;outdoor&quot;,&quot;options&quot;:[&quot;outdoor&quot;,&quot;none&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;apiEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://formsubmit.co/ajax/mahialjaber.dev@gmail.com&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#7a6a8f&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#7f62a6&quot;,&quot;#6a4f96&quot;,&quot;#8f5f8f&quot;,&quot;#5980a6&quot;],&quot;section&quot;:&quot;Theme&quot;},&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;system&quot;,&quot;options&quot;:[&quot;system&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;portrait&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;outdoor&quot;,&quot;options&quot;:[&quot;outdoor&quot;,&quot;none&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;apiEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://formsubmit.co/ajax/363ea30418f3f63941c8b6e43f39c501&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;}}">
 const ROT = [
   "Alert Triage · Threat Investigation · Containment",
   "Sysmon · Active Directory · PCAP & Phishing DFIR",
@@ -1312,9 +1312,9 @@ class Component extends DCLogic {
 
   validate(f) {
     const e = {};
-    if (f.name.trim().length < 2) e.name = "Please enter your name (2+ characters).";
+    if (!f.name.trim()) e.name = "Please enter your name.";
     if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(f.email.trim())) e.email = "Enter a valid email address.";
-    if (f.message.trim().length < 20) e.message = "A little more detail, please — 20 characters minimum.";
+    if (!f.message.trim()) e.message = "Please enter a message.";
     return e;
   }
 
@@ -1322,11 +1322,6 @@ class Component extends DCLogic {
     ev.preventDefault();
     const f = this.state.form;
     if (f._hp) return; // honeypot
-    const lastSent = Number(localStorage.getItem("mahi-contact-ts") || 0);
-    if (Date.now() - lastSent < 60000) {
-      this.setState({ status: "error", notice: { title: "Rate limited", body: "Please wait a minute before sending another message." } });
-      return;
-    }
     const errors = this.validate(f);
     if (Object.keys(errors).length) {
       this.setState({ errors, status: "idle", notice: { title: "Check the highlighted fields", body: "Nothing was sent yet." } }, () => {
@@ -1342,7 +1337,7 @@ class Component extends DCLogic {
     const endpoint =
       rawEndpoint && rawEndpoint !== "/api/contact"
         ? rawEndpoint
-        : "https://formsubmit.co/ajax/mahialjaber.dev@gmail.com";
+        : "https://formsubmit.co/ajax/363ea30418f3f63941c8b6e43f39c501";
     const mailto =
       "mailto:mahialjaber.dev@gmail.com?subject=" +
       encodeURIComponent(f.subject || "Portfolio contact") +
@@ -1373,7 +1368,6 @@ class Component extends DCLogic {
       const data = await res.json().catch(() => ({}));
 
       if (res.ok && data.success !== "false" && data.success !== false && data.ok !== false) {
-        try { localStorage.setItem("mahi-contact-ts", String(Date.now())); } catch (e) {}
         if (typeof gtag === "function") {
           gtag("event", "generate_lead", {
             method: "contact_form"
@@ -1394,22 +1388,20 @@ class Component extends DCLogic {
         this.setState({ status: "error", notice: { title: "Rate limited", body: "Too many messages sent. Try again in 15 minutes, or email directly.", mailto } });
         return;
       }
-      window.location.href = mailto;
       this.setState({
-        status: "ok",
+        status: "idle",
         notice: {
-          title: "Ready to send in your mail app",
-          body: (data && data.message) ? data.message : "Your message has been pre-filled in your email client so you can send it directly to mahialjaber.dev@gmail.com.",
+          title: "One-time activation needed",
+          body: (data && data.message) ? data.message : "Please click the blue 'ACTIVATE FORM' button in the email FormSubmit sent to mahialjaber.dev@gmail.com, or send via your mail app below:",
           mailto,
         },
       });
     } catch (err) {
-      window.location.href = mailto;
       this.setState({
-        status: "ok",
+        status: "error",
         notice: {
-          title: "Ready to send in your mail app",
-          body: "Your browser blocked background form delivery (common in InPrivate / strict tracking mode), so your message has been pre-filled in your email client:",
+          title: "Connection blocked by browser",
+          body: "Your browser blocked background form delivery (common in InPrivate mode). Click below to send your message directly via email:",
           mailto,
         },
       });
