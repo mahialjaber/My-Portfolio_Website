@@ -604,7 +604,6 @@
         <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
         <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
           <h3 style="font-size: 20px; margin: 0; text-transform: uppercase; letter-spacing: .04em">Send a message</h3>
-          <span class="text-muted" style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .12em">POST /API/CONTACT</span>
         </div>
         <div class="split" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px">
           <div class="field">
@@ -639,7 +638,7 @@
         <input type="text" name="_hp" tabIndex="-1" autoComplete="off" onInput="{{ onHp }}" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0">
         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px">
           <button type="submit" class="btn btn-primary" disabled="{{ sending }}" style="padding: 12px 24px; font-size: 14px; letter-spacing: .1em; text-transform: uppercase">{{ submitLabel }}</button>
-          <span class="text-muted" style="font-size: 12px">Validated client-side, then again on the API.</span>
+          <span class="text-muted" style="font-size: 12px">Direct to mahialjaber.dev@gmail.com</span>
         </div>
         <sc-if value="{{ notice }}" hint-placeholder-val="{{ false }}">
           <div role="status" style="padding: 14px 16px; border: 1px solid var(--color-accent); background: color-mix(in srgb, var(--color-accent) 10%, transparent)">
@@ -1352,21 +1351,22 @@ class Component extends DCLogic {
 
     try {
       const ctrl = new AbortController();
-      const t = setTimeout(() => ctrl.abort(), 10000);
+      const t = setTimeout(() => ctrl.abort(), 20000);
+      const fd = new FormData();
+      fd.append("name", f.name.trim());
+      fd.append("email", f.email.trim());
+      fd.append("_replyto", f.email.trim());
+      fd.append("subject", f.subject.trim() || "Portfolio Contact");
+      fd.append("message", f.message.trim());
+      fd.append("_subject", `[Portfolio Contact] ${f.subject.trim() || "New Message"} from ${f.name.trim()}`);
+      fd.append("_captcha", "false");
+      fd.append("_template", "table");
+      if (f._hp) fd.append("_honey", f._hp);
+
       const res = await fetch(endpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          name: f.name.trim(),
-          email: f.email.trim(),
-          _replyto: f.email.trim(),
-          subject: f.subject.trim() || "Portfolio Contact",
-          message: f.message.trim(),
-          _subject: `[Portfolio Contact] ${f.subject.trim() || "New Message"} from ${f.name.trim()}`,
-          _captcha: "false",
-          _template: "table",
-          _honey: f._hp
-        }),
+        headers: { Accept: "application/json" },
+        body: fd,
         signal: ctrl.signal,
       });
       clearTimeout(t);
@@ -1394,13 +1394,22 @@ class Component extends DCLogic {
         this.setState({ status: "error", notice: { title: "Rate limited", body: "Too many messages sent. Try again in 15 minutes, or email directly.", mailto } });
         return;
       }
-      this.setState({ status: "error", notice: { title: "Delivery failed", body: data.error || data.message || "The message could not be sent. Please email me directly.", mailto } });
-    } catch (err) {
+      window.location.href = mailto;
       this.setState({
-        status: "error",
+        status: "ok",
         notice: {
-          title: "Service temporarily unreachable",
-          body: "Network timeout or connection error. You can click below to send your message directly via email:",
+          title: "Ready to send in your mail app",
+          body: (data && data.message) ? data.message : "Your message has been pre-filled in your email client so you can send it directly to mahialjaber.dev@gmail.com.",
+          mailto,
+        },
+      });
+    } catch (err) {
+      window.location.href = mailto;
+      this.setState({
+        status: "ok",
+        notice: {
+          title: "Ready to send in your mail app",
+          body: "Your browser blocked background form delivery (common in InPrivate / strict tracking mode), so your message has been pre-filled in your email client:",
           mailto,
         },
       });
