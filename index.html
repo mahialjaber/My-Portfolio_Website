@@ -609,16 +609,16 @@
         <div class="split" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px">
           <div class="field">
             <label for="cf-name">Name</label>
-            <input id="cf-name" class="input" type="text" name="name" autoComplete="name" placeholder="Your name" value="{{ form.name }}" onInput="{{ onName }}" aria-invalid="{{ invalid.name }}">
+            <input id="cf-name" class="input" type="text" name="name" autoComplete="name" placeholder="Your name" value="{{ form.name }}" onInput="{{ onName }}" aria-invalid="{{ invalid.name }}" aria-describedby="{{ descBy.name }}">
             <sc-if value="{{ errors.name }}" hint-placeholder-val="{{ false }}">
-              <span role="alert" style="display: block; margin-top: 6px; font-size: 12px; color: var(--color-accent-800)">{{ errors.name }}</span>
+              <span id="cf-name-err" role="alert" style="display: block; margin-top: 6px; font-size: 12px; color: var(--color-accent-800)">{{ errors.name }}</span>
             </sc-if>
           </div>
           <div class="field">
             <label for="cf-email">Email</label>
-            <input id="cf-email" class="input" type="email" name="email" autoComplete="email" placeholder="you@company.com" value="{{ form.email }}" onInput="{{ onEmail }}" aria-invalid="{{ invalid.email }}">
+            <input id="cf-email" class="input" type="email" name="email" autoComplete="email" autoCorrect="off" autoCapitalize="none" spellCheck="false" placeholder="you@company.com" value="{{ form.email }}" onInput="{{ onEmail }}" aria-invalid="{{ invalid.email }}" aria-describedby="{{ descBy.email }}">
             <sc-if value="{{ errors.email }}" hint-placeholder-val="{{ false }}">
-              <span role="alert" style="display: block; margin-top: 6px; font-size: 12px; color: var(--color-accent-800)">{{ errors.email }}</span>
+              <span id="cf-email-err" role="alert" style="display: block; margin-top: 6px; font-size: 12px; color: var(--color-accent-800)">{{ errors.email }}</span>
             </sc-if>
           </div>
         </div>
@@ -628,10 +628,10 @@
         </div>
         <div class="field">
           <label for="cf-message">Message</label>
-          <textarea id="cf-message" class="input" name="message" rows="6" placeholder="A little about the role, the team and the stack…" value="{{ form.message }}" onInput="{{ onMessage }}" aria-invalid="{{ invalid.message }}"></textarea>
+          <textarea id="cf-message" class="input" name="message" rows="6" placeholder="A little about the role, the team and the stack…" value="{{ form.message }}" onInput="{{ onMessage }}" aria-invalid="{{ invalid.message }}" aria-describedby="{{ descBy.message }}"></textarea>
           <div style="display: flex; justify-content: space-between; gap: 12px; margin-top: 6px">
             <sc-if value="{{ errors.message }}" hint-placeholder-val="{{ false }}">
-              <span role="alert" style="font-size: 12px; color: var(--color-accent-800)">{{ errors.message }}</span>
+              <span id="cf-message-err" role="alert" style="font-size: 12px; color: var(--color-accent-800)">{{ errors.message }}</span>
             </sc-if>
             <span class="text-muted" style="margin-left: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px">{{ charCount }}</span>
           </div>
@@ -784,7 +784,7 @@
 </div>
 
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#7a6a8f&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#7f62a6&quot;,&quot;#6a4f96&quot;,&quot;#8f5f8f&quot;,&quot;#5980a6&quot;],&quot;section&quot;:&quot;Theme&quot;},&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;system&quot;,&quot;options&quot;:[&quot;system&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;portrait&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;outdoor&quot;,&quot;options&quot;:[&quot;outdoor&quot;,&quot;none&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;apiEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;/api/contact&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#7a6a8f&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#7f62a6&quot;,&quot;#6a4f96&quot;,&quot;#8f5f8f&quot;,&quot;#5980a6&quot;],&quot;section&quot;:&quot;Theme&quot;},&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;system&quot;,&quot;options&quot;:[&quot;system&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;portrait&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;outdoor&quot;,&quot;options&quot;:[&quot;outdoor&quot;,&quot;none&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;apiEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://formsubmit.co/ajax/mahialjaber.dev@gmail.com&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;}}">
 const ROT = [
   "Alert Triage · Threat Investigation · Containment",
   "Sysmon · Active Directory · PCAP & Phishing DFIR",
@@ -1330,12 +1330,20 @@ class Component extends DCLogic {
     }
     const errors = this.validate(f);
     if (Object.keys(errors).length) {
-      this.setState({ errors, status: "idle", notice: { title: "Check the highlighted fields", body: "Nothing was sent yet." } });
+      this.setState({ errors, status: "idle", notice: { title: "Check the highlighted fields", body: "Nothing was sent yet." } }, () => {
+        const firstId = errors.name ? "cf-name" : errors.email ? "cf-email" : "cf-message";
+        const el = document.getElementById(firstId);
+        if (el && typeof el.focus === "function") el.focus();
+      });
       return;
     }
     this.setState({ errors: {}, status: "sending", notice: null });
 
-    const endpoint = this.props.apiEndpoint || "https://formsubmit.co/ajax/mahialjaber.dev@gmail.com";
+    const rawEndpoint = this.props.apiEndpoint;
+    const endpoint =
+      rawEndpoint && rawEndpoint !== "/api/contact"
+        ? rawEndpoint
+        : "https://formsubmit.co/ajax/mahialjaber.dev@gmail.com";
     const mailto =
       "mailto:mahialjaber.dev@gmail.com?subject=" +
       encodeURIComponent(f.subject || "Portfolio contact") +
@@ -1349,11 +1357,14 @@ class Component extends DCLogic {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          name: f.name,
-          email: f.email,
-          subject: f.subject || "Portfolio Contact",
-          message: f.message,
-          _subject: `[Portfolio Contact] ${f.subject || "New Message"} from ${f.name}`,
+          name: f.name.trim(),
+          email: f.email.trim(),
+          _replyto: f.email.trim(),
+          subject: f.subject.trim() || "Portfolio Contact",
+          message: f.message.trim(),
+          _subject: `[Portfolio Contact] ${f.subject.trim() || "New Message"} from ${f.name.trim()}`,
+          _captcha: "false",
+          _template: "table",
           _honey: f._hp
         }),
         signal: ctrl.signal,
@@ -1361,7 +1372,7 @@ class Component extends DCLogic {
       clearTimeout(t);
       const data = await res.json().catch(() => ({}));
 
-      if (res.ok && data.success !== "false" && data.ok !== false) {
+      if (res.ok && data.success !== "false" && data.success !== false && data.ok !== false) {
         try { localStorage.setItem("mahi-contact-ts", String(Date.now())); } catch (e) {}
         if (typeof gtag === "function") {
           gtag("event", "generate_lead", {
@@ -1508,6 +1519,7 @@ class Component extends DCLogic {
       form: s.form,
       errors: s.errors,
       invalid: { name: s.errors.name ? "true" : "false", email: s.errors.email ? "true" : "false", message: s.errors.message ? "true" : "false" },
+      descBy: { name: s.errors.name ? "cf-name-err" : void 0, email: s.errors.email ? "cf-email-err" : void 0, message: s.errors.message ? "cf-message-err" : void 0 },
       charCount: s.form.message.length + " / 4000",
       sending: s.status === "sending",
       submitLabel: labels[s.status] || "Send message",
