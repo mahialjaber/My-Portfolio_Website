@@ -23,16 +23,16 @@
 <x-dc>
 <helmet>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mahi Al Jaber — SOC Analyst · Detection &amp; Response</title>
-<meta name="description" content="Mahi Al Jaber — entry-level SOC / Blue Team analyst. Alert triage, Sigma detection engineering, Splunk SPL, AWS CloudTrail threat detection, MITRE ATT&amp;CK-mapped adversary emulation. Evidence-backed lab projects.">
+<title>Mahi Al Jaber — Security Analyst &amp; Detection Engineer</title>
+<meta name="description" content="Mahi Al Jaber — Security Analyst &amp; Detection Engineer. Alert triage, incident investigation, Sigma &amp; Splunk SPL detection engineering, Wazuh SIEM, Sysmon, Active Directory, and AWS CloudTrail threat detection.">
 <meta name="author" content="Mahi Al Jaber">
 <meta name="theme-color" content="#f2f2f3">
 <link rel="canonical" href="https://mahialjaber.github.io/My-Portfolio_Website/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://mahialjaber.github.io/My-Portfolio_Website/">
 <meta name="twitter:card" content="summary_large_image">
-<meta property="og:title" content="Mahi Al Jaber — SOC Analyst · Detection &amp; Response">
-<meta property="og:description" content="I investigate alerts and write the detections that generate them. Splunk · Sigma · AWS · MITRE ATT&amp;CK.">
+<meta property="og:title" content="Mahi Al Jaber — Security Analyst &amp; Detection Engineer">
+<meta property="og:description" content="I work the alerts, and I write the detections that raise them. Splunk · Wazuh · Sigma · Sysmon · AWS CloudTrail · MITRE ATT&amp;CK.">
 <link rel="stylesheet" href="industry.css">
 <style>
   /* Industry's steel accent retuned to purple — same OKLCH lightness steps,
@@ -267,7 +267,7 @@
 
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Mahi Al Jaber","jobTitle":"SOC Analyst — Detection & Response","email":"mailto:mahialjaber.dev@gmail.com","url":"https://github.com/mahialjaber","knowsAbout":["Security Operations","Splunk SPL","Sigma","MITRE ATT&CK","AWS CloudTrail","Threat Hunting","Incident Response"],"sameAs":["https://github.com/mahialjaber"]}
+{"@context":"https://schema.org","@type":"Person","name":"Mahi Al Jaber","jobTitle":"Security Analyst & Detection Engineer","email":"mailto:mahialjaber.dev@gmail.com","url":"https://github.com/mahialjaber","knowsAbout":["Security Analysis","Detection Engineering","Splunk SPL","Wazuh SIEM","Sigma","Sysmon","Active Directory","MITRE ATT&CK","AWS CloudTrail","Threat Hunting","Incident Investigation"],"sameAs":["https://github.com/mahialjaber","https://x.com/mahialjaber","https://tryhackme.com/p/mahialjaber"]}
 </script>
 </helmet>
 
@@ -331,7 +331,7 @@
       <div>
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 22px">
           <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--color-accent); animation: softPulse 2.4s ease-in-out infinite"></span>
-          <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--color-accent-700)">Open to entry-level SOC roles &amp; internships</span>
+          <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--color-accent-700)">Open to Security Analyst &amp; Detection Engineering roles</span>
         </div>
         <h1 style="font-size: clamp(46px, 9vw, 104px); line-height: .92; letter-spacing: -.03em; text-transform: uppercase; margin: 0 0 18px">
           Detection.<br>Response.<br><span style="color: var(--color-accent-700)">Evidence.</span>
@@ -341,10 +341,10 @@
           <span style="display: inline-block; width: 8px; height: 15px; background: var(--color-accent); animation: caretBlink 1.05s step-end infinite"></span>
         </div>
         <p style="font-size: clamp(16px, 1.9vw, 19px); max-width: 60ch; line-height: 1.6; text-wrap: pretty; margin: 0 0 14px">
-          I'm <strong>Mahi Al Jaber</strong> — I investigate alerts and write the detections that generate them. My work sits where SOC operations meet cloud telemetry: triage, enrichment, escalation and documentation on one side; CloudTrail, IAM and GuardDuty on the other.
+          I'm <strong>Mahi Al Jaber</strong> — a Security Analyst and Detection Engineer. I work the alerts, and I write the detections that raise them across Windows/Sysmon event logs, Active Directory, network traffic, phishing artifacts, and AWS CloudTrail.
         </p>
         <p class="text-muted" style="max-width: 58ch; line-height: 1.6; margin: 0 0 34px">
-          I emulate real attacker techniques in a lab I built myself, capture the telemetry they produce, write detections for them, and document the investigation the way a Tier 1 analyst documents a ticket. Everything here links to evidence — nothing is a course completion.
+          Treating on-prem and cloud as one timeline: in the lab, I run the attack, trace the telemetry, write the Sigma, Splunk SPL, or Wazuh rule, and tune it until it survives normal traffic. Everything here links directly to reproducible evidence.
         </p>
         <div style="display: flex; flex-wrap: wrap; gap: 12px">
           <a href="#projects" class="btn btn-primary" style="padding: 12px 22px; font-size: 14px; letter-spacing: .1em; text-transform: uppercase">View the case files</a>
@@ -386,20 +386,21 @@
     <div class="split" style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 64px)">
       <div data-reveal="">
         <p style="font-size: clamp(20px, 2.6vw, 30px); font-family: var(--font-heading); line-height: 1.22; letter-spacing: -.015em; margin: 0 0 22px">
-          I investigate alerts — and I write the detections that generate them.
+          I work the alerts — and I write the detections that raise them.
         </p>
         <p style="line-height: 1.7; text-wrap: pretty">
-          Most junior analysts keep two things separate: <strong>SOC operations</strong> — triage, enrichment, escalation, documentation — and <strong>cloud telemetry</strong> — CloudTrail, IAM, GuardDuty. My work sits at the intersection.
+          Blue team security analyst and detection engineer focused on <strong>alert triage</strong>, <strong>incident investigation</strong>, and <strong>detection engineering</strong> across Windows/Sysmon event logs, Active Directory, network traffic, phishing artifacts, and AWS CloudTrail.
         </p>
         <p class="text-muted" style="line-height: 1.7; text-wrap: pretty">
-          Each case file I publish follows the same structure: alert → what I checked and why → enrichment → verdict and confidence → escalation summary → recommended tuning. Including the ones I initially got wrong, because that's where the reasoning shows.
+          How I work an alert: scope before anything else (one host or many, one identity or many); look for what disproves me by writing down the benign hypothesis first; enrich identity, owner, change history, and reputation before escalating; deliver a verdict with an explicit confidence level; and treat every false positive as a tuning ticket.
         </p>
         <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px">
           <span class="tag tag-accent">Alert triage</span>
+          <span class="tag tag-accent">Incident investigation</span>
           <span class="tag tag-accent">Detection engineering</span>
           <span class="tag tag-accent">Threat hunting</span>
-          <span class="tag tag-outline">Adversary emulation</span>
-          <span class="tag tag-outline">Cloud security</span>
+          <span class="tag tag-outline">Endpoint &amp; AD DFIR</span>
+          <span class="tag tag-outline">Cloud telemetry</span>
         </div>
       </div>
       <div data-reveal="" style="display: grid; gap: 16px; align-content: start">
@@ -483,7 +484,7 @@
         <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase; color: #f2f2f3">Project phase</h2>
         <span style="flex: 1; height: 1px; background: color-mix(in srgb, #f2f2f3 22%, transparent)"></span>
       </div>
-      <p data-reveal="" style="max-width: 64ch; margin: 0 0 44px; line-height: 1.65; color: color-mix(in srgb, #f2f2f3 78%, transparent)">How every project on this page gets built — the same loop a mature SOC runs to make sure a detection fires before an attacker finds the gap first.</p>
+      <p data-reveal="" style="max-width: 64ch; margin: 0 0 44px; line-height: 1.65; color: color-mix(in srgb, #f2f2f3 78%, transparent)">How every project on this page gets built — the same loop a mature detection engineering &amp; security operations team runs to make sure a detection fires before an attacker finds the gap first.</p>
       <div data-reveal="" class="phase-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: color-mix(in srgb, #f2f2f3 20%, transparent)">
         <sc-for list="{{ phases }}" as="ph" hint-placeholder-count="4">
           <div style="background: var(--color-accent-900); padding: 28px 22px; display: flex; flex-direction: column; gap: 14px">
@@ -565,8 +566,8 @@
     </div>
     <div class="split" style="display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(28px, 4vw, 60px); align-items: start">
       <div data-reveal="">
-        <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase">Get in touch</h2><p style="font-family: var(--font-heading); font-size: clamp(20px, 2.4vw, 27px); line-height: 1.25; margin: 0 0 20px; letter-spacing: -.01em">Hiring for a Tier 1 SOC seat, or an internship? I'd like to hear about it.</p>
-        <p class="text-muted" style="line-height: 1.65; margin: 0 0 26px">Remote worldwide, or relocation. I usually reply within a day.</p>
+        <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase">Get in touch</h2><p style="font-family: var(--font-heading); font-size: clamp(20px, 2.4vw, 27px); line-height: 1.25; margin: 0 0 20px; letter-spacing: -.01em">Hiring for a Security Analyst or Detection Engineering role? I'd like to hear about it.</p>
+        <p class="text-muted" style="line-height: 1.65; margin: 0 0 26px">Remote worldwide, or relocation. Happy to walk through any investigation or detection in my repositories.</p>
         <div style="display: grid; gap: 12px">
           <sc-for list="{{ channels }}" as="c" hint-placeholder-count="3">
             <a href="{{ c.href }}" target="_blank" rel="noopener" class="blueprint" style="padding: 16px 18px; display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; color: var(--color-text); transition: background .2s ease" style-hover="background: color-mix(in srgb, var(--color-accent) 8%, transparent)">
@@ -605,7 +606,7 @@
         </div>
         <div class="field">
           <label for="cf-subject">Subject</label>
-          <input id="cf-subject" class="input" type="text" name="subject" placeholder="SOC Analyst role — first conversation" value="{{ form.subject }}" onInput="{{ onSubject }}">
+          <input id="cf-subject" class="input" type="text" name="subject" placeholder="Security Analyst / Detection Engineer role — first conversation" value="{{ form.subject }}" onInput="{{ onSubject }}">
         </div>
         <div class="field">
           <label for="cf-message">Message</label>
@@ -767,94 +768,43 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#7a6a8f&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#7f62a6&quot;,&quot;#6a4f96&quot;,&quot;#8f5f8f&quot;,&quot;#5980a6&quot;],&quot;section&quot;:&quot;Theme&quot;},&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;system&quot;,&quot;options&quot;:[&quot;system&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;portrait&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;outdoor&quot;,&quot;options&quot;:[&quot;outdoor&quot;,&quot;none&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;apiEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;/api/contact&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;}}">
 const ROT = [
-  "Alert Triage · Enrichment · Escalation",
-  "Sigma Detections · Splunk SPL · MITRE ATT&CK",
-  "AWS CloudTrail Threat Detection",
-  "Purple-Team Validation · Detection Tuning",
+  "Alert Triage · Threat Investigation · Containment",
+  "Sysmon · Active Directory · PCAP & Phishing DFIR",
+  "Sigma Detections · Splunk SPL · Wazuh SIEM",
+  "Endpoint, Identity, Network & AWS CloudTrail",
 ];
 
 const PROJECTS = [
   {
-    id: "wazuh-lab",
-    name: "Wazuh Enterprise SOC Lab",
-    title: "Multi-Node Threat Hunting & Active Response — deep endpoint telemetry (Sysmon & Auditd), VirusTotal intelligence, custom detection rules, and automated containment.",
-    kicker: "WAZUH SIEM · SYSMON · ACTIVE RESPONSE",
-    status: "Public · Active Lab",
-    summary: "A production-grade multi-node SOC architecture: centralized Wazuh Manager ingesting high-fidelity telemetry from Windows and Linux endpoints with automated active containment.",
-    repo: "https://github.com/mahialjaber/the-10-task-to-master-wazuh",
-    repoLabel: "the-10-task-to-master-wazuh",
-    demo: null,
-    demoNote: "Full architecture, agent configs, Sysmon XML profiles, custom decoders and containment scripts documented in the repository.",
-    overview: [
-      "Engineered an enterprise multi-node security operations center using Wazuh SIEM to achieve unified detection and containment across both Windows and Linux endpoints. Rather than relying solely on out-of-the-box alerts, this lab focuses on fine-tuning detection rules, eliminating noise, and executing automated active responses against live attack techniques.",
-      "Endpoints stream telemetry through Wazuh agents: Sysmon on Windows provides granular process creation (EID 1), network connections (EID 3), and image loading (EID 7), while Linux auditd captures privileged command execution and unauthorized credential alterations. All event streams converge at the Wazuh Manager for real-time decoding, VirusTotal API enrichment, and correlation.",
-      "Automated containment triggers via Wazuh Active Response scripts: suspicious processes are killed, and adversary IP addresses are dropped via local firewalls upon high-severity detection, proving the loop from initial detection to immediate triage and containment.",
-    ],
-    arch: "┌──────────────────────┐       ┌──────────────────────┐\n│   WINDOWS ENDPOINT   │       │     LINUX SERVER     │\n│  Sysmon + Wazuh Agt  │       │  auditd + Wazuh Agt  │\n└──────────┬───────────┘       └───────────┬──────────┘\n           │                               │\n           │ Encrypted Telemetry (TCP 1514)│\n           ▼                               ▼\n┌─────────────────────────────────────────────────────┐\n│               WAZUH MANAGER & INDEXER               │\n│  • Custom Decoders & XML Rules (syscheck / auth)    │\n│  • VirusTotal Threat Intel Integration              │\n│  • Automated Active Response Trigger (Firewall Drop)│\n└──────────────────────────┬──────────────────────────┘\n                           │\n                           ▼\n┌─────────────────────────────────────────────────────┐\n│              ANALYST SECURITY DASHBOARD             │\n│  Real-time alert triage, MITRE ATT&CK mapping,      │\n│  File Integrity Monitoring (FIM) & containment logs │\n└─────────────────────────────────────────────────────┘",
-    flow: [
-      { t: "01 · Endpoint Telemetry", d: "Sysmon on Windows (EIDs 1, 3, 7) and auditd on Linux feeding process-level telemetry into Wazuh agents over secure port 1514." },
-      { t: "02 · Ingestion & Decoding", d: "Custom decoders and correlation rules parse logs against known attacker tactics (brute force, persistence, priv-esc)." },
-      { t: "03 · Threat Intelligence", d: "Automated hash extraction queried against VirusTotal API for zero-delay verdict validation." },
-      { t: "04 · Active Response", d: "Automated containment executes — firewall IP drop and process termination without manual analyst delay." },
-    ],
-    tech: ["Wazuh SIEM", "Wazuh Manager", "Sysmon", "Linux auditd", "VirusTotal API", "Active Response (Bash/PS)", "File Integrity Monitoring (FIM)", "MITRE ATT&CK", "Docker / Linux"],
-    features: [
-      { t: "Multi-node architecture", d: "Centralized Wazuh Server ingesting and correlating live telemetry across heterogeneous Windows & Linux infrastructure." },
-      { t: "Custom detection rules", d: "Handcrafted Wazuh XML detection rules extending native capabilities to catch evasion techniques and brute-force spikes." },
-      { t: "VirusTotal enrichment", d: "Automated file hash querying against threat intelligence feeds for rapid triage of dropped payloads." },
-      { t: "Active response automation", d: "Configured automated containment scripts to isolate offending IPs and kill unauthorized processes instantaneously." },
-      { t: "FIM & compliance", d: "File Integrity Monitoring auditing critical system binaries and registry keys (Run / RunOnce) for tamper attempts." },
-    ],
-    attack: [
-      { technique: "SSH / RDP Brute Force", id: "T1110", tactic: "Credential Access", tool: "Hydra / Script", log: "sshd / WinEventLog (4625)" },
-      { technique: "Privileged Execution", id: "T1548", tactic: "Privilege Escalation", tool: "sudo / auditd", log: "Linux audit.log / execve" },
-      { technique: "Persistence via Run Keys", id: "T1547.001", tactic: "Persistence", tool: "Reg / Sysmon", log: "Sysmon EID 13 / Wazuh syscheck" },
-    ],
-    codeLabel: "Wazuh detection rule & active response configuration",
-    code: [
-      {
-        label: "Custom Wazuh XML Rule — Brute force threshold correlation",
-        note: "Triggers alert level 10 and executes active response after 8 failed SSH/RDP authentications within 120 seconds.",
-        body: '<group name="syslog,sshd,">\n  <rule id="100002" level="10" frequency="8" timeframe="120">\n    <if_matched_sid>5710</if_matched_sid>\n    <same_source_ip />\n    <description>Multiple SSH failed attempts from same IP (Brute Force detected).</description>\n    <mitre>\n      <id>T1110</id>\n    </mitre>\n  </rule>\n</group>',
-      },
-      {
-        label: "Active response configuration — Automated firewall drop",
-        note: "Ties rule 100002 to immediate firewall-drop script on host for 600 seconds.",
-        body: '<active-response>\n  <command>firewall-drop</command>\n  <location>local</location>\n  <rules_id>100002</rules_id>\n  <timeout>600</timeout>\n</active-response>',
-      },
-    ],
-    shots: ["WAZUH SECURITY EVENTS DASHBOARD", "SYSMON PROCESS CREATION TRIAGE VIEW", "VIRUSTOTAL API ENRICHMENT HIT", "ACTIVE RESPONSE FIREWALL DROP LOGS"],
-  },
-  {
     id: "datasets",
-    name: "SOC Log Datasets",
-    title: "Realistic, simulated security logs with hidden attacks — built for SOC analysts, threat hunters and students. 5 domains · 12 log files · 2 formats · 100% synthetic.",
-    kicker: "DATASETS · THREAT HUNTING · MIT",
-    status: "Public · MIT",
-    summary: "Purpose-built log files across five environments, each hiding specific attack techniques inside realistic background traffic — plus a hunting playbook of SPL, KQL and CLI queries.",
+    name: "SOC Log Analysis Datasets",
+    title: "Curated security logs with embedded attack vectors across Windows, Web, Firewall, Email & Cloud — 35+ ⭐ stars on GitHub, MIT licensed, with a hands-on hunting playbook.",
+    kicker: "DATASETS · THREAT HUNTING · 35+ ⭐ · MIT",
+    status: "Public · 35+ ⭐ · MIT",
+    summary: "Windows, web, firewall, and cloud logs with attack vectors embedded, MIT licensed. Curated synthetic dataset across 5 security domains with 35+ ⭐ stars and a hands-on hunting playbook.",
     repo: "https://github.com/mahialjaber/SOC-Log-Analysis-Datasets",
     repoLabel: "SOC-Log-Analysis-Datasets",
     demo: null,
-    demoNote: "Clone, unzip a domain and ingest it into Splunk, Elastic, Sentinel — or just grep, awk and jq.",
+    demoNote: "Clone, unzip a domain and ingest it into Splunk, Wazuh, Elastic, Sentinel — or hunt directly with grep, awk and jq.",
     overview: [
-      "Finding realistic log data for threat hunting practice is surprisingly hard. Clean, normal-activity logs teach you nothing about detection; massive public dumps are unstructured and overwhelming; real incident data is — rightly — locked down.",
-      "This repository bridges that gap: structured log files across Applications, Cloud, Email & DLP, Endpoints and Network, each containing specific, identifiable attack techniques buried inside normal-looking traffic. Everything is fully synthetic — no real user data, credentials, PII or breach data.",
-      "It ships with a Threat Hunting Playbook: starter queries for SQLi and XSS, cloud IAM privilege escalation, phishing and exfiltration, Windows brute force, C2 beaconing and DNS tunnelling, in SPL, KQL and plain shell.",
+      "Finding realistic log data for threat hunting practice and detection validation is surprisingly hard. Clean, normal-activity logs teach nothing about detection; massive public dumps are unstructured and overwhelming; real incident data is locked down.",
+      "This repository bridges that gap: structured log files across Applications, Cloud, Email & DLP, Endpoints and Network, each containing specific, identifiable attack techniques buried inside normal-looking traffic. Everything is synthetic and MIT-licensed — zero real PII or breach data.",
+      "Earned 35+ stars from the security community and ships with a Threat Hunting Playbook: starter queries for SQLi and XSS, cloud IAM privilege escalation, phishing and exfiltration, Windows brute force, C2 beaconing and DNS tunnelling across SPL, KQL and CLI.",
     ],
     arch: "SOC-Log-Analysis-Datasets/\n├── Applications/   app_sec_audit · web_server_access      → SQLi · XSS · traversal\n├── Cloud/          cloud_activity_audit                  → IAM esc. · resource deletion\n├── Email_and_DLP/  dlp_events · email_gateway_events     → phishing · exfiltration\n├── Endpoints/      linux_syslog · windows_security_events→ brute force · priv-esc\n└── Network/        dns · firewall · ids_ips · proxy · vpn→ tunnelling · C2 · scanning",
     flow: [
-      { t: "01 · Domains", d: "Five environments a real SOC actually monitors — applications, cloud, email/DLP, endpoints and network." },
-      { t: "02 · Formats", d: "Plain text and JSONL, zipped to keep the repo light; ingests cleanly into Splunk, Elastic, Sentinel or your own scripts." },
+      { t: "01 · Domains", d: "Five environments security teams monitor daily — applications, cloud, email/DLP, endpoints and network." },
+      { t: "02 · Formats", d: "Plain text and JSONL, zipped to keep the repo light; ingests cleanly into Splunk, Wazuh, Elastic, Sentinel or custom scripts." },
       { t: "03 · Playbook", d: "Sample SPL, KQL and CLI queries per attack vector — starting points to tune, not answers to copy." },
-      { t: "04 · Audience", d: "Students on Security+ / CySA+ / GCIH, Tier 1–2 analysts, detection engineers, purple teams and instructors." },
+      { t: "04 · Audience", d: "Security analysts, detection engineers, threat hunters, purple teams and instructors." },
     ],
-    tech: ["Splunk SPL", "Microsoft Sentinel KQL", "Elastic Stack (Filebeat/Logstash)", "JSONL", "grep / awk / sed / jq", "Windows Event Logs", "AWS-style cloud audit logs", "MIT License"],
+    tech: ["Splunk SPL", "Microsoft Sentinel KQL", "Elastic Stack (Filebeat/Logstash)", "JSONL", "grep / awk / sed / jq", "Windows Event Logs", "AWS Cloud Audit Logs", "MIT License"],
     features: [
       { t: "Targeted, not random", d: "Every file is built around specific, well-known techniques — SQLi, XSS, brute force, C2 beaconing, DNS tunnelling, IAM abuse — rather than random noise." },
       { t: "Realistic background noise", d: "Attacks are buried inside normal-looking traffic, just like production, so you have to actually hunt for them." },
       { t: "SIEM-agnostic", d: "Text and JSONL formats that load into Splunk, Elastic, Sentinel — or nothing more than a shell." },
       { t: "Hunting playbook", d: "Six worked hunts with queries in two SIEM languages plus CLI equivalents, and guidance on tuning thresholds down from noise." },
-      { t: "Free and open", d: "MIT licensed for educational and commercial use — built so the next analyst who needs practice data can just clone it." },
+      { t: "Community adopted (35+ ⭐)", d: "MIT licensed for educational and commercial use — built so the next analyst or detection engineer who needs practice telemetry can just clone it." },
     ],
     attack: null,
     codeLabel: "From the hunting playbook",
@@ -873,67 +823,78 @@ const PROJECTS = [
     shots: ["REPOSITORY STRUCTURE — FIVE DOMAIN FOLDERS", "SPLUNK INGESTION OF firewall_traffic.log", "DNS TUNNELLING HUNT — QUERY LENGTH OUTLIERS", "README PLAYBOOK SECTION"],
   },
   {
-    id: "cli",
-    name: "CLI Threat Analyzer",
-    title: "Log & security triage tool — a Python command-line utility for rapid server log parsing, IOC extraction and security report analysis.",
-    kicker: "PYTHON · THREAT ANALYSIS · TERMINAL",
-    status: "Public",
-    summary: "Feed server logs, security reports, or suspicious files into a command-line triage engine without leaving PowerShell or bash — built for rapid alert investigation.",
-    repo: "https://github.com/mahialjaber/CLI-Threat-Analyzer",
-    repoLabel: "CLI-Threat-Analyzer",
+    id: "casefiles",
+    name: "Investigation Case Files",
+    title: "Structured alert triage & incident investigation case files — evidence timelines, disproving benign hypotheses, defanged IOC extraction, and containment playbooks.",
+    kicker: "DFIR · ALERT TRIAGE · SPLUNK · SYSMON · PCAP",
+    status: "Public · MIT",
+    summary: "Structured alert triage and incident investigation case files: evidence timelines, disproving benign hypotheses, IOC extraction, and containment playbooks.",
+    repo: "https://github.com/mahialjaber/soc-investigation-casefiles",
+    repoLabel: "soc-investigation-casefiles",
     demo: null,
-    demoNote: "Runs locally: clone, pip install -r requirements.txt, add API key to .env, python cli.py.",
+    demoNote: "Four complete end-to-end true-positive investigations with raw forensic artifacts, Sysmon/Splunk timelines, and containment runbooks.",
     overview: [
-      "A command-line interface for rapid threat triage directly in the terminal — designed for SOC analysts and security professionals who want to analyse system logs, security reports, and code without switching context.",
-      "The workflow it targets is the repetitive part of triage: point at an Apache/Nginx access log or an SSH log, and get anomalous IPs, errors and likely threats back in the same shell you were already in.",
+      "Hands-on alert triage, threat hunting, and incident analysis case files. Each investigation documents real-world and enterprise lab threat scenarios end-to-end following a defensible 6-step investigative framework: Executive Summary, Alert Scope, Investigation Timeline, Disproving the Benign Hypothesis, Defanged IOCs, and Containment & Remediation.",
+      "Covers network PCAP C2 triage (TA505 / MirrorBlast & Warzone RAT via Brim and Wireshark), SIEM lateral movement & persistence hunting (WMIC and obfuscated PowerShell in Splunk), phishing-to-DNS data exfiltration unfolding across Sysmon and Splunk, and a full enterprise intrusion chain from macro foothold to C2 exfiltration.",
+      "Every report is written to hand off cleanly in production: testing the benign explanation before declaring a true positive, correlating host and network evidence on a single UTC timeline, and extracting actionable IOCs and detection rules.",
     ],
-    arch: "  ┌─────────────┐   /file <path> <prompt>   ┌──────────────┐\n  │  Terminal   │ ─────────────────────────▶ │   cli.py     │\n  │ PS / bash   │ ◀───────────────────────── │  session     │\n  └─────────────┘        verdict / IOCs       └──────┬───────┘\n                                                     │ Triage Engine\n                                              ┌──────▼───────┐\n                                              │  analysis    │\n                                              └──────────────┘",
+    arch: "┌─────────────────────────────────────────────────────────────────┐\n│                 6-STEP INVESTIGATION WORKFLOW                   │\n├─────────────────────────────────────────────────────────────────┤\n│  01. Executive Summary   → Trigger, impact & containment brief  │\n│  02. Alert Scope         → Assets, identities, IPs & ASNs       │\n│  03. Evidence Timeline   → Correlated SIEM, Sysmon, EDR & PCAP  │\n│  04. Benign Hypothesis   → Change windows & admin check         │\n│  05. Defanged IOCs       → Hashes, domains, IPs & file paths    │\n│  06. Containment Plan    → Host isolation, blocks & tuning      │\n└─────────────────────────────────────────────────────────────────┘",
     flow: [
-      { t: "01 · Input", d: "Interactive CLI prompt, or /file <path> <prompt> to attach a local log, report, code file or image." },
-      { t: "02 · Analysis", d: "Automated parsing and threat intelligence enrichment with the analyst's query as the investigative frame." },
-      { t: "03 · Output", d: "Threats, errors and anomalous IPs summarised back in the terminal, ready to paste into a ticket." },
-      { t: "04 · Config", d: "API credentials held securely in .env — never in source; cross-platform on Windows PowerShell, Linux bash or macOS." },
+      { t: "Case 01 · MirrorBlast & Warzone C2", d: "PCAP & Suricata/Brim triage of TA505 malspam callback chains, HTTP/TLS beacons, and Warzone RAT C2 infrastructure." },
+      { t: "Case 02 · WMIC & PowerShell in Splunk", d: "SIEM investigation of persistence, scheduled tasks, and lateral execution across Windows endpoints using Splunk SPL." },
+      { t: "Case 03 · Phishing to DNS Exfiltration", d: "Tracing a malicious attachment from initial execution through PowerShell base64 staging to nslookup DNS data exfiltration." },
+      { t: "Case 04 · Macro Foothold to Exfiltration", d: "End-to-end enterprise intrusion reconstruction: Office macro child processes, credential access, C2 staging, and exfiltration." },
     ],
-    tech: ["Python 3.x", "Threat Intelligence API", "Regex & Parsers", "python-dotenv", "Windows PowerShell", "Linux Bash"],
+    tech: ["Splunk SPL", "Sysmon (EID 1, 3, 11, 22)", "Wireshark & Brim (Zui)", "PCAP Forensics", "PowerShell Deobfuscation (MiCode)", "MITRE ATT&CK v16.1", "NIST SP 800-61", "IOC Extraction"],
     features: [
-      { t: "Log & report analysis", d: "Feed Apache/Nginx or SSH logs to identify security threats, error anomalies and suspicious IPs." },
-      { t: "Multi-modal triage", d: "Inspect local text logs, intelligence reports and security screenshots directly through the terminal." },
-      { t: "Terminal workflow", d: "An interactive session built purely in Python, optimised for rapid troubleshooting where the analyst already works." },
-      { t: "Secrets discipline", d: "Configuration through a .env file with a documented format — zero credentials committed, strict environment security." },
+      { t: "Hypothesis-driven triage", d: "Every investigation explicitly tests and disproves the benign explanation (authorized admin activity, vulnerability scanners, scheduled maintenance) before escalating." },
+      { t: "Cross-source timelines", d: "Correlates Sysmon process lineage, DNS queries, HTTP streams, and SIEM events into a single chronological chain." },
+      { t: "Visual forensic proof", d: "Backed by annotated Splunk queries, Brim/Wireshark packet inspections, and decoded payload transcripts." },
+      { t: "Production handoff format", d: "Includes defanged IOC tables ready for CTI ingestion plus tactical containment and detection tuning recommendations." },
     ],
-    attack: null,
-    codeLabel: "Usage",
+    attack: [
+      { technique: "Phishing: Spearphishing Attachment", id: "T1566.001", tactic: "Initial Access", tool: "Malicious Macro Doc", log: "Sysmon EID 1 / Email Gateway" },
+      { technique: "Command & Scripting: PowerShell", id: "T1059.001", tactic: "Execution", tool: "powershell.exe -enc", log: "Sysmon EID 1 / WinEventLog 4688" },
+      { technique: "Windows Management Instrumentation", id: "T1047", tactic: "Execution / Lateral Movement", tool: "wmic.exe", log: "Splunk / Sysmon EID 1" },
+      { technique: "Exfiltration Over Alternative Protocol (DNS)", id: "T1048.003", tactic: "Exfiltration", tool: "nslookup / PowerShell", log: "Sysmon EID 22 / DNS Logs" },
+    ],
+    codeLabel: "Investigative SPL & Sigma correlation",
     code: [
       {
-        label: "File analysis",
-        note: "Point the analyzer at a log and give it the question you actually have.",
-        body: "$ python cli.py\n> /file sample_access.log Analyze these server logs for security breaches.",
+        label: "Tracing Office macro child processes & encoded PowerShell",
+        note: "Correlates abnormal child processes spawned by Word/Excel with Base64 command-line execution and outbound DNS/network activity.",
+        body: 'index=main source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1\n| search ParentImage IN ("*\\\\WINWORD.EXE", "*\\\\EXCEL.EXE", "*\\\\cmd.exe")\n| table _time, Computer, User, ParentImage, Image, CommandLine, Hashes\n| sort _time',
+      },
+      {
+        label: "Detecting DNS exfiltration via anomalous subdomain queries",
+        note: "Identifies high-frequency, high-entropy subdomain lookups generated by PowerShell/nslookup exfiltration loops.",
+        body: 'index=main source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=22\n| eval qlen=len(QueryName)\n| where qlen > 45\n| stats count, values(QueryName) as sample_queries by Image, User, Computer\n| sort -count',
       },
     ],
-    shots: ["INTERACTIVE SESSION IN POWERSHELL", "/file COMMAND ANALYSING AN ACCESS LOG", "VERDICT OUTPUT WITH FLAGGED IPs"],
+    shots: ["CASE 01 — BRIM & WIRESHARK C2 BEACON TIMELINE", "CASE 02 — SPLUNK WMIC & POWERSHELL CORRELATION", "CASE 03 — SYSMON DNS EXFILTRATION RECONSTRUCTION", "CASE 04 — MACRO FOOTHOLD TO EXFILTRATION CHAIN"],
   },
   {
     id: "soc-lab",
-    name: "Threat Detection SOC Lab",
-    title: "Threat Detection & SIEM Engineering on AWS — attack emulation, log pipeline engineering and ATT&CK-mapped hunting with Splunk Enterprise.",
+    name: "Threat Detection Lab",
+    title: "End-to-End AWS & Windows Detection Lab — Splunk Universal Forwarder ingestion, custom SPL correlation searches, and Hydra / Atomic Red Team attack emulation mapped to MITRE ATT&CK.",
     kicker: "AWS · SPLUNK · MITRE ATT&CK",
     status: "Public",
-    summary: "A segmented three-tier SOC lab on AWS: three isolated EC2 instances standing in for attacker, endpoint and SIEM, run end-to-end from provisioning through detection engineering.",
+    summary: "End-to-end AWS & Windows detection lab: Splunk Universal Forwarder ingestion, custom SPL correlation searches, and Hydra / Atomic Red Team attack emulation mapped to MITRE ATT&CK. The whole pipeline, not a rule in isolation.",
     repo: "https://github.com/mahialjaber/threat-detection-soc-lab",
     repoLabel: "threat-detection-soc-lab",
     demo: null,
     demoNote: "No hosted demo — the deliverables are the ingestion pipeline, the SPL detections and the analyst dashboard.",
     overview: [
-      "I built this lab to prove something a resume bullet can't: that I can operate inside a real SOC on day one. Not \"I know what Splunk is\" — that I can stand up a log ingestion pipeline, write detections from scratch, chase an attacker through raw event data, and explain every decision along the way.",
+      "I built this lab to prove something a resume bullet can't: that I can engineer a detection pipeline and investigate threats end-to-end. Not just knowing what Splunk is — standing up a log ingestion pipeline, writing detections from scratch, chasing an attacker through raw event data, and explaining every decision along the way.",
       "Three isolated AWS EC2 instances stand in for an attacker, a target endpoint and a centralized SIEM. Real MITRE ATT&CK-mapped techniques are executed against the target, the telemetry they generate is forwarded into Splunk over TCP 9997, and custom SPL correlation searches turn that raw text into a triage-ready view.",
-      "It also exposed its own limits: native Windows Security auditing has real gaps for process-level techniques like LSASS memory access. The next iteration adds Sysmon (Event ID 1, 10, 11) and converts the strongest ad-hoc searches into scheduled correlation content with real alerting thresholds.",
+      "It also exposed its own limits: native Windows Security auditing has real gaps for process-level techniques like LSASS memory access. Documenting those visibility gaps drove the Sysmon (Event ID 1, 10, 11) and scheduled correlation rules across my subsequent detection engineering work.",
     ],
     arch: "┌──────────────┐       ┌──────────────┐       ┌──────────────┐\n│   ATTACKER   │       │    TARGET    │       │     SIEM     │\n│  Kali Linux  │──────▶│Windows Server│──────▶│    Splunk    │\n└──────────────┘       └──────────────┘       └──────────────┘\n   Hydra + ART            Universal            Indexer +\n   → RDP :3389            Forwarder            Search Head\n                          WinEventLog          TCP 9997",
     flow: [
       { t: "01 · Attacker", d: "Kali Linux EC2 — Hydra RDP brute force and Atomic Red Team execution, directed at port 3389." },
       { t: "02 · Target", d: "Windows Server EC2 generating native WinEventLog:Security and :System telemetry; runs the Splunk Universal Forwarder." },
       { t: "03 · SIEM", d: "Splunk Enterprise on Ubuntu / Amazon Linux — indexer and search head receiving forwarded logs over TCP 9997." },
-      { t: "04 · Analyst", d: "SPL correlation searches and a multi-panel dashboard for triage and threat hunting." },
+      { t: "04 · Detection", d: "SPL correlation searches and a multi-panel dashboard for triage and threat hunting." },
     ],
     tech: ["AWS EC2", "Kali Linux", "Hydra", "Atomic Red Team", "Windows Server", "Splunk Universal Forwarder", "Splunk Enterprise", "SPL (rex, stats, timechart, eval)", "MITRE ATT&CK", "Ubuntu / Amazon Linux"],
     features: [
@@ -941,7 +902,7 @@ const PROJECTS = [
       { t: "Log parsing", d: "rex-based field extraction turning unstructured raw Windows Event Log text (4624, 4625, 7036) into structured, query-ready fields." },
       { t: "Detection engineering", d: "Custom SPL correlation searches for brute-force patterns, authentication anomalies and credential-access behaviour — not out-of-the-box content." },
       { t: "Adversary emulation", d: "Real ATT&CK-mapped techniques executed to generate genuine telemetry instead of synthetic sample data — the purple-team approach used to validate detections in production." },
-      { t: "Analyst reporting", d: "A multi-panel SOC dashboard that turns raw log data into the kind of triage view a Tier 1/2 analyst hands off during a shift." },
+      { t: "Analyst reporting", d: "A multi-panel triage dashboard that turns raw log data into high-signal investigative context." },
     ],
     attack: [
       { technique: "RDP Brute Force", id: "T1110.001", tactic: "Credential Access", tool: "Hydra", log: "WinEventLog:Security (4625 / 4624)" },
@@ -966,7 +927,99 @@ const PROJECTS = [
         body: 'index=main sourcetype="WinEventLog:Security" EventCode=4625\n| rex field=_raw "Source Network Address:\\s+(?<src_ip>[\\d\\.]+)"\n| rex field=_raw "Account Name:\\s+(?<target_account>[^\\r\\n]+)"\n| stats count AS failed_attempts, values(target_account) AS targeted_accounts by src_ip\n| sort -failed_attempts\n| head 10',
       },
     ],
-    shots: ["SPLUNK SOC DASHBOARD — MULTI-PANEL TRIAGE VIEW", "BRUTE-FORCE CORRELATION SEARCH RESULTS", "AUTHENTICATION TIMELINE PANEL (15m BUCKETS)", "AWS EC2 THREE-TIER LAB TOPOLOGY"],
+    shots: ["SPLUNK DASHBOARD — MULTI-PANEL TRIAGE VIEW", "BRUTE-FORCE CORRELATION SEARCH RESULTS", "AUTHENTICATION TIMELINE PANEL (15m BUCKETS)", "AWS EC2 THREE-TIER LAB TOPOLOGY"],
+  },
+  {
+    id: "wazuh-lab",
+    name: "Wazuh SIEM Setup, Lab & Detection Tasks",
+    title: "10 Hands-On Wazuh Detection Engineering & Threat Hunting Challenges — AWS CloudTrail, real-time FIM differential analysis, custom PCRE2 rules, VirusTotal CTI, active response containment, and OpenSearch Dev Tools REST querying.",
+    kicker: "WAZUH v4.14.8 · OPENSEARCH · DETECTION ENGINEERING",
+    status: "Public · Active Lab",
+    summary: "10 hands-on Wazuh detection engineering & threat hunting challenges: AWS CloudTrail, real-time FIM differential analysis, custom PCRE2 rules, VirusTotal CTI, active response containment, and OpenSearch Dev Tools REST querying.",
+    repo: "https://github.com/mahialjaber/wazuh-setup-and-lab-tasks",
+    repoLabel: "wazuh-setup-and-lab-tasks",
+    demo: null,
+    demoNote: "Full 10-task engineering catalog, architecture diagrams, custom local_rules.xml, OpenSearch DQL library, and 31 redacted evidence screenshots in the repository.",
+    overview: [
+      "A complete, battle-tested defensive engineering repository showcasing the end-to-end setup, configuration, attack simulation, detection validation, and false-positive tuning of Wazuh v4.14.8 and OpenSearch v2.19.1 across a hybrid enterprise lab.",
+      "Spans 10 rigorous engineering tasks across AWS CloudTrail (aws-s3 wodle monitoring root IAM CreateUser), Rocky Linux 9 (real-time inotify FIM binary diffing on /usr/bin/tty, Suricata NIDS eve.json correlation, firewall-drop active response against Kali NetExec SSH brute force), Windows 11 Enterprise (Sysmon EID 1 vs Event ID 4688 lineage), and VirusTotal API v3 automated hash enrichment.",
+      "Includes production detection engineering breakthroughs: custom PCRE2 rules validated with wazuh-logtest (Rule 100025), raw OpenSearch Dev Tools REST API _search DSL queries for high-severity CVE extraction, and surgical level=\"0\" child rule suppression (Rule 100060) to eliminate scanner alert fatigue.",
+    ],
+    arch: "┌──────────────────────┐  ┌──────────────────────┐  ┌──────────────────────┐\n│   WINDOWS 11 AGENT   │  │  ROCKY LINUX 9 AGT   │  │    AWS CLOUDTRAIL    │\n│ Sysmon EID 1 + 4688  │  │ FIM · Suricata · AR  │  │ S3 Bucket (aws-s3)   │\n└──────────┬───────────┘  └──────────┬───────────┘  └──────────┬───────────┘\n           │ TCP 1514                │ TCP 1514                │ API Polling\n           ▼                         ▼                         ▼\n┌──────────────────────────────────────────────────────────────────────────┐\n│            WAZUH MANAGER 4.14.8 & OPENSEARCH INDEXER 2.19.1              │\n│  • Custom PCRE2 Rules (100025) & Scoped FP Suppression (100060 level=0)  │\n│  • VirusTotal API v3 Integrator (87105) & Active Response (firewall-drop)│\n│  • DQL Threat Hunting & OpenSearch Dev Tools REST API (_search DSL)      │\n└──────────────────────────────────────────────────────────────────────────┘",
+    flow: [
+      { t: "01 · Cloud & Endpoint Ingestion", d: "AWS CloudTrail via aws-s3 wodle, Windows 11 Sysmon process creation, and Rocky Linux 9 real-time inotify FIM + Suricata NIDS." },
+      { t: "02 · Custom PCRE2 & XML Rules", d: "Authored PCRE2 regex detections (whoami /priv, /etc/shadow) and multi-event brute-force escalation rules in local_rules.xml." },
+      { t: "03 · CTI & Active Containment", d: "Automated VirusTotal SHA1 hash lookups (66/68 engines on EICAR) and kernel-level firewall-drop blocking Kali NetExec attacks." },
+      { t: "04 · DQL, REST API & FP Tuning", d: "Boolean DQL triage, raw OpenSearch _search JSON queries for CVE hunting, and level=0 child rules silencing benign scanner noise." },
+    ],
+    tech: ["Wazuh v4.14.8", "OpenSearch v2.19.1", "AWS CloudTrail & S3", "Sysmon & Windows 11", "Rocky Linux 9 & FIM", "Suricata NIDS", "PCRE2 Custom Rules", "VirusTotal API v3", "Active Response (firewall-drop)", "MITRE ATT&CK v16.1"],
+    features: [
+      { t: "10-task engineering catalog", d: "Every challenge documented with hypothesis, config changes, Kali attack emulation, and ground-truth telemetry screenshots." },
+      { t: "Custom PCRE2 detection rules", d: "Engineered Rule 100025 catching cross-platform credential and privilege reconnaissance, verified via wazuh-logtest." },
+      { t: "Active defense debugging", d: "Resolved manager vs defined-agent execution location logic to dynamically block Kali SSH brute force via firewalld/iptables-nft." },
+      { t: "OpenSearch Dev Tools REST API", d: "Programmatically queried wazuh-states-vulnerabilities-* indices with multi-field descending sort to extract critical CVEs." },
+      { t: "Surgical false-positive tuning", d: "Authored child Rule 100060 (level=\"0\") anchored to specific IPv6 and Suricata signature IDs to eliminate alert fatigue." },
+    ],
+    attack: [
+      { technique: "Create Cloud Account (IAM)", id: "T1136.003", tactic: "Persistence", tool: "AWS Console / IAM", log: "AWS CloudTrail (Rule 80202)" },
+      { technique: "Stored Data Manipulation (FIM)", id: "T1565.001", tactic: "Impact / Defense Evasion", tool: "Binary Tampering", log: "syscheck inotify diff (Rule 550)" },
+      { technique: "OS Credential Dumping (/etc/shadow)", id: "T1003.008", tactic: "Credential Access", tool: "Shell / PrivRecon", log: "Custom PCRE2 Rule 100025" },
+      { technique: "SSH Brute Force + Active Drop", id: "T1110.001", tactic: "Credential Access", tool: "NetExec (nxc)", log: "Rule 5712 / firewall-drop AR" },
+      { technique: "Network Service Discovery", id: "T1046", tactic: "Discovery", tool: "Nmap", log: "Suricata eve.json (Rule 86601)" },
+    ],
+    codeLabel: "Production Wazuh rules (local_rules.xml)",
+    code: [
+      {
+        label: "Task 03 & Task 10 — Custom PCRE2 detection & surgical false-positive suppression",
+        note: "Rule 100025 detects cross-platform privilege/credential recon using PCRE2; Rule 100060 suppresses authorized Kali IPv6 ping noise without blinding NIDS.",
+        body: '<group name="local,syslog,sshd,custom_detection,">\n  <!-- TASK 03: Privilege Escalation & Credential Access Detection -->\n  <rule id="100025" level="10">\n    <description>Suspicious command execution: whoami /priv (Windows) or cat /etc/shadow (Linux)</description>\n    <regex type="pcre2">(?i)(whoami(\\.exe)?\\s+/priv|cat\\s+/etc/shadow)</regex>\n    <mitre>\n      <id>T1033</id>\n      <id>T1003.008</id>\n    </mitre>\n  </rule>\n\n  <!-- TASK 10: Suricata NIDS False Positive Suppression Rule -->\n  <rule id="100060" level="0">\n    <if_sid>86601</if_sid>\n    <field name="alert.signature_id">^9000001$</field>\n    <field name="src_ip">^fe80:0000:0000:0000:1467:52f3:5b1b:b3f2$</field>\n    <description>Ignore Kali test ping alerts from specific IPv6</description>\n  </rule>\n</group>',
+      },
+    ],
+    shots: ["AWS CLOUDTRAIL CreateUser ALERT (RULE 80202)", "REAL-TIME FIM DIFFERENTIAL ANALYSIS (/usr/bin/tty)", "VIRUSTOTAL 66/68 ENGINE HIT & ACTIVE RESPONSE DROP", "OPENSEARCH DEV TOOLS REST API CVE HUNT"],
+  },
+  {
+    id: "micode",
+    name: "MiCode",
+    title: "Tiny, offline PowerShell & Base64 decoder for security analysts — paste a suspicious command line, click Decode, and inspect obfuscated payloads safely in plain text.",
+    kicker: "OFFLINE DECODER · POWERSHELL · VANILLA JS",
+    status: "Public · Live Tool",
+    summary: "Tiny offline PowerShell & Base64 decoder for security analysts, live on GitHub Pages: auto-detects -enc flags, UTF-16LE/UTF-8 encodings, and Gzip/Deflate payloads 100% locally in the browser.",
+    repo: "https://github.com/mahialjaber/MiCode",
+    repoLabel: "MiCode",
+    demo: "https://mahialjaber.github.io/MiCode/",
+    demoNote: "Runs 100% locally in your browser with offline Service Worker caching and strict CSP blocking all network uploads.",
+    overview: [
+      "Attackers routinely hide malicious PowerShell commands behind Base64 flags (powershell.exe -NoP -W Hidden -enc SQBFAFgA...) or compressed streams. MiCode turns them back into readable plain text in one click — built as a fast, zero-dependency alternative to heavy multi-tool suites during everyday alert investigations.",
+      "Engineered for strict operational security (OPSEC): 100% of decoding happens locally in the browser with no backend, no API calls, and a strict Content Security Policy (CSP) that blocks all outgoing connections so sensitive incident artifacts never leave the analyst's machine.",
+      "Automatically extracts payloads from full command lines (-e, -enc, -EncodedCommand, FromBase64String), detects UTF-16LE vs UTF-8/ASCII, decompresses Gzip/Zlib/Deflate streams, repairs broken padding, and safely renders MZ executables as hex dumps without ever executing code.",
+    ],
+    arch: "┌───────────────────────────┐\n│Suspicious Command / Base64│  powershell -NoP -W Hidden -enc SQBFAFgA...\n└─────────────┬─────────────┘\n              ▼\n┌───────────────────────────┐\n│ 1. Smart Token Extractor  │  Strips CLI flags (-e, -enc, FromBase64String)\n│ 2. Padding & URL-Safe Fix │  Normalizes messy whitespace, quotes & padding\n│ 3. Stream Decompressor    │  Unpacks Gzip / Zlib / raw Deflate streams\n│ 4. Encoding & Binary Det. │  UTF-16LE · UTF-8 · Hex dump for MZ binaries\n└─────────────┬─────────────┘\n              ▼\n┌───────────────────────────┐\n│  Safe Plain-Text Output   │  100% Offline · Strict CSP · Zero Uploads\n└───────────────────────────┘",
+    flow: [
+      { t: "01 · Smart Input", d: "Paste raw Base64 or an entire Sysmon CommandLine field — automatically locates -e, -enc, -EncodedCommand or FromBase64String." },
+      { t: "02 · Auto-Encoding", d: "Distinguishes PowerShell default UTF-16LE from UTF-8/ASCII and UTF-16BE automatically." },
+      { t: "03 · Decompression", d: "Detects and unpacks Gzip, Zlib and raw Deflate payloads used in staged PowerShell cradles." },
+      { t: "04 · Safe Triage", d: "Flags corrupted input honestly and renders binary MZ payloads as hex dumps — never executes decoded content." },
+    ],
+    tech: ["Vanilla JavaScript", "HTML5 & CSS3", "Service Worker (Offline PWA)", "Strict CSP (Zero Network)", "UTF-16LE / UTF-8 Decoder", "Gzip / Deflate Decompression", "Node.js Unit Tests", "MIT License"],
+    features: [
+      { t: "Full command-line parsing", d: "No need to manually slice the Base64 blob out of a Sysmon Event ID 1 log — paste the whole command line and decode immediately." },
+      { t: "100% local & offline", d: "Cached via Service Worker after first visit and locked down with a Content Security Policy that forbids outbound network requests." },
+      { t: "Compressed stream support", d: "Handles PowerShell GzipStream and DeflateStream payloads alongside standard Base64 and URL-safe Base64." },
+      { t: "Binary & corruption warnings", d: "Detects embedded PE/MZ executables for hex inspection and warns when truncated logs produce partial decodes." },
+    ],
+    attack: [
+      { technique: "Command and Scripting Interpreter: PowerShell", id: "T1059.001", tactic: "Execution", tool: "powershell.exe -enc", log: "Sysmon EID 1 / WinEventLog 4688 / 4104" },
+      { technique: "Obfuscated Files or Information", id: "T1027", tactic: "Defense Evasion", tool: "Base64 / GzipStream", log: "CommandLine / ScriptBlockText" },
+    ],
+    codeLabel: "Example decoding workflow",
+    code: [
+      {
+        label: "Decoding an obfuscated PowerShell command line",
+        note: "MiCode strips the PowerShell flags, decodes the Base64 bytes, and resolves the UTF-16LE string in a single step.",
+        body: "Input   : powershell.exe -NoP -W Hidden -enc SQBFAFgAIAAoACcAaABlAGwAbABvACcAKQA=\nOutput  : IEX ('hello')\nDetected: PowerShell -enc argument → Base64 (26 bytes) → UTF-16LE",
+      },
+    ],
+    shots: ["MICODE LIVE INTERFACE — POWERSHELL -ENC DECODING", "AUTO-DETECTED UTF-16LE & DEFLATED PAYLOAD VIEW", "DARK / LIGHT COFFEE-CORD THEME SWITCH"],
   },
 ];
 
@@ -1355,27 +1408,27 @@ class Component extends DCLogic {
       toggleTheme: () => this.toggleTheme(),
 
       spec: [
-        { k: "Role", v: "SOC Analyst — Detection & Response" },
-        { k: "Focus", v: "Alert triage · Detection engineering · Cloud threat detection" },
-        { k: "Stack", v: "Splunk SPL · Sigma · AWS CloudTrail · Sysmon · Python" },
-        { k: "Frameworks", v: "MITRE ATT&CK · NIST SP 800-61 · Cyber Kill Chain" },
-        { k: "Studying", v: "Splunk Core Certified Power User" },
-        { k: "Status", v: "Open to entry-level SOC roles — remote worldwide or relocation" },
+        { k: "Role", v: "Security Analyst · Detection Engineer" },
+        { k: "Focus", v: "Alert triage · Incident investigation · Detection engineering" },
+        { k: "Stack", v: "Splunk SPL · Wazuh SIEM · Sigma · Sysmon · Active Directory · AWS CloudTrail" },
+        { k: "Frameworks", v: "MITRE ATT&CK · NIST SP 800-61 · Cyber Kill Chain · Atomic Red Team" },
+        { k: "Credential", v: "TryHackMe SOC Level 1 (THM-UV7LHQKCLC) · 14 modules · 65 labs" },
+        { k: "Status", v: "Open to Security Analyst & Detection Engineering roles — remote or relocation" },
       ],
 
       pillars: [
-        { n: "01", t: "SOC operations", d: "Triage, enrichment, escalation and the write-up — each case file documented the way a Tier 1 analyst documents a ticket." },
-        { n: "02", t: "Detection engineering", d: "Vendor-neutral Sigma rules and custom Splunk SPL correlation searches, each with a threat model and tested false positives." },
-        { n: "03", t: "Cloud threat detection", d: "CloudTrail, IAM and GuardDuty telemetry from a self-built AWS lab where I emulate cloud attacker techniques first." },
+        { n: "01", t: "Alert Triage & Investigation", d: "Scope first, test the benign hypothesis before building a story, enrich identity and change history, and hand off a verdict with explicit confidence and defanged IOCs." },
+        { n: "02", t: "Detection Engineering & Tuning", d: "Vendor-neutral Sigma rules, Splunk SPL correlation searches, and Wazuh PCRE2/XML rules built from live attack telemetry — tuned with scoped suppression so every rule survives normal traffic." },
+        { n: "03", t: "Endpoint, Identity, Network & Cloud", d: "Investigating Windows/Sysmon process lineage, Active Directory replication & Kerberos, Suricata NIDS & PCAP forensics, and AWS CloudTrail as a single unified timeline." },
       ],
 
       toolchain: [
-        { idx: "01", group: "SIEM & Detection", items: ["Wazuh SIEM", "Splunk (SPL)", "Sigma", "MITRE ATT&CK", "Microsoft Sentinel (KQL)"] },
-        { idx: "02", group: "Endpoint & Identity", items: ["Sysmon", "Windows Event Logs", "Active Directory", "PowerShell logging"] },
-        { idx: "03", group: "Cloud", items: ["AWS CloudTrail", "IAM", "GuardDuty", "CloudWatch", "S3", "VPC", "Lambda"] },
-        { idx: "04", group: "Network", items: ["Wireshark", "TCP/IP", "DNS", "HTTP", "Packet analysis"] },
-        { idx: "05", group: "Automation", items: ["Python", "Bash", "Git", "REST APIs"] },
-        { idx: "06", group: "Frameworks", items: ["MITRE ATT&CK", "NIST SP 800-61", "Cyber Kill Chain"] },
+        { idx: "01", group: "SIEM & Detection", items: ["Splunk SPL", "Wazuh SIEM", "OpenSearch DQL", "Sigma", "MITRE ATT&CK", "Microsoft Sentinel (KQL)"] },
+        { idx: "02", group: "Endpoint & Identity", items: ["Sysmon", "Windows Event Logs", "Active Directory", "PowerShell", "Linux auditd & FIM"] },
+        { idx: "03", group: "Triage & Analysis", items: ["Alert Triage", "Log Analysis", "Phishing Analysis", "Threat Hunting", "IOC Enrichment (VirusTotal)"] },
+        { idx: "04", group: "Network & Traffic", items: ["Wireshark", "TCP/IP", "DNS", "PCAP Analysis", "Suricata NIDS"] },
+        { idx: "05", group: "Cloud Telemetry", items: ["AWS", "CloudTrail", "IAM", "Amazon S3", "GuardDuty"] },
+        { idx: "06", group: "Automation & Frameworks", items: ["Python", "Bash", "Linux / Kali", "Docker", "Git", "NIST SP 800-61", "Cyber Kill Chain", "Atomic Red Team"] },
       ],
 
       projects,
@@ -1393,14 +1446,14 @@ class Component extends DCLogic {
           tag: "Phase two",
           t: "Development",
           d: "Stand up the infrastructure and the pipeline, then write the detection against raw telemetry — not pre-normalised fields.",
-          items: ["Lab provisioning (AWS EC2, forwarders)", "Ingestion pipeline and parsing (rex)", "SPL / Sigma authoring", "Dashboards and analyst views"],
+          items: ["Lab provisioning (AWS EC2, forwarders)", "Ingestion pipeline and parsing (rex)", "SPL / Sigma / Wazuh rule authoring", "Dashboards and analyst views"],
         },
         {
           n: "03",
           tag: "Phase three",
           t: "Testing",
           d: "Emulate the real technique and prove the detection fires. If it doesn't, the gap gets written down, not hidden.",
-          items: ["Adversary emulation (Hydra, Atomic Red Team)", "True/false-positive review", "Threshold and FP tuning", "Documented visibility limits"],
+          items: ["Adversary emulation (Hydra, NetExec, Atomic Red Team)", "True/false-positive review", "Threshold and FP tuning (level=0 suppression)", "Documented visibility limits"],
         },
         {
           n: "04",
@@ -1412,26 +1465,26 @@ class Component extends DCLogic {
       ],
 
       journey: [
-        { stage: "Stage 01", state: "Shipped", t: "Foundations — logs, networks, frameworks", d: "Windows Event Logs, TCP/IP and packet analysis, and the frameworks that give triage a structure: MITRE ATT&CK, the Cyber Kill Chain and NIST SP 800-61." },
-        { stage: "Stage 02", state: "Shipped", t: "SOC Log Analysis Datasets", d: "Built the practice data I couldn't find: 12 synthetic log files across five domains with embedded attack vectors, plus a hunting playbook in SPL, KQL and CLI. MIT licensed — 23+ stars on GitHub." },
-        { stage: "Stage 03", state: "Shipped", t: "Cloud SOC Lab on AWS", d: "Three EC2 instances, a Splunk Universal Forwarder feeding an indexer over TCP 9997, Hydra and Atomic Red Team generating real ATT&CK-mapped telemetry, and custom SPL detections over the top." },
-        { stage: "Stage 04", state: "Shipped", t: "Wazuh Enterprise SOC Lab", d: "Multi-node SIEM architecture with Wazuh agents, Sysmon and auditd telemetry streams, VirusTotal API enrichment, and automated active-response containment." },
-        { stage: "Stage 05", state: "Shipped", t: "CLI Threat Analyzer", d: "Turned the repetitive part of triage into a tool — a Python CLI that automates server log parsing, IOC extraction, and report summarization directly in the terminal." },
-        { stage: "Stage 06", state: "Shipped", t: "Enterprise Threat Detection SOC Lab", d: "Three-tier AWS EC2 telemetry pipeline, Splunk Universal Forwarder over TCP 9997, adversary emulation with Hydra and Atomic Red Team, and custom correlation detections." },
+        { stage: "Stage 01", state: "Verified", t: "Foundations & TryHackMe Credential (THM-UV7LHQKCLC)", d: "Windows/Sysmon Event Logs, TCP/IP & PCAP forensics, phishing DFIR, and SIEM threat detection across 14 modules and 65 hands-on labs, anchored by MITRE ATT&CK, the Cyber Kill Chain, and NIST SP 800-61." },
+        { stage: "Stage 02", state: "Shipped", t: "SOC Log Analysis Datasets (35+ ⭐)", d: "Built the practice telemetry I couldn't find: curated synthetic log files across five security domains with embedded attack vectors, plus a hunting playbook in SPL, KQL, and CLI. MIT licensed — 35+ stars on GitHub." },
+        { stage: "Stage 03", state: "Shipped", t: "Threat Detection Lab (AWS & Splunk)", d: "End-to-end AWS & Windows detection lab: Splunk Universal Forwarder over TCP 9997, Hydra and Atomic Red Team attack emulation mapped to MITRE ATT&CK, and custom SPL correlation searches." },
+        { stage: "Stage 04", state: "Shipped", t: "Enterprise Active Directory Lab", d: "Multi-controller Active Directory infrastructure on Windows Server 2022: forest root, multi-master replication with ADC, AD-integrated DNS/DHCP, GPO WMI filtering, and granular audit policies tuned for threat detection." },
+        { stage: "Stage 05", state: "Shipped", t: "Wazuh SIEM Setup, Lab & Detection Tasks", d: "10 hands-on Wazuh v4.14.8 & OpenSearch v2.19.1 challenges: AWS CloudTrail, real-time FIM binary diffing, custom PCRE2 rules, VirusTotal CTI, active response containment, OpenSearch Dev Tools REST API CVE hunting, and level=0 false-positive tuning." },
+        { stage: "Stage 06", state: "Shipped", t: "Investigation Case Files & MiCode", d: "Published structured 6-step alert triage & DFIR case files (MirrorBlast/Warzone PCAP, WMIC/PowerShell lateral movement, DNS exfiltration, macro foothold) alongside MiCode, a 100% offline browser-based PowerShell & Base64 decoder." },
       ],
 
       ghNotes: [
         { n: "01", t: "Reproducible, not screenshotted", d: "Every lab is written so someone else can stand it up: topology, versions, ports, forwarder config. If it can't be rebuilt from the README, it isn't finished." },
-        { n: "02", t: "Detections in full", d: "The SPL and Sigma live in the repo as text — not cropped into a dashboard image — so a reviewer can read the logic, argue with the thresholds and reuse the query." },
+        { n: "02", t: "Detections in full", d: "The SPL, Sigma, and Wazuh XML rules live in the repo as text — not cropped into a dashboard image — so a reviewer can read the logic, argue with the thresholds and reuse the query." },
         { n: "03", t: "Limits documented", d: "Each write-up ends with what the telemetry couldn't see and what the next iteration adds. Naming a visibility gap is part of the work, not an admission." },
-        { n: "04", t: "Written for the next analyst", d: "The datasets repo is MIT licensed and structured for someone else's practice. Building something usable by other people is the difference between studying and contributing." },
+        { n: "04", t: "Written for the next analyst", d: "The datasets and MiCode decoder are MIT licensed and built for everyday security work. Building something usable by other analysts is the difference between studying and contributing." },
       ],
 
       channels: [
         { k: "Email", v: "mahialjaber.dev@gmail.com", href: "mailto:mahialjaber.dev@gmail.com" },
         { k: "X (Twitter)", v: "@mahialjaber", href: "https://x.com/mahialjaber" },
-        { k: "Discord", v: "mahialjaber", href: "https://discord.com/users/mahialjaber" },
         { k: "GitHub", v: "github.com/mahialjaber", href: "https://github.com/mahialjaber" },
+        { k: "TryHackMe", v: "tryhackme.com/p/mahialjaber", href: "https://tryhackme.com/p/mahialjaber" },
       ],
 
       form: s.form,

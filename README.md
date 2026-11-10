@@ -1,19 +1,19 @@
-# 🛡️ Mahi Al Jaber — SOC Analyst & Detection Engineering Portfolio
+# 🛡️ Mahi Al Jaber — Security Analyst & Detection Engineering Portfolio
 
 [![Live Site](https://img.shields.io/badge/Live_Site-GitHub_Pages-0ea5e9?style=for-the-badge&logo=github)](https://mahialjaber.github.io/My-Portfolio_Website/)
-[![SOC Lab](https://img.shields.io/badge/SIEM-Splunk_%26_Wazuh-059669?style=for-the-badge&logo=splunk)](https://github.com/mahialjaber/enterprise-threat-detection-soc-lab)
-[![Datasets](https://img.shields.io/badge/Datasets-23%2B_Stars-f59e0b?style=for-the-badge&logo=star)](https://github.com/mahialjaber/SOC-Log-Analysis-Datasets)
+[![Detection Lab](https://img.shields.io/badge/SIEM-Splunk_%26_Wazuh-059669?style=for-the-badge&logo=splunk)](https://github.com/mahialjaber/threat-detection-soc-lab)
+[![Datasets](https://img.shields.io/badge/Datasets-35%2B_Stars-f59e0b?style=for-the-badge&logo=star)](https://github.com/mahialjaber/SOC-Log-Analysis-Datasets)
 [![License](https://img.shields.io/badge/License-All_Rights_Reserved-red?style=for-the-badge)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Open_to_Roles-10b981?style=for-the-badge)](#contact)
 
 > **"Detection. Response. Evidence."**  
-> An evidence-first, industrial-styled security portfolio demonstrating hands-on Blue Team operations, cloud telemetry analysis, adversary emulation, and custom detection engineering.
+> An evidence-first, industrial-styled security portfolio demonstrating hands-on Security Analysis, incident investigation, cloud & endpoint telemetry correlation, adversary emulation, and custom detection engineering.
 
 ---
 
 ## 🧭 Overview
 
-This repository hosts the personal portfolio of **Mahi Al Jaber** — an aspiring Tier 1 SOC Analyst and Detection Engineer. Rather than displaying generic course certifications, every project presented here links directly to reproducible laboratory environments, raw telemetry evidence, ATT&CK-mapped adversary emulation, and custom detection queries.
+This repository hosts the personal portfolio of **Mahi Al Jaber** — a Security Analyst and Detection Engineer. Rather than displaying generic course completions, every project presented here links directly to reproducible laboratory environments, raw telemetry evidence, ATT&CK-mapped adversary emulation, and custom detection queries.
 
 Hosted live on GitHub Pages: **[mahialjaber.github.io/My-Portfolio_Website/](https://mahialjaber.github.io/My-Portfolio_Website/)**
 
@@ -23,10 +23,11 @@ Hosted live on GitHub Pages: **[mahialjaber.github.io/My-Portfolio_Website/](htt
 
 | Project | Environment / Stack | Focus & Highlights | Status |
 |:---|:---|:---|:---:|
-| [**Wazuh Enterprise SOC Lab**](https://github.com/mahialjaber/the-10-task-to-master-wazuh) | Wazuh SIEM · Sysmon · Linux auditd · VirusTotal | Multi-node endpoint telemetry pipeline, custom XML decoders, VirusTotal API enrichment, and automated active-response firewall containment. | Active Lab |
-| [**Enterprise Threat Detection SOC Lab**](https://github.com/mahialjaber/enterprise-threat-detection-soc-lab) | AWS EC2 · Kali Linux · Windows Server · Splunk | Three-tier architecture, Universal Forwarder over TCP 9997, Hydra RDP brute force, Atomic Red Team execution, and custom SPL correlation searches. | Public |
-| [**SOC Log Analysis Datasets**](https://github.com/mahialjaber/SOC-Log-Analysis-Datasets) | Plain text · JSONL · Splunk SPL · Sentinel KQL | **23+ ⭐ Stars** — Curated synthetic log files across 5 security domains (App, Cloud, Email, Endpoints, Network) with hidden attack vectors and a hunting playbook. | Public · MIT |
-| [**CLI Threat Analyzer**](https://github.com/mahialjaber/CLI-Threat-Analyzer) | Python · Threat Intelligence API · Terminal | Command-line security copilot for instant server log triage, IOC extraction, and security report summarization without leaving the terminal. | Public |
+| [**SOC Log Analysis Datasets**](https://github.com/mahialjaber/SOC-Log-Analysis-Datasets) | Plain text · JSONL · Splunk SPL · Sentinel KQL | **35+ ⭐ Stars** — Curated synthetic log files across 5 security domains (App, Cloud, Email, Endpoints, Network) with embedded attack vectors and a hunting playbook. | Public · MIT |
+| [**SOC Investigation Case Files**](https://github.com/mahialjaber/soc-investigation-casefiles) | Splunk · Sysmon · Brim/Wireshark · PCAP | Structured 6-step alert triage and incident investigation case files: evidence timelines, disproving benign hypotheses, IOC extraction, and containment playbooks. | Public · MIT |
+| [**Threat Detection Lab**](https://github.com/mahialjaber/threat-detection-soc-lab) | AWS EC2 · Kali Linux · Windows Server · Splunk | End-to-end AWS & Windows detection lab: Universal Forwarder over TCP 9997, Hydra RDP brute force, Atomic Red Team execution, and custom SPL correlation searches. | Public |
+| [**Wazuh SIEM Setup, Lab & Detection Tasks**](https://github.com/mahialjaber/wazuh-setup-and-lab-tasks) | Wazuh v4.14.8 · OpenSearch · Sysmon · CloudTrail | 10 hands-on detection engineering & threat hunting challenges: AWS CloudTrail, real-time FIM diffing, custom PCRE2 rules, VirusTotal CTI, active response, and Dev Tools REST querying. | Public · Active Lab |
+| [**MiCode**](https://github.com/mahialjaber/MiCode) | Vanilla JS · Offline PWA · Strict CSP | Tiny offline PowerShell & Base64 decoder for security analysts, live on [GitHub Pages](https://mahialjaber.github.io/MiCode/) — runs 100% locally in the browser with zero data uploads. | Public · Live |
 
 ---
 
