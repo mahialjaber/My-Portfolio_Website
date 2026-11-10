@@ -96,7 +96,7 @@
   }
   @media (max-width: 1100px) { .phase-grid { grid-template-columns: 1fr 1fr !important; } }
   @media (max-width: 640px) { .phase-grid { grid-template-columns: 1fr !important; } }
-  /* Pull Cord Lamp Switch Toggle */
+  /* Pull Cord Lamp Switch Toggle (Roasted Coffee & Espresso Style) */
   .cord-fixture {
     position: relative;
     display: inline-flex;
@@ -112,13 +112,13 @@
   }
   .cord-fixture:active { cursor: grabbing; }
   .cord-anchor-plate {
-    width: 18px;
+    width: 20px;
     height: 9px;
     border-radius: 0 0 3px 3px;
-    background: linear-gradient(180deg, #475569 0%, #1e293b 100%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: linear-gradient(180deg, #43281c 0%, #2b170c 100%);
+    border: 1px solid rgba(221, 184, 146, 0.35);
     border-top: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 6px rgba(20, 10, 5, 0.6);
     position: relative;
     z-index: 20;
     display: flex;
@@ -132,12 +132,12 @@
     transition: all 0.3s ease;
   }
   .bulb-lit {
-    background-color: #fbbf24;
-    box-shadow: 0 0 8px #f59e0b, 0 0 16px #fbbf24;
+    background-color: #ddb892;
+    box-shadow: 0 0 8px #b08968, 0 0 16px #ddb892;
   }
   .bulb-off {
-    background-color: #38bdf8;
-    box-shadow: 0 0 5px #0284c7;
+    background-color: #8c5e3c;
+    box-shadow: 0 0 5px #52341e;
   }
   .cord-interactive-area {
     position: relative;
@@ -150,9 +150,9 @@
   .rope-stem {
     width: 2.5px;
     height: 32px;
-    background: linear-gradient(180deg, #94a3b8 0%, #cbd5e1 50%, #fde68a 100%);
+    background: linear-gradient(180deg, #7f5539 0%, #b08968 50%, #e6ccb2 100%);
     transform-origin: top center;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 3px rgba(35, 18, 10, 0.6);
     position: relative;
     overflow: hidden;
   }
@@ -160,8 +160,8 @@
     content: "";
     position: absolute;
     inset: 0;
-    opacity: 0.4;
-    background: repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 1px, transparent 3px);
+    opacity: 0.45;
+    background: repeating-linear-gradient(45deg, rgba(43, 23, 12, 0.5) 0, rgba(43, 23, 12, 0.5) 1px, transparent 1px, transparent 3px);
   }
   .cord-handle {
     position: relative;
@@ -176,17 +176,17 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #f59e0b;
-    border: 1px solid #b45309;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    background: #6f4e37;
+    border: 1px solid #43281c;
+    box-shadow: 0 1px 3px rgba(25, 12, 5, 0.4);
   }
   .cord-bead-main {
     width: 12px;
     height: 18px;
     border-radius: 8px;
-    background: linear-gradient(135deg, #d97706 0%, #fef08a 40%, #b45309 100%);
-    border: 1px solid #92400e;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.45);
+    background: linear-gradient(135deg, #3f2314 0%, #6f4e37 38%, #9c6644 68%, #3f2314 100%);
+    border: 1px solid #2b170c;
+    box-shadow: 0 4px 10px rgba(20, 10, 5, 0.65);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -196,13 +196,14 @@
     width: 4px;
     height: 9px;
     border-radius: 4px;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(246, 235, 224, 0.45);
   }
   .cord-bead-cap {
     width: 6px;
     height: 4px;
     border-radius: 0 0 3px 3px;
-    background: #78350f;
+    background: #2b170c;
+    border: 1px solid #1a0e07;
     margin-top: -1px;
   }
   .pull-cue {
@@ -226,18 +227,35 @@
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 10px;
     letter-spacing: 0.05em;
-    background: #0f172a;
-    color: #e2e8f0;
-    border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+    background: #231610;
+    color: #ede0d4;
+    border: 1px solid rgba(221, 184, 146, 0.28);
+    box-shadow: 0 6px 18px rgba(10, 5, 2, 0.7);
     opacity: 0;
     transform: translateY(-4px);
     transition: opacity 0.2s ease, transform 0.2s ease;
     z-index: 50;
   }
-  .cord-fixture:hover .cord-tooltip {
+  .cord-fixture:hover .cord-tooltip,
+  .cord-fixture:focus-visible .cord-tooltip {
     opacity: 1;
     transform: translateY(0);
+  }
+  @media (forced-colors: active) {
+    .cord-anchor-plate, .cord-bead-top, .cord-bead-main, .cord-bead-cap {
+      border: 1px solid ButtonText;
+    }
+    .rope-stem {
+      background: ButtonText;
+    }
+    .bulb-lit {
+      background-color: Highlight;
+      outline: 1px solid Highlight;
+    }
+    .bulb-off {
+      background-color: Canvas;
+      border: 1px solid GrayText;
+    }
   }
 
   @keyframes cordReleaseSnap {
@@ -1207,8 +1225,8 @@ class Component extends DCLogic {
 
       if (cue) {
         if (currentStretch >= PULL_THRESHOLD) {
-          cue.style.background = "#fbbf24";
-          cue.style.boxShadow = "0 0 8px #fbbf24";
+          cue.style.background = "#ddb892";
+          cue.style.boxShadow = "0 0 8px #b08968";
         } else {
           cue.style.background = "transparent";
           cue.style.boxShadow = "none";
