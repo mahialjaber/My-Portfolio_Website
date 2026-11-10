@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5WM13GC6V"></script>
 <script>
@@ -608,14 +609,14 @@
         <div class="split" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px">
           <div class="field">
             <label for="cf-name">Name</label>
-            <input id="cf-name" class="input" type="text" name="name" autoComplete="name" placeholder="Your name" value="{{ form.name }}" onInput="{{ onName }}" aria-invalid="{{ invalid.name }}" aria-describedby="{{ descBy.name }}">
+            <input id="cf-name" class="input" type="text" name="name" maxLength="80" autoComplete="name" placeholder="Your name" value="{{ form.name }}" onInput="{{ onName }}" aria-invalid="{{ invalid.name }}" aria-describedby="{{ descBy.name }}">
             <sc-if value="{{ errors.name }}" hint-placeholder-val="{{ false }}">
               <span id="cf-name-err" role="alert" style="display: block; margin-top: 6px; font-size: 12px; color: var(--color-accent-800)">{{ errors.name }}</span>
             </sc-if>
           </div>
           <div class="field">
             <label for="cf-email">Email</label>
-            <input id="cf-email" class="input" type="email" name="email" autoComplete="email" autoCorrect="off" autoCapitalize="none" spellCheck="false" placeholder="you@company.com" value="{{ form.email }}" onInput="{{ onEmail }}" aria-invalid="{{ invalid.email }}" aria-describedby="{{ descBy.email }}">
+            <input id="cf-email" class="input" type="email" name="email" maxLength="160" autoComplete="email" autoCorrect="off" autoCapitalize="none" spellCheck="false" placeholder="you@company.com" value="{{ form.email }}" onInput="{{ onEmail }}" aria-invalid="{{ invalid.email }}" aria-describedby="{{ descBy.email }}">
             <sc-if value="{{ errors.email }}" hint-placeholder-val="{{ false }}">
               <span id="cf-email-err" role="alert" style="display: block; margin-top: 6px; font-size: 12px; color: var(--color-accent-800)">{{ errors.email }}</span>
             </sc-if>
@@ -623,11 +624,11 @@
         </div>
         <div class="field">
           <label for="cf-subject">Subject</label>
-          <input id="cf-subject" class="input" type="text" name="subject" placeholder="Security Analyst / Detection Engineer role — first conversation" value="{{ form.subject }}" onInput="{{ onSubject }}">
+          <input id="cf-subject" class="input" type="text" name="subject" maxLength="140" placeholder="Security Analyst / Detection Engineer role — first conversation" value="{{ form.subject }}" onInput="{{ onSubject }}">
         </div>
         <div class="field">
           <label for="cf-message">Message</label>
-          <textarea id="cf-message" class="input" name="message" rows="6" placeholder="A little about the role, the team and the stack…" value="{{ form.message }}" onInput="{{ onMessage }}" aria-invalid="{{ invalid.message }}" aria-describedby="{{ descBy.message }}"></textarea>
+          <textarea id="cf-message" class="input" name="message" rows="6" maxLength="4000" placeholder="A little about the role, the team and the stack…" value="{{ form.message }}" onInput="{{ onMessage }}" aria-invalid="{{ invalid.message }}" aria-describedby="{{ descBy.message }}"></textarea>
           <div style="display: flex; justify-content: space-between; gap: 12px; margin-top: 6px">
             <sc-if value="{{ errors.message }}" hint-placeholder-val="{{ false }}">
               <span id="cf-message-err" role="alert" style="font-size: 12px; color: var(--color-accent-800)">{{ errors.message }}</span>
@@ -1310,11 +1311,26 @@ class Component extends DCLogic {
     });
   }
 
+  sanitizeHeaderField(v) {
+    return String(v || "").replace(/[\r\n\0-\x1F\x7F]+/g, " ").trim();
+  }
+
+  sanitizeBodyField(v) {
+    return String(v || "").replace(/[\0-\x08\x0B\x0C\x0E-\x1F\x7F]+/g, "").trim();
+  }
+
   validate(f) {
     const e = {};
-    if (!f.name.trim()) e.name = "Please enter your name.";
-    if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(f.email.trim())) e.email = "Enter a valid email address.";
-    if (!f.message.trim()) e.message = "Please enter a message.";
+    const name = this.sanitizeHeaderField(f.name);
+    const email = this.sanitizeHeaderField(f.email);
+    const subject = this.sanitizeHeaderField(f.subject);
+    const message = this.sanitizeBodyField(f.message);
+    if (!name) e.name = "Please enter your name.";
+    else if (name.length > 80) e.name = "Name must be 80 characters or fewer.";
+    if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email) || email.length > 160) e.email = "Enter a valid email address.";
+    if (subject.length > 140) e.name = "Subject must be 140 characters or fewer.";
+    if (!message) e.message = "Please enter a message.";
+    else if (message.length > 4000) e.message = "Message must be 4000 characters or fewer.";
     return e;
   }
 
@@ -1333,6 +1349,11 @@ class Component extends DCLogic {
     }
     this.setState({ errors: {}, status: "sending", notice: null });
 
+    const safeName = this.sanitizeHeaderField(f.name).slice(0, 80);
+    const safeEmail = this.sanitizeHeaderField(f.email).slice(0, 160);
+    const safeSubject = (this.sanitizeHeaderField(f.subject) || "Portfolio Contact").slice(0, 140);
+    const safeMessage = this.sanitizeBodyField(f.message).slice(0, 4000);
+
     const rawEndpoint = this.props.apiEndpoint;
     const endpoint =
       rawEndpoint && rawEndpoint !== "/api/contact"
@@ -1340,20 +1361,20 @@ class Component extends DCLogic {
         : "https://formsubmit.co/ajax/363ea30418f3f63941c8b6e43f39c501";
     const mailto =
       "mailto:mahialjaber.dev@gmail.com?subject=" +
-      encodeURIComponent(f.subject || "Portfolio contact") +
+      encodeURIComponent(safeSubject) +
       "&body=" +
-      encodeURIComponent(f.message + "\n\n— " + f.name + " (" + f.email + ")");
+      encodeURIComponent(safeMessage + "\n\n— " + safeName + " (" + safeEmail + ")");
 
     try {
       const ctrl = new AbortController();
       const t = setTimeout(() => ctrl.abort(), 20000);
       const fd = new FormData();
-      fd.append("name", f.name.trim());
-      fd.append("email", f.email.trim());
-      fd.append("_replyto", f.email.trim());
-      fd.append("subject", f.subject.trim() || "Portfolio Contact");
-      fd.append("message", f.message.trim());
-      fd.append("_subject", `[Portfolio Contact] ${f.subject.trim() || "New Message"} from ${f.name.trim()}`);
+      fd.append("name", safeName);
+      fd.append("email", safeEmail);
+      fd.append("_replyto", safeEmail);
+      fd.append("subject", safeSubject);
+      fd.append("message", safeMessage);
+      fd.append("_subject", `[Portfolio Contact] ${safeSubject} from ${safeName}`);
       fd.append("_captcha", "false");
       fd.append("_template", "table");
       if (f._hp) fd.append("_honey", f._hp);

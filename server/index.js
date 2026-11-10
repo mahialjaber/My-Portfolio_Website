@@ -50,7 +50,7 @@ function validate(body) {
   if (name.length < 2 || name.length > 80) errors.name = 'Name must be 2–80 characters.';
   if (!EMAIL_RE.test(email) || email.length > 160) errors.email = 'Enter a valid email address.';
   if (subject.length > 140) errors.subject = 'Subject must be under 140 characters.';
-  if (message.length < 20 || message.length > 4000) errors.message = 'Message must be 20–4000 characters.';
+  if (message.length < 1 || message.length > 4000) errors.message = 'Message must be 1–4000 characters.';
   if (/\r|\n/.test(name + email + subject)) errors.name = 'Invalid characters.';
 
   return { errors, data: { name, email, subject: subject || 'Portfolio contact', message } };
