@@ -27,7 +27,7 @@ Hosted live on GitHub Pages: **[mahialjaber.github.io/My-Portfolio_Website/](htt
 | [**SOC Investigation Case Files**](https://github.com/mahialjaber/soc-investigation-casefiles) | Splunk · Sysmon · Brim/Wireshark · PCAP | Structured 6-step alert triage and incident investigation case files: evidence timelines, disproving benign hypotheses, IOC extraction, and containment playbooks. | Public · MIT |
 | [**Threat Detection Lab**](https://github.com/mahialjaber/threat-detection-soc-lab) | AWS EC2 · Kali Linux · Windows Server · Splunk | End-to-end AWS & Windows detection lab: Universal Forwarder over TCP 9997, Hydra RDP brute force, Atomic Red Team execution, and custom SPL correlation searches. | Public |
 | [**Wazuh SIEM Setup, Lab & Detection Tasks**](https://github.com/mahialjaber/wazuh-setup-and-lab-tasks) | Wazuh v4.14.8 · OpenSearch · Sysmon · CloudTrail | 10 hands-on detection engineering & threat hunting challenges: AWS CloudTrail, real-time FIM diffing, custom PCRE2 rules, VirusTotal CTI, active response, and Dev Tools REST querying. | Public · Active Lab |
-| [**MiCode**](https://github.com/mahialjaber/MiCode) | Vanilla JS · Offline PWA · Strict CSP | Tiny offline PowerShell & Base64 decoder for security analysts, live on [GitHub Pages](https://mahialjaber.github.io/MiCode/) — runs 100% locally in the browser with zero data uploads. | Public · Live |
+| [**Decodora**](https://github.com/mahialjaber/Decodora) | Vanilla JS · Offline PWA · Strict CSP | Fast offline PowerShell, Base64, Base85, Obfuscated URL & Hex decoder for security analysts, live on [GitHub Pages](https://mahialjaber.github.io/Decodora/) — runs 100% locally in the browser with zero data uploads. | Public · Live |
 
 ---
 

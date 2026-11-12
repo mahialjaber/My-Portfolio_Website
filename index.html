@@ -863,7 +863,7 @@ const PROJECTS = [
       { t: "Case 03 · Phishing to DNS Exfiltration", d: "Tracing a malicious attachment from initial execution through PowerShell base64 staging to nslookup DNS data exfiltration." },
       { t: "Case 04 · Macro Foothold to Exfiltration", d: "End-to-end enterprise intrusion reconstruction: Office macro child processes, credential access, C2 staging, and exfiltration." },
     ],
-    tech: ["Splunk SPL", "Sysmon (EID 1, 3, 11, 22)", "Wireshark & Brim (Zui)", "PCAP Forensics", "PowerShell Deobfuscation (MiCode)", "MITRE ATT&CK v16.1", "NIST SP 800-61", "IOC Extraction"],
+    tech: ["Splunk SPL", "Sysmon (EID 1, 3, 11, 22)", "Wireshark & Brim (Zui)", "PCAP Forensics", "PowerShell Deobfuscation (Decodora)", "MITRE ATT&CK v16.1", "NIST SP 800-61", "IOC Extraction"],
     features: [
       { t: "Hypothesis-driven triage", d: "Every investigation explicitly tests and disproves the benign explanation (authorized admin activity, vulnerability scanners, scheduled maintenance) before escalating." },
       { t: "Cross-source timelines", d: "Correlates Sysmon process lineage, DNS queries, HTTP streams, and SIEM events into a single chronological chain." },
@@ -996,20 +996,20 @@ const PROJECTS = [
     shots: ["AWS CLOUDTRAIL CreateUser ALERT (RULE 80202)", "REAL-TIME FIM DIFFERENTIAL ANALYSIS (/usr/bin/tty)", "VIRUSTOTAL 66/68 ENGINE HIT & ACTIVE RESPONSE DROP", "OPENSEARCH DEV TOOLS REST API CVE HUNT"],
   },
   {
-    id: "micode",
-    name: "MiCode",
-    title: "Tiny, offline PowerShell & Base64 decoder for security analysts — paste a suspicious command line, click Decode, and inspect obfuscated payloads safely in plain text.",
-    kicker: "OFFLINE DECODER · POWERSHELL · VANILLA JS",
+    id: "decodora",
+    name: "Decodora",
+    title: "Fast, offline PowerShell, Base64, Base85, Obfuscated URL & Hex decoder for security analysts — paste a suspicious payload, click Decode, and inspect it safely in plain text.",
+    kicker: "OFFLINE DECODER · POWERSHELL · BASE85 · URL · HEX",
     status: "Public · Live Tool",
-    summary: "Tiny offline PowerShell & Base64 decoder for security analysts, live on GitHub Pages: auto-detects -enc flags, UTF-16LE/UTF-8 encodings, and Gzip/Deflate payloads 100% locally in the browser.",
-    repo: "https://github.com/mahialjaber/MiCode",
-    repoLabel: "MiCode",
-    demo: "https://mahialjaber.github.io/MiCode/",
+    summary: "Fast offline PowerShell, Base64, Base85, Obfuscated URL & Hex decoder for security analysts, live on GitHub Pages: auto-detects -enc flags, Ascii85/RFC1924, defanged/SafeLinks URLs, and Gzip/Deflate payloads 100% locally in the browser.",
+    repo: "https://github.com/mahialjaber/Decodora",
+    repoLabel: "Decodora",
+    demo: "https://mahialjaber.github.io/Decodora/",
     demoNote: "Runs 100% locally in your browser with offline Service Worker caching and strict CSP blocking all network uploads.",
     overview: [
-      "Attackers routinely hide malicious PowerShell commands behind Base64 flags (powershell.exe -NoP -W Hidden -enc SQBFAFgA...) or compressed streams. MiCode turns them back into readable plain text in one click — built as a fast, zero-dependency alternative to heavy multi-tool suites during everyday alert investigations.",
+      "Attackers routinely hide malicious commands and links behind PowerShell Base64 flags, Base85 streams, defanged/encoded URLs, or hex escapes. Decodora turns them back into readable plain text in one click — built as a fast, zero-dependency alternative to heavy multi-tool suites during everyday alert investigations.",
       "Engineered for strict operational security (OPSEC): 100% of decoding happens locally in the browser with no backend, no API calls, and a strict Content Security Policy (CSP) that blocks all outgoing connections so sensitive incident artifacts never leave the analyst's machine.",
-      "Automatically extracts payloads from full command lines (-e, -enc, -EncodedCommand, FromBase64String), detects UTF-16LE vs UTF-8/ASCII, decompresses Gzip/Zlib/Deflate streams, repairs broken padding, and safely renders MZ executables as hex dumps without ever executing code.",
+      "Automatically detects or lets you switch between Base64 / PowerShell (-e, -enc, -EncodedCommand, FromBase64String, Gzip/Deflate), Base85 (Ascii85 & RFC 1924), URL de-obfuscation (hxxps, SafeLinks, Proofpoint, Hex/Dword/Octal IPs), and Hex/Unicode escapes without ever executing code.",
     ],
     arch: "┌───────────────────────────┐\n│Suspicious Command / Base64│  powershell -NoP -W Hidden -enc SQBFAFgA...\n└─────────────┬─────────────┘\n              ▼\n┌───────────────────────────┐\n│ 1. Smart Token Extractor  │  Strips CLI flags (-e, -enc, FromBase64String)\n│ 2. Padding & URL-Safe Fix │  Normalizes messy whitespace, quotes & padding\n│ 3. Stream Decompressor    │  Unpacks Gzip / Zlib / raw Deflate streams\n│ 4. Encoding & Binary Det. │  UTF-16LE · UTF-8 · Hex dump for MZ binaries\n└─────────────┬─────────────┘\n              ▼\n┌───────────────────────────┐\n│  Safe Plain-Text Output   │  100% Offline · Strict CSP · Zero Uploads\n└───────────────────────────┘",
     flow: [
@@ -1033,11 +1033,11 @@ const PROJECTS = [
     code: [
       {
         label: "Decoding an obfuscated PowerShell command line",
-        note: "MiCode strips the PowerShell flags, decodes the Base64 bytes, and resolves the UTF-16LE string in a single step.",
+        note: "Decodora strips the PowerShell flags, decodes the Base64 bytes, and resolves the UTF-16LE string in a single step.",
         body: "Input   : powershell.exe -NoP -W Hidden -enc SQBFAFgAIAAoACcAaABlAGwAbABvACcAKQA=\nOutput  : IEX ('hello')\nDetected: PowerShell -enc argument → Base64 (26 bytes) → UTF-16LE",
       },
     ],
-    shots: ["MICODE LIVE INTERFACE — POWERSHELL -ENC DECODING", "AUTO-DETECTED UTF-16LE & DEFLATED PAYLOAD VIEW", "DARK / LIGHT COFFEE-CORD THEME SWITCH"],
+    shots: ["DECODORA LIVE INTERFACE — MULTI-MODE DECODING", "AUTO-DETECTED UTF-16LE, BASE85 & URL DE-OBFUSCATION", "DARK / LIGHT COFFEE-CORD THEME SWITCH"],
   },
 ];
 
@@ -1521,14 +1521,14 @@ class Component extends DCLogic {
         { stage: "Stage 03", state: "Shipped", t: "Threat Detection Lab (AWS & Splunk)", d: "End-to-end AWS & Windows detection lab: Splunk Universal Forwarder over TCP 9997, Hydra and Atomic Red Team attack emulation mapped to MITRE ATT&CK, and custom SPL correlation searches." },
         { stage: "Stage 04", state: "Shipped", t: "Enterprise Active Directory Lab", d: "Multi-controller Active Directory infrastructure on Windows Server 2022: forest root, multi-master replication with ADC, AD-integrated DNS/DHCP, GPO WMI filtering, and granular audit policies tuned for threat detection." },
         { stage: "Stage 05", state: "Shipped", t: "Wazuh SIEM Setup, Lab & Detection Tasks", d: "10 hands-on Wazuh v4.14.8 & OpenSearch v2.19.1 challenges: AWS CloudTrail, real-time FIM binary diffing, custom PCRE2 rules, VirusTotal CTI, active response containment, OpenSearch Dev Tools REST API CVE hunting, and level=0 false-positive tuning." },
-        { stage: "Stage 06", state: "Shipped", t: "Investigation Case Files & MiCode", d: "Published structured 6-step alert triage & DFIR case files (MirrorBlast/Warzone PCAP, WMIC/PowerShell lateral movement, DNS exfiltration, macro foothold) alongside MiCode, a 100% offline browser-based PowerShell & Base64 decoder." },
+        { stage: "Stage 06", state: "Shipped", t: "Investigation Case Files & Decodora", d: "Published structured 6-step alert triage & DFIR case files (MirrorBlast/Warzone PCAP, WMIC/PowerShell lateral movement, DNS exfiltration, macro foothold) alongside Decodora, a 100% offline browser-based PowerShell, Base64, Base85, URL & Hex decoder." },
       ],
 
       ghNotes: [
         { n: "01", t: "Reproducible, not screenshotted", d: "Every lab is written so someone else can stand it up: topology, versions, ports, forwarder config. If it can't be rebuilt from the README, it isn't finished." },
         { n: "02", t: "Detections in full", d: "The SPL, Sigma, and Wazuh XML rules live in the repo as text — not cropped into a dashboard image — so a reviewer can read the logic, argue with the thresholds and reuse the query." },
         { n: "03", t: "Limits documented", d: "Each write-up ends with what the telemetry couldn't see and what the next iteration adds. Naming a visibility gap is part of the work, not an admission." },
-        { n: "04", t: "Written for the next analyst", d: "The datasets and MiCode decoder are MIT licensed and built for everyday security work. Building something usable by other analysts is the difference between studying and contributing." },
+        { n: "04", t: "Written for the next analyst", d: "The datasets and Decodora decoder are MIT licensed and built for everyday security work. Building something usable by other analysts is the difference between studying and contributing." },
       ],
 
       channels: [
