@@ -1010,14 +1010,14 @@ const PROJECTS = [
     demoNote: "Runs 100% locally in your browser with offline Service Worker caching, one-click demo samples, and strict CSP blocking all network uploads.",
     overview: [
       "CyberChef is a Swiss Army knife where you assemble recipes step by step. Decodora is the express triage lane when an EDR alert or phishing email drops a tangled multi-layer payload on your desk and you want readable plain text plus ticket-safe IOCs in a single paste.",
-      "Auto-Detect iteratively peels up to 6 nested layers (Base64 → Gzip → Reversed → Hex → SafeLinks), strips PowerShell caret/backtick and zero-width Unicode obfuscation, resolves Hex/Dword/Octal IPs, flags @ phishing lures, and extracts defanged IOCs (hxxps[:]//, [.]) ready for Jira/Slack or CSV.",
+      "Auto-Detect iteratively peels up to 6 nested layers (Base64 → Gzip → Reversed → Hex → SafeLinks), strips PowerShell caret/backtick and zero-width Unicode obfuscation, resolves Hex/Dword/Octal IPs, flags @ phishing lures, and extracts defanged IOCs (hxxps[:]//, [.]) ready for Jira or Slack.",
       "Engineered for strict operational security (OPSEC): 100% of decoding and IOC extraction runs locally under a connect-src 'none' Content Security Policy and an offline Service Worker — zero uploads, zero execution, backed by 58 Node.js unit tests.",
     ],
-    arch: "┌───────────────────────────┐\n│ Raw Alert / Phish Payload │  SafeLinks · p^o^w^e^r^s^h^e^l^l -e^n^c · Reversed\n└─────────────┬─────────────┘\n              ▼\n┌───────────────────────────┐\n│ 1. Multi-Layer Auto-Peel  │  Up to 6 passes (Base64 · Gzip · Base85 · Hex · Rev · URL)\n│ 2. Obfuscation Cleanup    │  Caret/backtick strip · zero-width warn · SafeLinks/PP unwrap\n│ 3. Honest Diagnostics     │  @ userinfo lure · Hex/Dword/Octal IP · odd UTF-16 · MZ hex\n│ 4. IOC Extractor & Defang │  URL/Domain/IPv4/Email/Hash/CVE → hxxps[:]// & [.] · CSV\n└─────────────┬─────────────┘\n              ▼\n┌───────────────────────────┐\n│ Plain Text + Safe IOCs    │  100% Offline · connect-src 'none' · Copy Defanged\n└───────────────────────────┘",
+    arch: "┌───────────────────────────┐\n│ Raw Alert / Phish Payload │  SafeLinks · p^o^w^e^r^s^h^e^l^l -e^n^c · Reversed\n└─────────────┬─────────────┘\n              ▼\n┌───────────────────────────┐\n│ 1. Multi-Layer Auto-Peel  │  Up to 6 passes (Base64 · Gzip · Base85 · Hex · Rev · URL)\n│ 2. Obfuscation Cleanup    │  Caret/backtick strip · zero-width warn · SafeLinks/PP unwrap\n│ 3. Honest Diagnostics     │  @ userinfo lure · Hex/Dword/Octal IP · odd UTF-16 · MZ hex\n│ 4. IOC Extractor & Defang │  URL/Domain/IPv4/Email/Hash/CVE → hxxps[:]// & [.] · Piped\n└─────────────┬─────────────┘\n              ▼\n┌───────────────────────────┐\n│ Plain Text + Safe IOCs    │  100% Offline · connect-src 'none' · Copy Defanged\n└───────────────────────────┘",
     flow: [
       { t: "01 · Zero-Recipe Peel", d: "Paste a raw command line or wrapped link — Auto-Detect peels up to 6 nested encoding and compression layers automatically." },
       { t: "02 · Evasion Warnings", d: "Flags zero-width Unicode injection, @ credential spoofing lures, Hex/Dword/Octal IPs, wrapper hosts, and truncated payloads." },
-      { t: "03 · Ticket-Safe IOCs", d: "Extracts URLs, domains, IPs, emails, hashes, and CVEs while ignoring .NET class names, defanged cleanly with 1-click Copy or CSV." },
+      { t: "03 · Ticket-Safe IOCs", d: "Extracts URLs, domains, IPs, emails, hashes, and CVEs while ignoring .NET class names, defanged cleanly with 1-click Copy all or Copy raw." },
       { t: "04 · One-Click Samples", d: "Five synthetic attack samples built right into the UI (#sample=...) let analysts verify multi-layer unwrapping in seconds." },
     ],
     tech: ["Vanilla JavaScript", "Zero-Recipe Auto-Detect", "IOC Extractor & Defanger", "Strict CSP (connect-src 'none')", "Service Worker (Offline PWA)", "Gzip / Deflate / Base85", "SafeLinks & Proofpoint Unwrap", "58 Node.js Unit Tests"],
@@ -1039,7 +1039,7 @@ const PROJECTS = [
         body: "Input   : powershell.exe -NoP -W Hidden -enc SQBFAFgAIAAoACcAaABlAGwAbABvACcAKQA=\nOutput  : IEX ('hello')\nDetected: PowerShell -enc argument → Base64 (26 bytes) → UTF-16LE",
       },
     ],
-    shots: ["ONE-CLICK REAL-WORLD SAMPLES · 3-LAYER AUTO-PEEL", "EXTRACTED & DEFANGED IOC PANEL (CSV / COPY ALL)", "SAFELINKS, @ LURE & HEX IP DIAGNOSTICS"],
+    shots: ["2-COLUMN WORKSPACE · SAMPLES RAIL & INPUT/OUTPUT FLOW", "PIPED DEFANGED IOC PANEL (COPY ALL / COPY RAW)", "SAFELINKS, @ LURE & HEX IP DIAGNOSTICS"],
   },
 ];
 
