@@ -2,7 +2,7 @@
 
 [![Live Site](https://img.shields.io/badge/Live_Site-GitHub_Pages-0ea5e9?style=for-the-badge&logo=github)](https://mahialjaber.github.io/My-Portfolio_Website/)
 [![Detection Lab](https://img.shields.io/badge/SIEM-Splunk_%26_Wazuh-059669?style=for-the-badge&logo=splunk)](https://github.com/mahialjaber/threat-detection-soc-lab)
-[![Datasets](https://img.shields.io/badge/Datasets-35%2B_Stars-f59e0b?style=for-the-badge&logo=star)](https://github.com/mahialjaber/SOC-Log-Analysis-Datasets)
+[![Datasets](https://img.shields.io/badge/Datasets-50%2B_Stars-f59e0b?style=for-the-badge&logo=star)](https://github.com/mahialjaber/SOC-Log-Analysis-Datasets)
 [![License](https://img.shields.io/badge/License-All_Rights_Reserved-red?style=for-the-badge)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Open_to_Roles-10b981?style=for-the-badge)](#contact)
 
@@ -23,7 +23,7 @@ Hosted live on GitHub Pages: **[mahialjaber.github.io/My-Portfolio_Website/](htt
 
 | Project | Environment / Stack | Focus & Highlights | Status |
 |:---|:---|:---|:---:|
-| [**SOC Log Analysis Datasets**](https://github.com/mahialjaber/SOC-Log-Analysis-Datasets) | Plain text · JSONL · Splunk SPL · Sentinel KQL | **35+ ⭐ Stars** — Curated synthetic log files across 5 security domains (App, Cloud, Email, Endpoints, Network) with embedded attack vectors and a hunting playbook. | Public · MIT |
+| [**SOC Log Analysis Datasets**](https://github.com/mahialjaber/SOC-Log-Analysis-Datasets) | Plain text · JSONL · Splunk SPL · Sentinel KQL | **50+ ⭐ Stars** — Curated synthetic log files across 5 security domains (App, Cloud, Email, Endpoints, Network) with embedded attack vectors and a hunting playbook. | Public · MIT |
 | [**Investigation Case Files**](https://github.com/mahialjaber/investigation-casefiles) | Splunk · Sysmon · EDR · Brim/Wireshark · PCAP | Structured 6-step alert triage and incident investigation case files: evidence timelines, disproving benign hypotheses, IOC extraction, and containment playbooks. | Public · MIT |
 | [**Threat Detection Lab**](https://github.com/mahialjaber/threat-detection-soc-lab) | AWS EC2 · Kali Linux · Windows Server · Splunk | End-to-end AWS & Windows detection lab: Universal Forwarder over TCP 9997, Hydra RDP brute force, Atomic Red Team execution, and custom SPL correlation searches. | Public |
 | [**Wazuh SIEM Setup, Lab & Detection Tasks**](https://github.com/mahialjaber/wazuh-setup-and-lab-tasks) | Wazuh v4.14.8 · OpenSearch · Sysmon · CloudTrail | 10 hands-on detection engineering & threat hunting challenges: AWS CloudTrail, real-time FIM diffing, custom PCRE2 rules, VirusTotal CTI, active response, and Dev Tools REST querying. | Public · Active Lab |
