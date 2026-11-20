@@ -443,7 +443,7 @@
       <span style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .16em; color: var(--color-accent-700)">02</span>
       <h2 style="font-size: clamp(28px, 4.4vw, 46px); margin: 0; letter-spacing: -.02em; text-transform: uppercase">Toolchain</h2>
       <span style="flex: 1; height: 1px; background: var(--color-divider)"></span>
-      <span class="text-muted lg-only" style="font-size: 11px; letter-spacing: .14em; text-transform: uppercase">Hands-on, in a lab I built</span>
+      <span class="text-muted lg-only" style="font-size: 11px; letter-spacing: .14em; text-transform: uppercase">Used in my labs and case files</span>
     </div>
     <div data-reveal="" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px">
       <sc-for list="{{ toolchain }}" as="g" hint-placeholder-count="6">
@@ -865,7 +865,7 @@ const PROJECTS = [
       { t: "Case 05 · CRM Portal Breach & Exfiltration", d: "Investigating web shell upload (invoice.php), Base64 reverse shell deobfuscation via Decodora, EDR parent-child shell spawn, and curl database exfiltration." },
       { t: "Case 06 · Malicious PDF Analysis", d: "Static PDF triage, stream dissection, and de-obfuscation of embedded Launch actions executing encoded PowerShell." },
     ],
-    tech: ["Splunk SPL", "Sysmon (EID 1, 3, 11, 22)", "TryDetectMe XDR / EDR", "Wireshark & Brim (Zui)", "PCAP Forensics", "Payload Deobfuscation (Decodora)", "MITRE ATT&CK v16.1", "NIST SP 800-61", "IOC Extraction"],
+    tech: ["Splunk SPL", "Sysmon (EID 1, 3, 11, 22)", "TryDetectMe XDR / EDR (TryHackMe lab product)", "Wireshark & Brim (Zui)", "PCAP Forensics", "Payload Deobfuscation (Decodora)", "MITRE ATT&CK v16.1", "NIST SP 800-61", "IOC Extraction"],
     features: [
       { t: "Hypothesis-driven triage", d: "Every investigation explicitly tests and disproves the benign explanation (authorized admin activity, vulnerability scanners, scheduled maintenance) before escalating." },
       { t: "Cross-source timelines", d: "Correlates Sysmon process lineage, DNS queries, HTTP streams, and SIEM events into a single chronological chain." },
@@ -1476,12 +1476,12 @@ class Component extends DCLogic {
       ],
 
       toolchain: [
-        { idx: "01", group: "SIEM & Detection", items: ["Splunk SPL", "Wazuh SIEM", "OpenSearch DQL", "Sigma", "MITRE ATT&CK", "Microsoft Sentinel (KQL)"] },
-        { idx: "02", group: "Endpoint & Identity", items: ["Sysmon", "Windows Event Logs", "Active Directory", "PowerShell", "Linux auditd & FIM"] },
-        { idx: "03", group: "Triage & Analysis", items: ["Alert Triage", "Log Analysis", "Phishing Analysis", "Threat Hunting", "IOC Enrichment (VirusTotal)"] },
-        { idx: "04", group: "Network & Traffic", items: ["Wireshark", "TCP/IP", "DNS", "PCAP Analysis", "Suricata NIDS"] },
-        { idx: "05", group: "Cloud Telemetry", items: ["AWS", "CloudTrail", "IAM", "Amazon S3", "GuardDuty"] },
-        { idx: "06", group: "Automation & Frameworks", items: ["Python", "Bash", "Linux / Kali", "Docker", "Git", "NIST SP 800-61", "Cyber Kill Chain", "Atomic Red Team"] },
+        { idx: "01", group: "SIEM & Detection", items: ["Splunk SPL", "Wazuh SIEM", "OpenSearch DQL"] },
+        { idx: "02", group: "Endpoint & Identity", items: ["Sysmon", "Windows Event Logs", "Active Directory", "Linux auditd & FIM"] },
+        { idx: "03", group: "Triage & Analysis", items: ["Alert Triage", "Phishing Analysis", "IOC Enrichment (VirusTotal)"] },
+        { idx: "04", group: "Network & Traffic", items: ["Wireshark", "Suricata NIDS"] },
+        { idx: "05", group: "Cloud Telemetry", items: ["AWS CloudTrail"] },
+        { idx: "06", group: "Attack Emulation", items: ["Atomic Red Team", "Kali Linux"] },
       ],
 
       projects,
