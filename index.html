@@ -796,10 +796,10 @@ const PROJECTS = [
   {
     id: "datasets",
     name: "SOC Log Analysis Datasets",
-    title: "Curated security logs with embedded attack vectors across Windows, Web, Firewall, Email & Cloud — 70+ ⭐ stars on GitHub, MIT licensed, with a hands-on hunting playbook.",
-    kicker: "DATASETS · THREAT HUNTING · 70+ ⭐ · MIT",
-    status: "Public · 70+ ⭐ · MIT",
-    summary: "Windows, web, firewall, and cloud logs with attack vectors embedded, MIT licensed. Curated synthetic dataset across 5 security domains with 70+ ⭐ stars and a hands-on hunting playbook.",
+    title: "Curated security logs with embedded attack vectors across Windows, Web, Firewall, Email & Cloud — 100+ ⭐ stars on GitHub, MIT licensed, with a hands-on hunting playbook.",
+    kicker: "DATASETS · THREAT HUNTING · 100+ ⭐ · MIT",
+    status: "Public · 100+ ⭐ · MIT",
+    summary: "Windows, web, firewall, and cloud logs with attack vectors embedded, MIT licensed. Curated synthetic dataset across 5 security domains with 100+ ⭐ stars and a hands-on hunting playbook.",
     repo: "https://github.com/mahialjaber/SOC-Log-Analysis-Datasets",
     repoLabel: "SOC-Log-Analysis-Datasets",
     demo: null,
@@ -807,7 +807,7 @@ const PROJECTS = [
     overview: [
       "Finding realistic log data for threat hunting practice and detection validation is surprisingly hard. Clean, normal-activity logs teach nothing about detection; massive public dumps are unstructured and overwhelming; real incident data is locked down.",
       "This repository bridges that gap: structured log files across Applications, Cloud, Email & DLP, Endpoints and Network, each containing specific, identifiable attack techniques buried inside normal-looking traffic. Everything is synthetic and MIT-licensed — zero real PII or breach data.",
-      "Earned 70+ stars from the security community and ships with a Threat Hunting Playbook: starter queries for SQLi and XSS, cloud IAM privilege escalation, phishing and exfiltration, Windows brute force, C2 beaconing and DNS tunnelling across SPL, KQL and CLI.",
+      "Earned 100+ stars from the security community and ships with a Threat Hunting Playbook: starter queries for SQLi and XSS, cloud IAM privilege escalation, phishing and exfiltration, Windows brute force, C2 beaconing and DNS tunnelling across SPL, KQL and CLI.",
     ],
     arch: "SOC-Log-Analysis-Datasets/\n├── Applications/   app_sec_audit · web_server_access      → SQLi · XSS · traversal\n├── Cloud/          cloud_activity_audit                  → IAM esc. · resource deletion\n├── Email_and_DLP/  dlp_events · email_gateway_events     → phishing · exfiltration\n├── Endpoints/      linux_syslog · windows_security_events→ brute force · priv-esc\n└── Network/        dns · firewall · ids_ips · proxy · vpn→ tunnelling · C2 · scanning",
     flow: [
@@ -822,7 +822,7 @@ const PROJECTS = [
       { t: "Realistic background noise", d: "Attacks are buried inside normal-looking traffic, just like production, so you have to actually hunt for them." },
       { t: "SIEM-agnostic", d: "Text and JSONL formats that load into Splunk, Elastic, Sentinel — or nothing more than a shell." },
       { t: "Hunting playbook", d: "Six worked hunts with queries in two SIEM languages plus CLI equivalents, and guidance on tuning thresholds down from noise." },
-      { t: "Community adopted (70+ ⭐)", d: "MIT licensed for educational and commercial use — built so the next analyst or detection engineer who needs practice telemetry can just clone it." },
+      { t: "Community adopted (100+ ⭐)", d: "MIT licensed for educational and commercial use — built so the next analyst or detection engineer who needs practice telemetry can just clone it." },
     ],
     attack: null,
     codeLabel: "From the hunting playbook",
@@ -1519,7 +1519,7 @@ class Component extends DCLogic {
 
       journey: [
         { stage: "Stage 01", state: "Verified", t: "Foundations & TryHackMe Credential (THM-UV7LHQKCLC)", d: "Windows/Sysmon Event Logs, TCP/IP & PCAP forensics, phishing DFIR, and SIEM threat detection across 14 modules and 65 hands-on labs, anchored by MITRE ATT&CK, the Cyber Kill Chain, and NIST SP 800-61." },
-        { stage: "Stage 02", state: "Shipped", t: "SOC Log Analysis Datasets (70+ ⭐)", d: "Built the practice telemetry I couldn't find: curated synthetic log files across five security domains with embedded attack vectors, plus a hunting playbook in SPL, KQL, and CLI. MIT licensed — 70+ stars on GitHub." },
+        { stage: "Stage 02", state: "Shipped", t: "SOC Log Analysis Datasets (100+ ⭐)", d: "Built the practice telemetry I couldn't find: curated synthetic log files across five security domains with embedded attack vectors, plus a hunting playbook in SPL, KQL, and CLI. MIT licensed — 100+ stars on GitHub." },
         { stage: "Stage 03", state: "Shipped", t: "Threat Detection Lab (AWS & Splunk)", d: "End-to-end AWS & Windows detection lab: Splunk Universal Forwarder over TCP 9997, Hydra and Atomic Red Team attack emulation mapped to MITRE ATT&CK, and custom SPL correlation searches." },
         { stage: "Stage 04", state: "Shipped", t: "Enterprise Active Directory Lab", d: "Multi-controller Active Directory infrastructure on Windows Server 2022: forest root, multi-master replication with ADC, AD-integrated DNS/DHCP, GPO WMI filtering, and granular audit policies tuned for threat detection." },
         { stage: "Stage 05", state: "Shipped", t: "Wazuh SIEM Setup, Lab & Detection Tasks", d: "10 hands-on Wazuh v4.14.8 & OpenSearch v2.19.1 challenges: AWS CloudTrail, real-time FIM binary diffing, custom PCRE2 rules, VirusTotal CTI, active response containment, OpenSearch Dev Tools REST API CVE hunting, and level=0 false-positive tuning." },
